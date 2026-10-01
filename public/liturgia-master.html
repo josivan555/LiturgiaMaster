@@ -1853,17 +1853,27 @@ function exportarPDF(){
   const marginVal2=document.getElementById('margin_sel').value;
   const sideMarginPdf=marginVal2==='0'?'0.5cm':(marginVal2+'mm');
   const margin2=booklet?`1cm ${sideMarginPdf}`:`1.1cm ${sideMarginPdf}`;
+  const barDk=darken(titleColor||'#D32F2F',.72);
+  const _rgb=barDk.replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
+  const numColor=((0.299*_rgb[0]+0.587*_rgb[1]+0.114*_rgb[2])/255)<0.6?'#FFFFFF':'#1A1A1A';
   const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
 <style>
   @page{
     margin:0 0 10mm 0;
     size:${pageSize};
+    @bottom-left{content:"";background:${barDk};width:40%;height:10mm;vertical-align:middle}
+    @bottom-center{content:"";background:${barDk};width:30%;height:10mm;vertical-align:middle}
     @bottom-right{
       content:counter(page);
+      background:${barDk};
+      width:30%;
+      height:10mm;
+      vertical-align:middle;
+      text-align:right;
       font-family:Arial,sans-serif;
-      font-size:9pt;
+      font-size:10pt;
       font-weight:bold;
-      color:${darken(titleColor||'#D32F2F',.75)};
+      color:${numColor};
       padding-right:7mm;
     }
   }
