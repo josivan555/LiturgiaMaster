@@ -1860,21 +1860,21 @@ function exportarPDF(){
   const _rgb=barDk.replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
   const numColor=((0.299*_rgb[0]+0.587*_rgb[1]+0.114*_rgb[2])/255)<0.6?'#FFFFFF':'#1A1A1A';
   const _svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 127" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V127H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V127H0Z" fill="${barDk}"/></svg>`;
-  const fraseCss=String((document.getElementById('frase_rodape')||{}).value||'').replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\r?\n/g,' ');
+  const _fr=String((document.getElementById('frase_rodape')||{}).value||'').replace(/[\r\n]+/g,' ').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const _txtSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 127"><text x="500" y="68" text-anchor="middle" fill="#FFFFFF" font-style="italic" font-size="21.6" font-family="Times New Roman,serif">${_fr}</text></svg>`;
+  const txtBg='data:image/svg+xml;utf8,'+encodeURIComponent(_txtSvg);
   const footBg='data:image/svg+xml;utf8,'+encodeURIComponent(_svg);
   const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
 <style>
   @page{
     margin:0 0 27mm 0;
     size:${pageSize};
-    @bottom-left{content:"";width:20%;height:27mm;background:url("${footBg}") no-repeat 0% 0/500% 100%}
-    @bottom-center{content:"${fraseCss}";width:60%;height:27mm;background:url("${footBg}") no-repeat 50% 0/166.667% 100%;vertical-align:bottom;padding-bottom:10mm;box-sizing:border-box;text-align:center;white-space:nowrap;color:#fff;font-style:italic;font-size:13pt;font-family:'Times New Roman',serif}
-    @bottom-right{
+    @bottom-center{
       content:counter(page);
-      width:20%;
+      width:100%;
       height:27mm;
       box-sizing:border-box;
-      background:url("${footBg}") no-repeat 100% 0/500% 100%;
+      background:url("${txtBg}") center bottom/auto 27mm no-repeat,url("${footBg}") 0 0/100% 100% no-repeat;
       vertical-align:bottom;
       padding-bottom:3mm;
       text-align:right;
