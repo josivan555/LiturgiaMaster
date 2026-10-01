@@ -2331,10 +2331,10 @@ function hookAutosave(){
   // Input fields
   ['paroquia','domingo','titulo_principal','ano_lit','data_missa','fonte_sel',
    'margin_sel','img-align','img-height','sacra-height','sacra-caption','sacra-align',
-   'booklet-mode','strophe_gap'].forEach(id=>{
+    'booklet-mode','strophe_gap','frase_header','frase_rodape','orient-sel'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el) el.addEventListener('change',autoSave);
-    if(el&&el.tagName==='INPUT'&&el.type!=='checkbox'&&el.type!=='range') el.addEventListener('input',autoSave);
+    if(el) el.addEventListener('change',()=>{autoSave();buildPreviewIfActive();});
+    if(el&&el.tagName==='INPUT'&&el.type!=='checkbox'&&el.type!=='range') el.addEventListener('input',()=>{autoSave();buildPreviewIfActive();});
   });
   // Observe editor-area for textarea changes (covers dynamic blocks)
   const ea=document.getElementById('editor-area');
