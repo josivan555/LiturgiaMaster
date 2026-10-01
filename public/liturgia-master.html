@@ -1866,24 +1866,29 @@ function exportarPDF(){
   const marginVal2=document.getElementById('margin_sel').value;
   const sideMarginPdf=marginVal2==='0'?'0.5cm':(marginVal2+'mm');
   const margin2=booklet?`1cm ${sideMarginPdf}`:`1.1cm ${sideMarginPdf}`;
+  const pageHeightMm=booklet?210:(isLand()?210:297);
   const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
 <style>
-  @page{
-    margin:0;
-    size:${pageSize};
-    @bottom-right{
-      content:counter(page);
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      font-weight:bold;
-      color:${darken(titleColor||'#D32F2F',.75)};
-      padding:0 7mm 4mm 0;
-    }
-  }
+  @page{margin:0;size:${pageSize}}
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
-  body{font-family:${fstack};font-size:${fs}pt;margin:0}
+  html,body{margin:0;padding:0}
+  body{font-family:${fstack};font-size:${fs}pt;position:relative}
+  .pdf-page-number{position:absolute;right:7mm;font-family:Arial,sans-serif;font-size:9pt;font-weight:bold;color:${darken(titleColor||'#D32F2F',.75)};z-index:9999}
 </style></head><body>
 ${decoHtml(titleColor||'#D32F2F','fixed')}<div style="position:relative;z-index:1;padding:6mm 9mm 20mm;-webkit-box-decoration-break:clone;box-decoration-break:clone">${makeHeader(parq,dom,ano,dataStr,t,fstack,fs,align,imgH)}${(_makeContentMode=null,makeContent(fstack,t,fs))}</div>
+<script>
+  addEventListener('load',function(){
+    var pxPerMm=96/25.4,pageHeight=${pageHeightMm}*pxPerMm;
+    var total=Math.max(1,Math.ceil(document.documentElement.scrollHeight/pageHeight));
+    if(total<2)return;
+    document.body.style.minHeight=(total*${pageHeightMm})+'mm';
+    for(var i=1;i<=total;i++){
+      var n=document.createElement('span');
+      n.className='pdf-page-number';n.textContent=i;
+      n.style.top=(i*${pageHeightMm}-9)+'mm';document.body.appendChild(n);
+    }
+  });
+<\/script>
 </body></html>`;
   const w=window.open('','_blank');
   if(!w){alert('Permita pop-ups para gerar o PDF.');return;}
