@@ -1398,6 +1398,7 @@ function decoHtml(tc,pos){
   return `<div style="position:${pos};top:${ot};left:0;width:42mm;height:21mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 300 150" preserveAspectRatio="none"><path d="M0 0H235C140 30 50 75 0 150Z" fill="${GOLD_DECO}"/><path d="M0 0H205C120 25 40 62 0 128Z" fill="${dk}"/></svg></div>
   <div style="position:${pos};bottom:${ob};left:0;width:100%;height:17mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 1000 80" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V80H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V80H0Z" fill="${dk}"/></svg>
     <div style="position:absolute;left:0;right:0;bottom:3mm;text-align:center;color:#fff;font-style:italic;font-size:13pt;font-family:'Times New Roman',serif">${h(frase)}</div></div>
+  <div style="position:${pos};bottom:0;left:0;width:100%;height:1mm;background:${dk};z-index:0;${pe}"></div>
   <div style="position:${pos};bottom:${wb};right:6mm;width:38mm;z-index:0;opacity:.22;${pe}"><svg width="100%" viewBox="0 0 160 110"><rect x="55" y="45" width="50" height="60" fill="${tc}"/><polygon points="80,20 52,46 108,46" fill="${tc}"/><rect x="78" y="6" width="4" height="16" fill="${tc}"/><rect x="73" y="10" width="14" height="3" fill="${tc}"/><circle cx="25" cy="80" r="20" fill="${tc}"/><rect x="23" y="95" width="4" height="12" fill="${tc}"/><circle cx="136" cy="72" r="24" fill="${tc}"/><rect x="134" y="92" width="4" height="15" fill="${tc}"/></svg></div>`;
 }
 
@@ -1853,17 +1854,26 @@ function exportarPDF(){
   const marginVal2=document.getElementById('margin_sel').value;
   const sideMarginPdf=marginVal2==='0'?'0.5cm':(marginVal2+'mm');
   const margin2=booklet?`1cm ${sideMarginPdf}`:`1.1cm ${sideMarginPdf}`;
+  const barDk=darken(titleColor||'#D32F2F',.72);
+  const _rgb=barDk.replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
+  const numColor=((0.299*_rgb[0]+0.587*_rgb[1]+0.114*_rgb[2])/255)<0.6?'#FFFFFF':'#1A1A1A';
   const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
 <style>
   @page{
     margin:0 0 10mm 0;
     size:${pageSize};
+    @bottom-left{content:"";background:${barDk};width:70%;height:10mm}
     @bottom-right{
       content:counter(page);
+      background:${barDk};
+      width:30%;
+      height:10mm;
+      vertical-align:middle;
+      text-align:right;
       font-family:Arial,sans-serif;
-      font-size:9pt;
+      font-size:10pt;
       font-weight:bold;
-      color:${darken(titleColor||'#D32F2F',.75)};
+      color:${numColor};
       padding-right:7mm;
     }
   }
