@@ -1394,14 +1394,14 @@ function isLand(){return !document.getElementById('booklet-mode').checked&&docum
 function leafSvg(c,w){
   return `<svg width="${w}" height="${Math.round(w*.7)}" viewBox="0 0 40 28" style="vertical-align:middle"><path d="M20 26C20 14 12 6 2 4c0 10 6 18 18 22z" fill="${c}"/><path d="M20 26C20 14 28 6 38 4c0 10-6 18-18 22z" fill="${c}"/><path d="M20 26C19 16 19 8 20 1c2 8 2 16 0 25z" fill="${c}"/></svg>`;
 }
-function decoHtml(tc,pos){
+function decoHtml(tc,pos,pageBg){
   const dk=darken(tc,.72),frase=(document.getElementById('frase_rodape')||{}).value||'';
-  const pe='pointer-events:none',ot='0',ob='0',wb='15mm';
+  const pe='pointer-events:none',ot='0',ob='0',wb=pageBg?'0mm':'15mm';
   return `<div style="position:${pos};top:${ot};left:0;width:42mm;height:21mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 300 150" preserveAspectRatio="none"><path d="M0 0H235C140 30 50 75 0 150Z" fill="${GOLD_DECO}"/><path d="M0 0H205C120 25 40 62 0 128Z" fill="${dk}"/></svg></div>
-  <div style="position:${pos};bottom:${ob};left:0;width:100%;height:17mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 1000 80" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V80H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V80H0Z" fill="${dk}"/></svg>
-    <div style="position:absolute;left:0;right:0;bottom:3mm;text-align:center;color:#fff;font-style:italic;font-size:13pt;font-family:'Times New Roman',serif">${h(frase)}</div></div>
-  <div style="position:${pos};bottom:0;left:0;width:100%;height:1mm;background:${dk};z-index:0;${pe}"></div>
-  <div style="position:${pos};bottom:${wb};right:6mm;width:38mm;z-index:0;opacity:.22;${pe}"><svg width="100%" viewBox="0 0 160 110"><rect x="55" y="45" width="50" height="60" fill="${tc}"/><polygon points="80,20 52,46 108,46" fill="${tc}"/><rect x="78" y="6" width="4" height="16" fill="${tc}"/><rect x="73" y="10" width="14" height="3" fill="${tc}"/><circle cx="25" cy="80" r="20" fill="${tc}"/><rect x="23" y="95" width="4" height="12" fill="${tc}"/><circle cx="136" cy="72" r="24" fill="${tc}"/><rect x="134" y="92" width="4" height="15" fill="${tc}"/></svg></div>`;
+  ${pageBg?``:`<div style="position:${pos};bottom:${ob};left:0;width:100%;height:17mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 1000 80" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V80H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V80H0Z" fill="${dk}"/></svg>
+     <div style="position:absolute;left:0;right:0;bottom:3mm;text-align:center;color:#fff;font-style:italic;font-size:13pt;font-family:'Times New Roman',serif">${h(frase)}</div></div>
+   <div style="position:${pos};bottom:0;left:0;width:100%;height:1mm;background:${dk};z-index:0;${pe}"></div>`}
+   <div style="position:${pos};bottom:${wb};right:6mm;width:38mm;z-index:0;opacity:.22;${pe}"><svg width="100%" viewBox="0 0 160 110"><rect x="55" y="45" width="50" height="60" fill="${tc}"/><polygon points="80,20 52,46 108,46" fill="${tc}"/><rect x="78" y="6" width="4" height="16" fill="${tc}"/><rect x="73" y="10" width="14" height="3" fill="${tc}"/><circle cx="25" cy="80" r="20" fill="${tc}"/><rect x="23" y="95" width="4" height="12" fill="${tc}"/><circle cx="136" cy="72" r="24" fill="${tc}"/><rect x="134" y="92" width="4" height="15" fill="${tc}"/></svg></div>`;
 }
 
 function renderStrophe(bl, n, preNum, forExport, fs, fstack){
@@ -1859,18 +1859,24 @@ function exportarPDF(){
   const barDk=darken(titleColor||'#D32F2F',.72);
   const _rgb=barDk.replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
   const numColor=((0.299*_rgb[0]+0.587*_rgb[1]+0.114*_rgb[2])/255)<0.6?'#FFFFFF':'#1A1A1A';
+  const _svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 127" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V127H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V127H0Z" fill="${barDk}"/></svg>`;
+  const _fr=String((document.getElementById('frase_rodape')||{}).value||'').replace(/[\r\n]+/g,' ').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const _txtSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 127"><text x="500" y="68" text-anchor="middle" fill="#FFFFFF" font-style="italic" font-size="21.6" font-family="Times New Roman,serif">${_fr}</text></svg>`;
+  const txtBg='data:image/svg+xml;utf8,'+encodeURIComponent(_txtSvg);
+  const footBg='data:image/svg+xml;utf8,'+encodeURIComponent(_svg);
   const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
 <style>
   @page{
-    margin:0 0 10mm 0;
+    margin:0 0 27mm 0;
     size:${pageSize};
-    @bottom-left{content:"";background:${barDk};width:70%;height:10mm}
-    @bottom-right{
+    @bottom-center{
       content:counter(page);
-      background:${barDk};
-      width:30%;
-      height:10mm;
-      vertical-align:middle;
+      width:100%;
+      height:27mm;
+      box-sizing:border-box;
+      background:url("${txtBg}") center bottom/auto 27mm no-repeat,url("${footBg}") 0 0/100% 100% no-repeat;
+      vertical-align:bottom;
+      padding-bottom:3mm;
       text-align:right;
       font-family:Arial,sans-serif;
       font-size:10pt;
@@ -1883,7 +1889,7 @@ function exportarPDF(){
   html,body{margin:0;padding:0}
   body{font-family:${fstack};font-size:${fs}pt}
 </style></head><body>
-${decoHtml(titleColor||'#D32F2F','fixed')}<div style="position:relative;z-index:1;padding:6mm 9mm 20mm;-webkit-box-decoration-break:clone;box-decoration-break:clone">${makeHeader(parq,dom,ano,dataStr,t,fstack,fs,align,imgH)}${(_makeContentMode=null,makeContent(fstack,t,fs))}</div>
+${decoHtml(titleColor||'#D32F2F','fixed',true)}<div style="position:relative;z-index:1;padding:6mm 9mm 4mm;-webkit-box-decoration-break:clone;box-decoration-break:clone">${makeHeader(parq,dom,ano,dataStr,t,fstack,fs,align,imgH)}${(_makeContentMode=null,makeContent(fstack,t,fs))}</div>
 </body></html>`;
   const w=window.open('','_blank');
   if(!w){alert('Permita pop-ups para gerar o PDF.');return;}
