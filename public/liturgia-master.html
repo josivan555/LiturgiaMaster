@@ -1363,12 +1363,13 @@ function splitTitulo(text){
   return{titulo,rest:lines.join('\n').replace(/\n{3,}/g,'\n\n').trim(),align};
 }
 function bannerHtml(num,label,tc,tfs,fstack){
-  const bar=barColor(),dk=darken(bar,.7);
+  const intensity=parseInt(document.getElementById('bar-intensity')?.value||100,10);
+  const bar=barColor(),dk=darken(bar,.7),fg=intensity<55?darken(tc,.45):'#fff';
   return `<table style="border-collapse:collapse;width:100%;margin:2pt 0 5pt;background:${bar};background:linear-gradient(90deg,${dk},${bar});border-radius:26px;break-after:avoid;page-break-after:avoid"><tr>
   <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 4pt;vertical-align:middle"><span style="display:inline-block;min-width:24pt;height:24pt;line-height:24pt;border-radius:50%;background:${dk};border:1.5pt solid #fff;color:#fff;text-align:center;font-size:11pt;font-weight:bold;font-family:Arial,sans-serif;padding:0 1pt">${num}</span></td>
-  <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 6pt;vertical-align:middle"><span class="song-note">&#9835;</span></td>
-  <td style="padding:3pt 6pt 3pt 2pt;color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:0;font-size:${tfs};font-family:${fstack};line-height:1.25">${label}</td>
-  <td style="width:1%;padding:0 10pt 0 0;opacity:.45">${leafSvg('#fff',26)}</td></tr></table>`;
+  <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 6pt;vertical-align:middle"><span class="song-note" style="color:${fg}">&#9835;</span></td>
+  <td style="padding:3pt 6pt 3pt 2pt;color:${fg};font-weight:900;text-transform:uppercase;letter-spacing:0;font-size:${tfs};font-family:${fstack};line-height:1.25">${label}</td>
+  <td style="width:1%;padding:0 10pt 0 0;opacity:.55">${leafSvg(fg,26)}</td></tr></table>`;
 }
 function subtituloHtml(t,tc,fstack,fsz,align){
   return `<table style="border-collapse:collapse;width:100%;margin:0 0 5pt;background:${hexToRgbBg(tc,0.12)};border-radius:18px;break-after:avoid;page-break-after:avoid"><tr><td style="padding:3pt 12pt;text-align:${align||'left'};font-weight:bold;color:${darken(tc,.8)};font-family:${fstack};font-size:${fsz};line-height:1.3">${h(t)}</td></tr></table>`;
@@ -1617,7 +1618,7 @@ function buildPreview(){
     guideN++;
     entries.forEach((v,i)=>{
       const sp=splitTitulo(v);
-      allSecs.push(`<div class="preview-sec">${bannerHtml(i+1,bdefs[k].label,tc,tfs,"'Cinzel',serif")}${sp.titulo?subtituloHtml(sp.titulo,tc,fstack,fs):''}<div class="preview-sec-body" style="font-family:${fstack};font-size:${fs};text-align:left">${fmtHtmlPR(sp.rest)}</div></div>`);
+      allSecs.push(`<div class="preview-sec">${bannerHtml(guideN+(i>0?'.'+i:''),bdefs[k].label,tc,tfs,"'Cinzel',serif")}${sp.titulo?subtituloHtml(sp.titulo,tc,fstack,fs):''}<div class="preview-sec-body" style="font-family:${fstack};font-size:${fs};text-align:left">${fmtHtmlPR(sp.rest)}</div></div>`);
   });
   });
   // apply page margin + strophe gap CSS var
@@ -1692,7 +1693,7 @@ function makeContent(fstack,t,fsize){
     guideN++;
     entries.forEach((v,i)=>{
       const secLabel=bdefs[k].label;
-      const secNum=i+1;
+      const secNum=guideN+(i>0?'.'+i:'');
       allSecs.push(
         makeSectionTitle(secNum,secLabel)+(splitTitulo(v).titulo?subtituloHtml(splitTitulo(v).titulo,tc,fstack,fs+'pt',splitTitulo(v).align):'')+fmtDocPR(splitTitulo(v).rest,fstack,fs,tc)+
         `<p style="margin:0;font-size:4pt;line-height:4pt">&nbsp;</p>`
