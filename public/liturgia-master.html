@@ -560,6 +560,7 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
     </div>
   </div>
   <div class="fg"><label>Frase do cabeçalho (lado direito)</label><input id="frase_header" placeholder="Ex: Que São Francisco nos ensine..." style="width:230px" oninput="buildPreviewIfActive()"></div>
+  <div class="fg"><label>Barra inferior</label><select id="footer-bar" onchange="buildPreviewIfActive()"><option value="1">Com barra inferior</option><option value="0">Sem barra inferior</option></select></div>
   <div class="fg"><label>Frase do rodapé</label><input id="frase_rodape" placeholder="Ex: São Francisco, rogai por nós!" style="width:200px" oninput="buildPreviewIfActive()"></div>
 </div>
 </div><!-- /body-dados -->
@@ -1394,11 +1395,12 @@ function isLand(){return !document.getElementById('booklet-mode').checked&&docum
 function leafSvg(c,w){
   return `<svg width="${w}" height="${Math.round(w*.7)}" viewBox="0 0 40 28" style="vertical-align:middle"><path d="M20 26C20 14 12 6 2 4c0 10 6 18 18 22z" fill="${c}"/><path d="M20 26C20 14 28 6 38 4c0 10-6 18-18 22z" fill="${c}"/><path d="M20 26C19 16 19 8 20 1c2 8 2 16 0 25z" fill="${c}"/></svg>`;
 }
+function footerOn(){return (document.getElementById('footer-bar')||{}).value!=='0';}
 function decoHtml(tc,pos,pageBg){
   const dk=darken(tc,.72),frase=(document.getElementById('frase_rodape')||{}).value||'';
-  const pe='pointer-events:none',ot='0',ob='0',wb=pageBg?'0mm':'15mm';
+  const pe='pointer-events:none',ot='0',ob='0',wb=pageBg?'0mm':(footerOn()?'15mm':'4mm');
   return `<div style="position:${pos};top:${ot};left:0;width:42mm;height:21mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 300 150" preserveAspectRatio="none"><path d="M0 0H235C140 30 50 75 0 150Z" fill="${GOLD_DECO}"/><path d="M0 0H205C120 25 40 62 0 128Z" fill="${dk}"/></svg></div>
-  ${pageBg?``:`<div style="position:${pos};bottom:${ob};left:0;width:100%;height:17mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 1000 80" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V80H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V80H0Z" fill="${dk}"/></svg>
+  ${(pageBg||!footerOn())?``:`<div style="position:${pos};bottom:${ob};left:0;width:100%;height:17mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 1000 80" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V80H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V80H0Z" fill="${dk}"/></svg>
      <div style="position:absolute;left:0;right:0;bottom:3mm;text-align:center;color:#fff;font-style:italic;font-size:13pt;font-family:'Times New Roman',serif">${h(frase)}</div></div>
    <div style="position:${pos};bottom:0;left:0;width:100%;height:1mm;background:${dk};z-index:0;${pe}"></div>`}
    <div style="position:${pos};bottom:${wb};right:6mm;width:38mm;z-index:0;opacity:.22;${pe}"><svg width="100%" viewBox="0 0 160 110"><rect x="55" y="45" width="50" height="60" fill="${tc}"/><polygon points="80,20 52,46 108,46" fill="${tc}"/><rect x="78" y="6" width="4" height="16" fill="${tc}"/><rect x="73" y="10" width="14" height="3" fill="${tc}"/><circle cx="25" cy="80" r="20" fill="${tc}"/><rect x="23" y="95" width="4" height="12" fill="${tc}"/><circle cx="136" cy="72" r="24" fill="${tc}"/><rect x="134" y="92" width="4" height="15" fill="${tc}"/></svg></div>`;
@@ -1864,10 +1866,8 @@ function exportarPDF(){
   const _txtSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 127"><text x="500" y="68" text-anchor="middle" fill="#FFFFFF" font-style="italic" font-size="21.6" font-family="Times New Roman,serif">${_fr}</text></svg>`;
   const txtBg='data:image/svg+xml;utf8,'+encodeURIComponent(_txtSvg);
   const footBg='data:image/svg+xml;utf8,'+encodeURIComponent(_svg);
-  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
-<style>
-  @page{
-    margin:0 0 27mm 0;
+  const fOn=footerOn();
+  const pageBox=fOn?`margin:0 0 27mm 0;
     size:${pageSize};
     @bottom-center{
       content:counter(page);
@@ -1883,7 +1883,21 @@ function exportarPDF(){
       font-weight:bold;
       color:${numColor};
       padding-right:7mm;
-    }
+    }`:`margin:0 0 12mm 0;
+    size:${pageSize};
+    @bottom-right{
+      content:counter(page);
+      vertical-align:middle;
+      font-family:Arial,sans-serif;
+      font-size:10pt;
+      font-weight:bold;
+      color:#444444;
+      padding-right:7mm;
+    }`;
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
+<style>
+  @page{
+    ${pageBox}
   }
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
   html,body{margin:0;padding:0}
@@ -2237,6 +2251,7 @@ function collectSaveData(){
     sacra_caption: document.getElementById('sacra-caption').value,
     sacra_align: document.getElementById('sacra-align').value,
     bar_intensity: document.getElementById('bar-intensity').value,
+    footer_bar: document.getElementById('footer-bar').value,
     booklet: document.getElementById('booklet-mode').checked,
     strophe_gap: (document.getElementById('strophe_gap')||{}).value||'1',
     tempo, dark, fontSize, titleFontSize, titleColor,
@@ -2301,6 +2316,7 @@ function restaurarRascunho(){
     if(d.data_missa!=null) document.getElementById('data_missa').value=d.data_missa;
     if(d.fonte_sel!=null) document.getElementById('fonte_sel').value=d.fonte_sel;
     if(d.margin_sel!=null) document.getElementById('margin_sel').value=d.margin_sel;
+    if(d.footer_bar!=null) document.getElementById('footer-bar').value=d.footer_bar;
     if(d.img_align!=null) document.getElementById('img-align').value=d.img_align;
     if(d.img_height!=null){
       document.getElementById('img-height').value=d.img_height;
@@ -2366,7 +2382,7 @@ function hookAutosave(){
   // Input fields
   ['paroquia','domingo','titulo_principal','ano_lit','data_missa','fonte_sel',
     'margin_sel','img-align','img-height','sacra-height','sacra-caption','sacra-align','bar-intensity',
-    'booklet-mode','strophe_gap','frase_header','frase_rodape','orient-sel'].forEach(id=>{
+    'booklet-mode','strophe_gap','frase_header','frase_rodape','orient-sel','footer-bar'].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.addEventListener('change',()=>{autoSave();buildPreviewIfActive();});
     if(el&&el.tagName==='INPUT'&&el.type!=='checkbox'&&el.type!=='range') el.addEventListener('input',()=>{autoSave();buildPreviewIfActive();});
@@ -2405,6 +2421,7 @@ function aplicarDadosBackup(d){
   if(d.data_missa!=null) document.getElementById('data_missa').value=d.data_missa;
   if(d.fonte_sel!=null) document.getElementById('fonte_sel').value=d.fonte_sel;
   if(d.margin_sel!=null) document.getElementById('margin_sel').value=d.margin_sel;
+  if(d.footer_bar!=null) document.getElementById('footer-bar').value=d.footer_bar;
   if(d.img_align!=null) document.getElementById('img-align').value=d.img_align;
   if(d.img_height!=null){document.getElementById('img-height').value=d.img_height;document.getElementById('img-h-val').textContent=d.img_height+'px';}
   if(d.sacra_height!=null){document.getElementById('sacra-height').value=d.sacra_height;document.getElementById('sacra-h-val').textContent=d.sacra_height+'px';}
