@@ -365,9 +365,12 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);font-
 .nav-btn.solid{color:white;background:var(--gold);border-color:var(--gold);border-radius:6px;padding:6px 16px}
 .theme-btn{border-color:var(--border);background:var(--surface2);color:var(--text2);border-radius:6px}
 body>div[style*="height:calc"]{height:calc(100vh - 64px)!important}
-#panels-top{margin-left:288px;background:var(--surface);box-shadow:0 2px 10px rgba(16,42,67,.05);z-index:20}
+#panels-top{display:none;position:fixed;left:288px;top:64px;bottom:0;width:min(720px,calc(100vw - 288px));margin:0;background:var(--surface);box-shadow:12px 0 36px rgba(16,42,67,.18);z-index:290;overflow-y:auto}
+#panels-top.side-open{display:block}
+#panels-top .collapsible-section{display:none}
+#panels-top .collapsible-section.side-active{display:block;min-height:100%}
 .collapsible-section{border-color:var(--border)}
-.collapsible-header{min-height:58px;padding:0 32px;background:var(--surface);border-bottom:0;position:relative}
+.collapsible-header{min-height:64px;padding:0 32px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:2}
 .collapsible-header:hover{background:var(--surface2)}
 .collapsible-header-left{gap:14px;min-width:0}
 .collapsible-title{font-family:'Libre Baskerville',Georgia,serif;font-size:14px;text-transform:none;color:var(--text);font-weight:700}
@@ -389,10 +392,17 @@ body>div[style*="height:calc"]{height:calc(100vh - 64px)!important}
 .fg input:focus,.fg select:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in oklab,var(--gold) 16%,transparent)}
 #editor-wrapper{margin-left:0}
 #pane-editor .pi{padding-left:288px}
-.sidebar{position:fixed;left:0;top:0;bottom:0;width:288px;padding:92px 16px 24px;background:#102A43;border:0;z-index:300;color:white}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:288px;padding:78px 16px 24px;background:#102A43;border:0;z-index:300;color:white}
 .sidebar::before{content:'L  LiturgiaMaster';position:absolute;left:24px;top:22px;font-family:'Libre Baskerville',Georgia,serif;font-size:18px;font-weight:700;color:white;white-space:pre;padding-left:2px}
 .sidebar::after{content:'';position:absolute;left:21px;top:15px;width:34px;height:34px;border-radius:4px;background:var(--gold);z-index:-1}
-.sb-title{color:rgba(255,255,255,.42);padding:2px 8px 12px;font-size:9px}
+.sb-title{color:rgba(255,255,255,.42);padding:2px 8px 10px;font-size:9px}
+.sidebar-config{display:flex;flex-direction:column;gap:4px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebar-config-btn{width:100%;min-height:42px;display:flex;align-items:center;gap:10px;padding:8px 11px;border:1px solid transparent;border-radius:6px;background:transparent;color:rgba(255,255,255,.76);font-family:'IBM Plex Sans',sans-serif;text-align:left;cursor:pointer;transition:background .18s,border-color .18s,color .18s}
+.sidebar-config-btn:hover{background:rgba(255,255,255,.07);color:white}
+.sidebar-config-btn.active{background:rgba(30,78,121,.9);border-color:rgba(240,162,2,.45);color:white;box-shadow:inset 3px 0 0 var(--gold)}
+.sidebar-config-icon{width:27px;height:27px;display:grid;place-items:center;flex:0 0 auto;border-radius:4px;background:rgba(255,255,255,.1);color:var(--gold);font-size:13px}
+.sidebar-config-copy{min-width:0;flex:1}.sidebar-config-name{display:block;font-size:12px;font-weight:600;line-height:1.25}.sidebar-config-summary{display:block;margin-top:2px;color:rgba(255,255,255,.4);font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-config-arrow{color:rgba(255,255,255,.35);font-size:14px}
 .sb-add-btn{height:42px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:white;border-radius:6px;padding:0 14px}
 .sb-add-btn:hover{background:rgba(255,255,255,.1);color:var(--gold);border-color:rgba(240,162,2,.5)}
 .sb-sep{background:rgba(255,255,255,.08);margin:12px 0}
@@ -403,11 +413,11 @@ body>div[style*="height:calc"]{height:calc(100vh - 64px)!important}
 .sbi-name,.sbi.active .sbi-name{color:inherit!important}
 .editor-area{padding:28px 32px 80px;background:var(--bg)}
 .block-panel{max-width:1040px;margin:0 auto 20px;border-color:var(--border);border-radius:7px;box-shadow:var(--shadow)}
-.bp-head{padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border)}
-.bp-title{font-family:'Libre Baskerville',Georgia,serif;color:var(--text)!important;text-transform:none;font-size:15px}
-.bp-note{color:var(--text3)}
-.bp-handle{color:var(--text3)}
-.bp-icon{border-radius:4px!important;background:var(--gold-bg)!important;color:var(--gold)!important}
+.bp-head{padding:16px 20px;background:#102A43;border-bottom:1px solid rgba(255,255,255,.08)}
+.bp-title{font-family:'Libre Baskerville',Georgia,serif;color:white!important;text-transform:none;font-size:15px}
+.bp-note{color:rgba(255,255,255,.58)}
+.bp-handle{color:rgba(255,255,255,.4)}
+.bp-icon{border-radius:4px!important;background:rgba(255,255,255,.1)!important;color:var(--gold)!important}
 .bp-badge{background:var(--gold-bg);color:#a66f00;border-color:color-mix(in oklab,var(--gold) 35%,transparent)}
 .bp-body{padding:22px}
 .sub-entry{border-color:var(--border);border-radius:6px}
@@ -425,7 +435,8 @@ textarea{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);min-hei
 }
 @media(max-width:780px){
   .sidebar{position:relative;top:auto;width:100%;height:auto;padding:16px;max-height:220px}.sidebar::before,.sidebar::after{display:none}
-  .topnav,#panels-top{margin-left:0}.topnav{height:auto;min-height:64px;flex-wrap:wrap}.nav-actions{overflow-x:auto;width:100%;padding-bottom:8px}
+  .topnav{margin-left:0}.topnav{height:auto;min-height:64px;flex-wrap:wrap}.nav-actions{overflow-x:auto;width:100%;padding-bottom:8px}
+  #panels-top{left:0;top:0;width:100vw;z-index:400}
   body>div[style*="height:calc"]{height:auto!important;min-height:calc(100vh - 64px)}
   #pane-editor .pi{padding-left:0;flex-direction:column}.pane{overflow:visible!important}.editor-area{overflow:visible;padding:18px 14px}.sidebar{overflow:auto}
   #pane-preview{padding-left:0}.collapsible-subtitle{max-width:140px}.img-panel{flex-wrap:wrap!important}.img-panel>div{border-right:0!important}
