@@ -1642,7 +1642,7 @@ function buildPreview(){
     guideN++;
     entries.forEach((v,i)=>{
       const sp=splitTitulo(v);
-      allSecs.push(`<div class="preview-sec">${bannerHtml(guideN+(i>0?'.'+i:''),bdefs[k].label,tc,tfs,"'Cinzel',serif")}${sp.titulo?subtituloHtml(sp.titulo,tc,fstack,fs):''}<div class="preview-sec-body" style="font-family:${fstack};font-size:${fs};text-align:left">${fmtHtmlPR(sp.rest)}</div></div>`);
+      allSecs.push(`<div class="preview-sec">${bannerHtml(guideN+(i>0?'.'+i:''),bdefs[k].label,tc,tfs,"'Cinzel',serif")}${sp.titulo?subtituloHtml(sp.titulo,tc,fstack,fs,sp.align):''}<div class="preview-sec-body" style="font-family:${fstack};font-size:${fs};text-align:left">${fmtHtmlPR(sp.rest)}</div></div>`);
   });
   });
   // apply page margin + strophe gap CSS var
