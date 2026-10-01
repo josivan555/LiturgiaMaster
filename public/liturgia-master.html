@@ -365,7 +365,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);font-
 .nav-btn.solid{color:white;background:var(--gold);border-color:var(--gold);border-radius:6px;padding:6px 16px}
 .theme-btn{border-color:var(--border);background:var(--surface2);color:var(--text2);border-radius:6px}
 body>div[style*="height:calc"]{height:calc(100vh - 64px)!important}
-#panels-top{display:none;position:fixed;left:288px;top:64px;bottom:0;width:min(720px,calc(100vw - 288px));margin:0;background:var(--surface);box-shadow:12px 0 36px rgba(16,42,67,.18);z-index:290;overflow-y:auto}
+#panels-top{--side-panel-width:clamp(440px,42vw,640px);display:none;position:fixed;left:288px;top:64px;bottom:0;width:min(var(--side-panel-width),calc(100vw - 288px));margin:0;background:var(--surface);box-shadow:12px 0 36px rgba(16,42,67,.18);z-index:290;overflow-y:auto}
 #panels-top.side-open{display:block}
 #panels-top .collapsible-section{display:none}
 #panels-top .collapsible-section.side-active{display:block;min-height:100%}
@@ -381,10 +381,8 @@ body>div[style*="height:calc"]{height:calc(100vh - 64px)!important}
 .collapsible-chevron::after{content:'⌄';font-size:16px;line-height:1;transform:translateY(-2px)}
 .collapsible-section.collapsed .collapsible-chevron{transform:none}
 .collapsible-section.collapsed .collapsible-chevron::after{transform:rotate(-90deg)}
-.collapsible-pin{border:0;background:transparent;color:var(--text3);font-size:0;width:30px;height:30px;border-radius:5px}
-.collapsible-pin::after{content:'◇';font-size:15px}
-.collapsible-pin:hover,.collapsible-pin.pinned{background:var(--gold-bg);color:var(--gold)}
-.collapsible-pin.pinned::after{content:'◆'}
+.side-panel-close{width:34px;height:34px;display:grid;place-items:center;flex:0 0 auto;border:1px solid var(--border);border-radius:5px;background:var(--surface);color:var(--text2);font-size:20px;line-height:1;cursor:pointer;transition:background .18s,color .18s,border-color .18s}
+.side-panel-close:hover{background:var(--gold-bg);border-color:var(--gold);color:var(--gold)}
 .collapsible-body{max-height:700px;transition:max-height .34s cubic-bezier(.16,1,.3,1),opacity .22s}
 .header-form,.img-panel,.tempo-wrap{padding:8px 32px 26px;background:var(--surface);gap:18px}
 .fg{gap:7px}.fg label,.img-panel-title,.tempo-label{color:var(--text3);font-size:9px}
@@ -401,7 +399,7 @@ body>div[style*="height:calc"]{height:calc(100vh - 64px)!important}
 .sidebar-config-btn:hover{background:rgba(255,255,255,.07);color:white}
 .sidebar-config-btn.active{background:rgba(30,78,121,.9);border-color:rgba(240,162,2,.45);color:white;box-shadow:inset 3px 0 0 var(--gold)}
 .sidebar-config-icon{width:27px;height:27px;display:grid;place-items:center;flex:0 0 auto;border-radius:4px;background:rgba(255,255,255,.1);color:var(--gold);font-size:13px}
-.sidebar-config-copy{min-width:0;flex:1}.sidebar-config-name{display:block;font-size:12px;font-weight:600;line-height:1.25}.sidebar-config-summary{display:block;margin-top:2px;color:rgba(255,255,255,.4);font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-config-copy{min-width:0;flex:1}.sidebar-config-name{display:block;font-size:14px;font-weight:600;line-height:1.3}.sidebar-config-summary{display:block;margin-top:3px;color:rgba(255,255,255,.46);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sidebar-config-arrow{color:rgba(255,255,255,.35);font-size:14px}
 .sb-add-btn{height:42px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:white;border-radius:6px;padding:0 14px}
 .sb-add-btn:hover{background:rgba(255,255,255,.1);color:var(--gold);border-color:rgba(240,162,2,.5)}
@@ -428,7 +426,14 @@ textarea{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);min-hei
 .tempo-cards{gap:10px}.tc{border-radius:6px;background:var(--surface2);padding:12px}.tc.active{background:var(--gold-bg)}
 .img-drop{border-radius:6px;background:var(--surface2)}
 .modal-box,.autosave-banner{border-radius:8px}.modal-title,.autosave-banner-title,#focused-modal-title{font-family:'Libre Baskerville',Georgia,serif}
-#pane-preview{padding-left:288px}
+#editor-wrapper{position:relative}
+#pane-preview{padding-left:288px;transition:padding-left .28s cubic-bezier(.16,1,.3,1)}
+body.preview-mode #pane-editor{display:block;position:absolute;width:0;height:0;overflow:visible}
+body.preview-mode #pane-editor .editor-area{display:none}
+body.preview-mode #pane-preview{display:flex}
+body.preview-mode.panel-open #pane-preview{padding-left:calc(288px + clamp(440px,42vw,640px))}
+body.preview-mode .preview-wrap{padding:24px;display:flex;justify-content:center;align-items:flex-start}
+body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
 @media(max-width:1050px){
   .topnav{padding:0 16px}.nav-btn.secondary{display:none}.nav-actions{gap:4px}
   .collapsible-header{padding:0 20px}.header-form,.img-panel,.tempo-wrap{padding-left:20px;padding-right:20px}
@@ -439,7 +444,7 @@ textarea{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);min-hei
   #panels-top{left:0;top:0;width:100vw;z-index:400}
   body>div[style*="height:calc"]{height:auto!important;min-height:calc(100vh - 64px)}
   #pane-editor .pi{padding-left:0;flex-direction:column}.pane{overflow:visible!important}.editor-area{overflow:visible;padding:18px 14px}.sidebar{overflow:auto}
-  #pane-preview{padding-left:0}.collapsible-subtitle{max-width:140px}.img-panel{flex-wrap:wrap!important}.img-panel>div{border-right:0!important}
+  #pane-preview,body.preview-mode.panel-open #pane-preview{padding-left:0}.collapsible-subtitle{max-width:140px}.img-panel{flex-wrap:wrap!important}.img-panel>div{border-right:0!important}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
@@ -482,7 +487,7 @@ textarea{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);min-hei
     <span class="collapsible-title">📋 Dados da Missa</span>
     <span class="collapsible-subtitle" id="subtitle-dados">recolhido</span>
   </div>
-  <button class="collapsible-pin" id="pin-dados" onclick="event.stopPropagation();togglePin('dados')" title="Manter sempre aberto">📌 Fixar</button>
+  <button class="side-panel-close" onclick="event.stopPropagation();closeSidePanel()" title="Fechar Dados da Missa" aria-label="Fechar Dados da Missa">×</button>
 </div>
 <div class="collapsible-body" id="body-dados">
 <div class="header-form">
@@ -557,7 +562,7 @@ textarea{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);min-hei
     <span class="collapsible-title">🖼 Imagens do Cabeçalho &amp; Sacra</span>
     <span class="collapsible-subtitle" id="subtitle-logos">recolhido</span>
   </div>
-  <button class="collapsible-pin" id="pin-logos" onclick="event.stopPropagation();togglePin('logos')" title="Manter sempre aberto">📌 Fixar</button>
+  <button class="side-panel-close" onclick="event.stopPropagation();closeSidePanel()" title="Fechar Imagens e Sacra" aria-label="Fechar Imagens e Sacra">×</button>
 </div>
 <div class="collapsible-body" id="body-logos">
 <div class="img-panel" style="flex-wrap:nowrap;align-items:flex-start;gap:0">
@@ -654,7 +659,7 @@ textarea{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);min-hei
     <span class="collapsible-title">🕯 Tempo Litúrgico</span>
     <span class="collapsible-subtitle" id="subtitle-tempo">recolhido</span>
   </div>
-  <button class="collapsible-pin" id="pin-tempo" onclick="event.stopPropagation();togglePin('tempo')" title="Manter sempre aberto">📌 Fixar</button>
+  <button class="side-panel-close" onclick="event.stopPropagation();closeSidePanel()" title="Fechar Tempo Litúrgico" aria-label="Fechar Tempo Litúrgico">×</button>
 </div>
 <div class="collapsible-body" id="body-tempo">
 <div class="tempo-wrap">
@@ -788,11 +793,14 @@ function openSidePanel(id){
   sec.classList.add('side-active');
   sec.classList.remove('collapsed');
   panels.classList.add('side-open');
+  document.body.classList.add('panel-open');
   document.querySelectorAll('.sidebar-config-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.panel===id));
+  if(document.body.classList.contains('preview-mode'))buildPreview();
 }
 
 function closeSidePanel(){
   document.getElementById('panels-top')?.classList.remove('side-open');
+  document.body.classList.remove('panel-open');
   document.querySelectorAll('#panels-top .collapsible-section').forEach(el=>el.classList.remove('side-active'));
   document.querySelectorAll('.sidebar-config-btn').forEach(btn=>btn.classList.remove('active'));
   _activeSidePanel=null;
@@ -1212,12 +1220,17 @@ function removerBloco(k){
 
 /* ── TABS ── */
 function setTab(t){
+  document.body.classList.toggle('preview-mode',t==='preview');
   ['editor','preview'].forEach(id=>{
-    document.getElementById('pane-'+id).classList.toggle('active',id===t);
+    const shouldShow=id===t||(t==='preview'&&id==='editor');
+    document.getElementById('pane-'+id).classList.toggle('active',shouldShow);
     const tb=document.getElementById('tab-'+id);
     if(tb)tb.classList.toggle('active',id===t);
   });
-  if(t==='preview')buildPreview();
+  if(t==='preview'){
+    if(!_activeSidePanel)openSidePanel('dados');
+    buildPreview();
+  }
 }
 
 /* ── UTILS ── */
@@ -2318,10 +2331,10 @@ function hookAutosave(){
   // Input fields
   ['paroquia','domingo','titulo_principal','ano_lit','data_missa','fonte_sel',
    'margin_sel','img-align','img-height','sacra-height','sacra-caption','sacra-align',
-   'booklet-mode','strophe_gap'].forEach(id=>{
+    'booklet-mode','strophe_gap','frase_header','frase_rodape','orient-sel'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el) el.addEventListener('change',autoSave);
-    if(el&&el.tagName==='INPUT'&&el.type!=='checkbox'&&el.type!=='range') el.addEventListener('input',autoSave);
+    if(el) el.addEventListener('change',()=>{autoSave();buildPreviewIfActive();});
+    if(el&&el.tagName==='INPUT'&&el.type!=='checkbox'&&el.type!=='range') el.addEventListener('input',()=>{autoSave();buildPreviewIfActive();});
   });
   // Observe editor-area for textarea changes (covers dynamic blocks)
   const ea=document.getElementById('editor-area');
