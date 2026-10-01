@@ -561,6 +561,8 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
   </div>
   <div class="fg"><label>Frase do cabeçalho (lado direito)</label><input id="frase_header" placeholder="Ex: Que São Francisco nos ensine..." style="width:230px" oninput="buildPreviewIfActive()"></div>
   <div class="fg"><label>Barra inferior</label><select id="footer-bar" onchange="buildPreviewIfActive()"><option value="1">Com barra inferior</option><option value="0">Sem barra inferior</option></select></div>
+  <div class="fg"><label>Estilo das barras dos cantos</label><select id="song-bar-style" onchange="updateSongBarControls();buildPreviewIfActive()"><option value="1">Barra 01</option><option value="2">Barra 02</option><option value="0">Sem barra</option></select></div>
+  <div class="fg" id="no-bar-color-controls" style="display:none"><label>Cor das letras (sem barra)</label><div style="display:flex;align-items:center;gap:6px"><select id="no-bar-color-mode" onchange="updateSongBarControls();buildPreviewIfActive()"><option value="black">Preto</option><option value="general">Cor geral do folheto</option><option value="custom">Cor personalizada</option></select><input type="color" id="no-bar-custom-color" value="#111111" title="Escolher cor das letras" aria-label="Cor personalizada das letras sem barra" oninput="buildPreviewIfActive()" style="display:none;width:34px;height:34px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px;background:var(--surface)"></div></div>
   <div class="fg"><label>Frase do rodapé</label><input id="frase_rodape" placeholder="Ex: São Francisco, rogai por nós!" style="width:200px" oninput="buildPreviewIfActive()"></div>
 </div>
 </div><!-- /body-dados -->
@@ -935,6 +937,22 @@ function barColor(){
   const full=hex.length===3?hex.split('').map(c=>c+c).join(''):hex;
   const channels=[0,2,4].map(i=>parseInt(full.slice(i,i+2),16));
   return '#'+channels.map(c=>Math.round(255-(255-c)*strength).toString(16).padStart(2,'0')).join('');
+}
+
+function songBarStyle(){return (document.getElementById('song-bar-style')||{}).value||'1';}
+function noBarTextColor(){
+  const mode=(document.getElementById('no-bar-color-mode')||{}).value||'black';
+  if(mode==='general')return titleColor||'#D32F2F';
+  if(mode==='custom')return (document.getElementById('no-bar-custom-color')||{}).value||'#111111';
+  return '#111111';
+}
+function updateSongBarControls(){
+  const noBar=songBarStyle()==='0';
+  const controls=document.getElementById('no-bar-color-controls');
+  const picker=document.getElementById('no-bar-custom-color');
+  const mode=(document.getElementById('no-bar-color-mode')||{}).value||'black';
+  if(controls)controls.style.display=noBar?'flex':'none';
+  if(picker)picker.style.display=noBar&&mode==='custom'?'block':'none';
 }
 
 function setTitleColor(el,color){
@@ -1354,6 +1372,21 @@ function splitTitulo(text){
 function bannerHtml(num,label,tc,tfs,fstack){
   const intensity=parseInt(document.getElementById('bar-intensity')?.value||100,10);
   const bar=barColor(),dk=darken(bar,.7),fg=intensity<55?darken(tc,.45):'#fff';
+  const style=songBarStyle();
+  if(style==='0'){
+    const ink=noBarTextColor();
+    return `<table style="border-collapse:collapse;width:100%;margin:2pt 0 5pt;background:transparent;break-after:avoid;page-break-after:avoid"><tr>
+  <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 4pt;vertical-align:middle"><span style="display:inline-block;min-width:24pt;height:24pt;line-height:21pt;border-radius:50%;background:transparent;border:2pt solid ${ink};color:${ink};text-align:center;font-size:11pt;font-weight:bold;font-family:Arial,sans-serif;padding:0 1pt">${num}</span></td>
+  <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 7pt;vertical-align:middle"><span class="song-note" style="color:${ink}">&#9835;</span></td>
+  <td style="padding:3pt 6pt 3pt 2pt;color:${ink};font-weight:900;text-transform:uppercase;letter-spacing:0;font-size:${tfs};font-family:${fstack};line-height:1.25;border-bottom:1.5pt solid ${ink}">${label}</td></tr></table>`;
+  }
+  if(style==='2'){
+    return `<table style="border-collapse:separate;border-spacing:0;width:100%;margin:2pt 0 5pt;background:linear-gradient(90deg,${dk},${bar});border:1.5pt solid ${GOLD_DECO};border-radius:25px 7px 7px 25px;break-after:avoid;page-break-after:avoid;overflow:hidden"><tr>
+  <td style="width:1%;white-space:nowrap;padding:1.5pt 0 1.5pt 1.5pt;vertical-align:middle"><span style="display:inline-block;min-width:28pt;height:28pt;line-height:25pt;border-radius:50%;background:${dk};border:2pt solid ${GOLD_DECO};color:#fff;text-align:center;font-size:12pt;font-weight:bold;font-family:Arial,sans-serif;padding:0 1pt">${num}</span></td>
+  <td style="width:1%;white-space:nowrap;padding:3pt 7pt 3pt 8pt;vertical-align:middle;border-right:1pt solid ${GOLD_DECO}"><span class="song-note" style="color:${GOLD_DECO}">&#9835;</span></td>
+  <td style="padding:3pt 6pt 3pt 8pt;color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:0;font-size:${tfs};font-family:${fstack};line-height:1.25">${label}</td>
+  <td style="width:1%;padding:0 9pt 0 7pt;border-right:6pt solid ${GOLD_DECO}">${leafSvg(GOLD_DECO,26)}</td></tr></table>`;
+  }
   return `<table style="border-collapse:collapse;width:100%;margin:2pt 0 5pt;background:${bar};background:linear-gradient(90deg,${dk},${bar});border-radius:26px;break-after:avoid;page-break-after:avoid"><tr>
   <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 4pt;vertical-align:middle"><span style="display:inline-block;min-width:24pt;height:24pt;line-height:24pt;border-radius:50%;background:${dk};border:1.5pt solid #fff;color:#fff;text-align:center;font-size:11pt;font-weight:bold;font-family:Arial,sans-serif;padding:0 1pt">${num}</span></td>
   <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 6pt;vertical-align:middle"><span class="song-note" style="color:${fg}">&#9835;</span></td>
@@ -2252,6 +2285,9 @@ function collectSaveData(){
     sacra_align: document.getElementById('sacra-align').value,
     bar_intensity: document.getElementById('bar-intensity').value,
     footer_bar: document.getElementById('footer-bar').value,
+    song_bar_style: document.getElementById('song-bar-style').value,
+    no_bar_color_mode: document.getElementById('no-bar-color-mode').value,
+    no_bar_custom_color: document.getElementById('no-bar-custom-color').value,
     booklet: document.getElementById('booklet-mode').checked,
     strophe_gap: (document.getElementById('strophe_gap')||{}).value||'1',
     tempo, dark, fontSize, titleFontSize, titleColor,
@@ -2317,6 +2353,10 @@ function restaurarRascunho(){
     if(d.fonte_sel!=null) document.getElementById('fonte_sel').value=d.fonte_sel;
     if(d.margin_sel!=null) document.getElementById('margin_sel').value=d.margin_sel;
     if(d.footer_bar!=null) document.getElementById('footer-bar').value=d.footer_bar;
+    if(d.song_bar_style!=null) document.getElementById('song-bar-style').value=d.song_bar_style;
+    if(d.no_bar_color_mode!=null) document.getElementById('no-bar-color-mode').value=d.no_bar_color_mode;
+    if(d.no_bar_custom_color!=null) document.getElementById('no-bar-custom-color').value=d.no_bar_custom_color;
+    updateSongBarControls();
     if(d.img_align!=null) document.getElementById('img-align').value=d.img_align;
     if(d.img_height!=null){
       document.getElementById('img-height').value=d.img_height;
@@ -2382,7 +2422,7 @@ function hookAutosave(){
   // Input fields
   ['paroquia','domingo','titulo_principal','ano_lit','data_missa','fonte_sel',
     'margin_sel','img-align','img-height','sacra-height','sacra-caption','sacra-align','bar-intensity',
-    'booklet-mode','strophe_gap','frase_header','frase_rodape','orient-sel','footer-bar'].forEach(id=>{
+    'booklet-mode','strophe_gap','frase_header','frase_rodape','orient-sel','footer-bar','song-bar-style','no-bar-color-mode','no-bar-custom-color'].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.addEventListener('change',()=>{autoSave();buildPreviewIfActive();});
     if(el&&el.tagName==='INPUT'&&el.type!=='checkbox'&&el.type!=='range') el.addEventListener('input',()=>{autoSave();buildPreviewIfActive();});
@@ -2408,6 +2448,7 @@ else if(mm<5)tempo='pascal';
 else tempo='comum';
 blockOrder.forEach(k=>{state[k]=[''];});
 renderTempoCards();renderSidebar();renderEditor();
+updateSongBarControls();
 hookAutosave();
 checkForDraft();
 loadSectionState();
@@ -2422,6 +2463,10 @@ function aplicarDadosBackup(d){
   if(d.fonte_sel!=null) document.getElementById('fonte_sel').value=d.fonte_sel;
   if(d.margin_sel!=null) document.getElementById('margin_sel').value=d.margin_sel;
   if(d.footer_bar!=null) document.getElementById('footer-bar').value=d.footer_bar;
+  if(d.song_bar_style!=null) document.getElementById('song-bar-style').value=d.song_bar_style;
+  if(d.no_bar_color_mode!=null) document.getElementById('no-bar-color-mode').value=d.no_bar_color_mode;
+  if(d.no_bar_custom_color!=null) document.getElementById('no-bar-custom-color').value=d.no_bar_custom_color;
+  updateSongBarControls();
   if(d.img_align!=null) document.getElementById('img-align').value=d.img_align;
   if(d.img_height!=null){document.getElementById('img-height').value=d.img_height;document.getElementById('img-h-val').textContent=d.img_height+'px';}
   if(d.sacra_height!=null){document.getElementById('sacra-height').value=d.sacra_height;document.getElementById('sacra-h-val').textContent=d.sacra_height+'px';}
