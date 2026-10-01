@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liturgia Master - Folhetos Profissionais</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{
+  --bg:#f4f5f7;--surface:#ffffff;--surface2:#f8f9fb;--surface3:#eef0f4;
+  --border:#e2e5eb;--border2:#cdd1da;
+  --text:#1a1d23;--text2:#5a6175;--text3:#9099b0;
+  --gold:#e8950a;--gold-l:#f5aa30;--gold-bg:#fff8ed;
+  --hover:#f0f3f8;
+  --red:#d93025;--red-l:#e85a50;
+  --topnav:#1e2228;--topnav-t:rgba(255,255,255,.5);
+  --bp-head:#2d3240;
+  --shadow:0 1px 4px rgba(0,0,0,.07),0 2px 12px rgba(0,0,0,.05);
+  --shadow-lg:0 4px 24px rgba(0,0,0,.12);
+  --drag-hl:#e8f0fd;
+}
+[data-theme="dark"]{
+  --bg:#13161c;--surface:#1e2228;--surface2:#252b34;--surface3:#2d3340;
+  --border:#333b48;--border2:#3e4a5c;
+  --text:#e4e8f0;--text2:#8a95aa;--text3:#5a6480;
+  --gold:#f5aa30;--gold-l:#f9c060;--gold-bg:#2a2210;
+  --hover:#252d38;
+  --red:#e05a50;--red-l:#f07060;
+  --topnav:#0f1217;--topnav-t:rgba(255,255,255,.4);
+  --bp-head:#1a1f28;
+  --shadow:0 1px 4px rgba(0,0,0,.3),0 2px 12px rgba(0,0,0,.2);
+  --shadow-lg:0 4px 24px rgba(0,0,0,.4);
+  --drag-hl:#1e2a3a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;transition:background .2s,color .2s}
+
+.topnav{background:var(--topnav);padding:0 24px;display:flex;align-items:center;height:58px;position:sticky;top:0;z-index:200;box-shadow:0 1px 0 rgba(255,255,255,.05),0 2px 16px rgba(0,0,0,.3);gap:0}
+.logo{display:flex;align-items:center;gap:10px;margin-right:28px;text-decoration:none;white-space:nowrap}
+.logo-icon{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.logo-text{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:.01em}
+.logo-text .lt-litur{color:var(--gold)}
+.logo-text .lt-master{color:#fff}
+.nav-tabs{display:flex;flex:1}
+.nav-tab{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--topnav-t);padding:0 20px;height:58px;display:flex;align-items:center;cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:all .2s}
+.nav-tab:hover{color:rgba(255,255,255,.85)}
+.nav-tab.active{color:var(--gold-l);border-bottom-color:var(--gold)}
+.nav-actions{display:flex;gap:6px;align-items:center}
+.nav-btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:6px 14px;border-radius:6px;border:1px solid;cursor:pointer;transition:all .18s;height:32px;display:flex;align-items:center;gap:5px}
+.nav-btn.outline{background:transparent;border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)}
+.nav-btn.outline:hover{border-color:rgba(255,255,255,.45);color:#fff}
+.nav-btn.solid{background:var(--gold);border-color:var(--gold);color:#fff;border-radius:20px;padding:6px 18px;font-weight:600}
+.nav-btn.solid:hover{background:var(--gold-l);border-color:var(--gold-l)}
+.nav-btn.danger{background:transparent;border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)}
+.nav-btn.danger:hover{border-color:rgba(255,255,255,.45);color:#fff}
+.theme-btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);cursor:pointer;font-size:16px;transition:all .18s;display:flex;align-items:center;justify-content:center;margin-left:4px}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,255,255,.1)}
+
+.header-form{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-family:'Inter',sans-serif}
+.fg input,.fg select{font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:6px 11px;height:36px;outline:none;transition:border-color .15s,box-shadow .15s}
+.fg input:focus,.fg select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(232,149,10,.12)}
+.fg input::placeholder{color:var(--text3)}
+
+.tempo-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px}
+.tempo-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.tempo-cards{display:flex;gap:8px;flex-wrap:wrap}
+.tc{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;transition:all .18s;min-width:110px;flex:1}
+.tc:hover{border-color:var(--border2);background:var(--surface2)}
+.tc.active{background:var(--gold-bg);border-color:var(--tc-color,var(--gold));box-shadow:0 0 0 2px rgba(232,149,10,.15)}
+.tc-dot{width:14px;height:14px;border-radius:50%}
+.tc-name{font-size:12px;font-weight:600;text-align:center;font-family:'Inter',sans-serif;color:var(--text)}
+.tc-sub{font-size:10px;color:var(--text3);text-align:center;font-family:'Inter',sans-serif}
+.tc-desc{font-size:10px;color:var(--text2);text-align:center;line-height:1.3;font-family:'Inter',sans-serif}
+.tempo-info{margin-top:10px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);font-family:'Inter',sans-serif}
+.ti-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+.pane{display:none;flex:1;overflow:hidden}
+.pane.active{display:flex;flex-direction:column}
+/* Sticky top panels wrapper */
+#panels-top{flex-shrink:0;background:var(--bg)}
+#pane-editor .pi{display:flex;flex:1;overflow:hidden}
+
+.sidebar{width:265px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:12px 8px}
+.sb-title{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.1em;padding:4px 10px 8px;text-transform:uppercase}
+.sb-add-btn{display:flex;align-items:center;gap:7px;width:100%;padding:8px 12px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--gold);background:transparent;border:1.5px dashed var(--gold);cursor:pointer;transition:all .15s;margin-bottom:8px}
+.sb-add-btn:hover{background:var(--gold-bg)}
+.sb-sep{height:1px;background:var(--border);margin:4px 10px 8px}
+.sbi{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;color:var(--text2);transition:all .15s;margin-bottom:2px;border:1px solid transparent}
+.sbi:hover{background:var(--surface2);color:var(--text)}
+.sbi.active{background:var(--surface);border-color:var(--border);color:var(--text);box-shadow:var(--shadow)}
+.sbi-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'Inter',sans-serif;color:#fff}
+.sbi-name{flex:1;line-height:1.3;font-weight:500}
+.sbi-badge{font-size:10px;padding:2px 7px;border-radius:10px;background:var(--gold-bg);color:var(--gold);border:1px solid rgba(232,149,10,.3)}
+.sbi-off{font-size:10px;color:var(--text3);font-style:italic}
+
+.editor-area{flex:1;overflow-y:auto;padding:16px 20px;background:var(--bg)}
+.block-panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;transition:border-color .15s}
+.block-panel.drag-over-block{border-color:var(--gold);background:var(--drag-hl)}
+.bp-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--bp-head);border-bottom:1px solid rgba(255,255,255,.05)}
+.bp-handle{cursor:grab;color:rgba(255,255,255,.35);font-size:16px;user-select:none;line-height:1}
+.bp-handle:active{cursor:grabbing}
+.bp-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'Inter',sans-serif;color:#fff}
+.bp-meta{flex:1}
+.bp-title{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:#ffffff;letter-spacing:.03em}
+.bp-note{font-size:11px;color:rgba(255,255,255,.7);font-family:'Inter',sans-serif;margin-top:2px}
+.bp-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(232,149,10,.2);color:var(--gold-l);border:1px solid rgba(232,149,10,.3)}
+.bp-off{font-size:11px;color:rgba(255,255,255,.35);font-style:italic}
+.bp-del{font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.45);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.bp-del:hover{border-color:var(--red-l);color:var(--red-l);background:rgba(217,48,37,.12)}
+.bp-body{padding:14px 16px}
+
+.sub-entry{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;background:var(--surface)}
+.sub-entry.dragging{opacity:.4;border:2px dashed var(--gold)}
+.sub-entry.drag-over-se{border-color:var(--gold);background:var(--drag-hl)}
+.se-head{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--surface2);border-bottom:1px solid var(--border)}
+.se-handle{cursor:grab;color:var(--text3);font-size:14px;user-select:none}
+.se-label{font-size:11px;font-weight:700;color:var(--text3);flex:1;text-transform:uppercase;letter-spacing:.06em;font-family:'Inter',sans-serif}
+.se-rm{font-size:11px;padding:2px 8px;border-radius:5px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.se-rm:hover{border-color:var(--red-l);color:var(--red);background:rgba(217,48,37,.07)}
+.se-max{font-size:11px;padding:2px 8px;border-radius:5px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;margin-right:2px;font-family:'Inter',sans-serif}
+.se-max:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+/* Maximized card overlay — Modo Focado */
+.sub-entry.maximized{display:none !important}
+.se-max-backdrop{display:none;position:fixed;inset:0;z-index:899;background:rgba(0,0,0,.45)}
+.se-max-backdrop.show{display:block}
+
+/* Focused mode modal */
+#focused-modal{display:none;position:fixed;inset:0;z-index:1000;flex-direction:column;background:var(--surface)}
+#focused-modal.show{display:flex}
+#focused-modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 12px;border-bottom:1.5px solid var(--border);background:var(--surface);flex-shrink:0}
+#focused-modal-title{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--gold);letter-spacing:.05em;text-transform:uppercase}
+#focused-modal-close{background:none;border:none;cursor:pointer;color:var(--text3);font-size:22px;line-height:1;padding:0 4px;transition:color .15s}
+#focused-modal-close:hover{color:var(--text)}
+#focused-modal-body{flex:1;overflow-y:auto;padding:48px 80px}
+#focused-modal-textarea{width:100%;height:100%;min-height:calc(100vh - 200px);font-family:'EB Garamond',Georgia,serif;font-size:26px;line-height:1.85;color:var(--text);background:transparent;border:none;outline:none;resize:none;padding:0}
+#focused-modal-textarea::placeholder{color:var(--text3);font-style:italic}
+#focused-modal-footer{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-top:1px solid var(--border);background:var(--surface2);flex-shrink:0}
+#focused-modal-adjust{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:10px 22px;margin-right:12px;border-radius:30px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+#focused-modal-adjust:hover{background:var(--gold-bg)}
+#focused-modal-info{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:10px 22px;margin-right:12px;border-radius:30px;border:1.5px solid var(--text3);background:transparent;color:var(--text2);cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+#focused-modal-info:hover{border-color:var(--gold);color:var(--gold)}
+#codes-pop{display:none;position:fixed;right:28px;bottom:76px;width:min(560px,92vw);max-height:70vh;overflow:auto;z-index:1100;background:var(--surface);border:1.5px solid var(--gold);border-radius:14px;box-shadow:0 12px 48px rgba(0,0,0,.3);padding:18px 22px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
+#codes-pop.show{display:block}
+#codes-pop h4{margin:0 0 10px;font-family:'Cinzel',serif;font-size:14px;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+#codes-pop h4 button{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text3)}
+#codes-pop table{width:100%;border-collapse:collapse}
+#codes-pop td{padding:7px 6px;border-top:1px solid var(--border);vertical-align:top;line-height:1.45}
+#codes-pop td:first-child{width:46%;font-weight:700;color:var(--gold)}
+#codes-pop code{background:var(--surface2);padding:1px 6px;border-radius:5px;font-size:12px}
+#codes-pop .nota{margin-top:10px;font-size:12px;color:var(--text3)}
+#focused-modal-hint{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.12em;color:var(--text3);text-transform:uppercase}
+#focused-modal-save{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:10px 28px;border-radius:30px;border:none;background:var(--gold);color:#fff;cursor:pointer;letter-spacing:.04em;text-transform:uppercase;transition:background .18s,transform .12s}
+#focused-modal-save:hover{background:var(--gold-l);transform:scale(1.03)}
+textarea{width:100%;min-height:80px;padding:10px 12px;font-family:'EB Garamond',Georgia,serif;font-size:15px;line-height:1.6;color:var(--text);background:var(--surface);border:none;outline:none;resize:vertical}
+textarea::placeholder{color:var(--text3)}
+.add-canto-btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--gold);cursor:pointer;padding:4px 0;border:none;background:transparent;display:inline-flex;align-items:center;gap:5px;transition:color .15s}
+.add-canto-btn:hover{color:var(--gold-l)}
+
+.preview-wrap{background:var(--bg);overflow-y:auto;padding:20px;flex:1}
+.preview-page{background:#fff;color:#111;max-width:760px;margin:0 auto;padding:14mm 12mm;box-shadow:var(--shadow-lg);border-radius:3px}
+.pg-header{text-align:center;border-bottom:2px solid #2a2118;padding-bottom:8px;margin-bottom:12px}
+.pg-paroquia{font-size:17px;font-weight:bold;font-family:'Cinzel',serif;letter-spacing:.04em}
+.pg-tempo{font-size:12px;margin-top:3px;color:#555}
+.pg-domingo{font-size:13px;font-weight:bold;margin-top:2px}
+.pg-data{font-size:11px;color:#777;margin-top:2px}
+.preview-cols{column-count:2;column-gap:14px;column-rule:.5px solid #ccc}
+.preview-sec{margin-bottom:8px}
+.preview-sec-title{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-bottom:1.5px solid;padding-bottom:2px;margin-bottom:4px;font-family:'Cinzel',serif}
+.preview-sec-body{font-size:11px;line-height:1.35}
+.strophe-block{margin:0;line-height:1.4}
+/* ── COLOR SWATCHES ── */
+.color-swatch{display:inline-block;width:22px;height:22px;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s}
+.color-swatch:hover{transform:scale(1.15)}
+.color-swatch.active{border-color:#fff;box-shadow:0 0 0 2px #888}
+
+/* ── PREVIEW ENHANCEMENTS ── */
+.preview-page{border:1.5px solid #bbb;border-radius:4px}
+.preview-title-badge{display:inline-block;background:#f5efe0;border-radius:6px;padding:2px 10px 3px;font-weight:bold;color:#2a2118;font-size:13px;letter-spacing:.04em;font-family:'Cinzel',serif;margin-bottom:4px}
+.guide-num{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#1976D2;color:#fff;font-size:9px;font-weight:700;margin-right:4px;vertical-align:middle;flex-shrink:0;font-family:Arial,sans-serif}
+.pr-label{color:#D32F2F;font-weight:bold;font-style:normal}
+.as-label{color:#D32F2F;font-weight:bold;font-style:normal}
+.pg-odoming{font-family:Arial,'Helvetica Neue',sans-serif;font-size:22px;font-weight:900;letter-spacing:.12em;color:#D32F2F;text-transform:uppercase;margin-bottom:4px}
+.sacra-img-wrap{text-align:center;margin-bottom:8px;break-inside:avoid}
+.sacra-caption{font-size:9px;color:#888;font-style:italic;margin-top:2px;text-align:center}
+
+
+.action-bar{background:var(--surface);border-top:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;gap:8px}
+.ab-info{font-size:12px;color:var(--text3);flex:1;font-family:'Inter',sans-serif}
+.action-btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:7px 18px;border-radius:8px;border:1px solid;cursor:pointer;transition:all .18s}
+.action-btn.word{background:#1e4c7a;border-color:#1e4c7a;color:#fff}
+.action-btn.word:hover{background:#173d63}
+.action-btn.pdf{background:var(--red);border-color:var(--red);color:#fff}
+.action-btn.pdf:hover{background:var(--red-l)}
+.action-btn.back{background:transparent;border-color:var(--border2);color:var(--text2)}
+.action-btn.back:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── IMAGENS / LOGO ── */
+.img-panel{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.img-panel-title{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;width:100%;margin-bottom:4px}
+.img-slot{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.img-slot label.slot-lbl{font-size:10px;color:var(--text3);font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.img-drop{width:90px;height:72px;border:2px dashed var(--border2);border-radius:8px;background:var(--surface2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.img-drop:hover{border-color:var(--gold);background:var(--gold-bg)}
+.img-drop img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.img-drop .img-icon{font-size:22px;color:var(--text3);pointer-events:none}
+.img-drop .img-hint{font-size:9px;color:var(--text3);margin-top:2px;pointer-events:none}
+.img-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.img-rm{font-size:10px;color:var(--text3);border:none;background:none;cursor:pointer;padding:0;font-family:'Inter',sans-serif;transition:color .15s}
+.img-rm:hover{color:var(--red)}
+.img-controls{display:flex;flex-direction:column;gap:6px;justify-content:flex-end;padding-bottom:2px}
+.img-ctrl-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.img-ctrl-lbl{font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;min-width:56px}
+.img-ctrl-row select,.img-ctrl-row input[type=range]{font-family:'Inter',sans-serif;font-size:12px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:2px 6px;height:26px;outline:none}
+.img-ctrl-row input[type=range]{width:90px;padding:0;height:20px;accent-color:var(--gold)}
+.img-ctrl-val{font-size:11px;color:var(--text2);min-width:28px}
+/* ── FONT SIZE CONTROL ── */
+.fsize-ctrl{display:flex;align-items:center;gap:5px}
+.fsize-ctrl button{width:24px;height:24px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);color:var(--text2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1}
+.fsize-ctrl button:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+.fsize-val{font-size:12px;color:var(--text);min-width:28px;text-align:center;font-family:'Inter',sans-serif;font-weight:600}
+
+/* ── booklet-specific export tweaks ── */
+.preview-page.booklet{max-width:560px}
+.fmt-check-row{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;user-select:none}
+.fmt-check-row input{accent-color:var(--gold);width:14px;height:14px}
+
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center}
+.modal-box{background:var(--surface);border-radius:14px;box-shadow:0 12px 48px rgba(0,0,0,.3);padding:28px 32px;max-width:420px;width:92%;border:1px solid var(--border)}
+.modal-title{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:10px}
+.modal-body{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:6px;font-family:'Inter',sans-serif}
+.modal-warn{font-size:12px;color:var(--red);font-family:'Inter',sans-serif;margin-bottom:20px}
+.modal-row{display:flex;flex-direction:column;gap:4px;margin:14px 0 20px}
+.modal-row label{font-size:12px;color:var(--text2);font-family:'Inter',sans-serif}
+.modal-row input{font-family:'Inter',sans-serif;font-size:14px;color:var(--text);background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;padding:6px 10px;height:36px;outline:none}
+.modal-row input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(232,149,10,.12)}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end}
+.mbtn{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:7px 18px;border-radius:8px;cursor:pointer;border:1px solid}
+.mbtn.cancel{background:transparent;border-color:var(--border2);color:var(--text2)}
+.mbtn.cancel:hover{border-color:var(--gold);color:var(--gold)}
+.mbtn.confirm{background:var(--red);border-color:var(--red);color:#fff}
+.mbtn.ok{background:var(--gold);border-color:var(--gold);color:#fff}
+.mbtn.ok:hover{background:var(--gold-l)}
+.nav-btn.secondary{background:transparent;border:1.5px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);font-size:12px}
+.nav-btn.secondary:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35);color:#fff}
+/* ── IMPORT PDF MODAL ── */
+.import-modal-box{max-width:560px;width:95%}
+.import-drop{border:2px dashed var(--border);border-radius:10px;padding:28px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-family:'Inter',sans-serif;color:var(--text2)}
+.import-drop:hover,.import-drop.dragover{border-color:var(--gold);background:var(--gold-bg)}
+.import-drop input{display:none}
+.import-drop .drop-icon{font-size:32px;margin-bottom:8px}
+.import-progress{margin-top:14px;font-size:12px;color:var(--text2);min-height:20px;font-family:'Inter',sans-serif}
+.import-results{margin-top:12px;max-height:220px;overflow-y:auto}
+.import-hino-item{display:flex;align-items:flex-start;gap:8px;padding:7px 4px;border-bottom:1px solid var(--border);font-size:13px;font-family:'Inter',sans-serif}
+.import-hino-item input[type=checkbox]{margin-top:3px;accent-color:var(--gold);width:15px;height:15px;flex-shrink:0}
+.import-hino-title{font-weight:600;font-size:12px;color:var(--text)}
+.import-hino-preview{color:var(--text3);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:380px}
+.import-target-sel{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;font-family:'Inter',sans-serif;flex-wrap:wrap}
+.import-target-sel label{color:var(--text2)}
+.import-target-sel select{padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:'Inter',sans-serif;font-size:13px}
+
+/* ── BACKUP & RESTORE ── */
+function temConteudo(){
+  const campos=['paroquia','domingo','titulo_principal'];
+  if(campos.some(id=>document.getElementById(id).value.trim())) return true;
+  return Object.values(state).some(arr=>arr.some(v=>v&&v.trim()));
+}
+
+function fazerBackup(){
+  const data=collectSaveData();
+  const nome=data.paroquia||'folheto';
+  const data_str=new Date().toISOString().slice(0,10);
+  const nomeArq=`backup_${nome.replace(/[^a-zA-Z0-9À-ú ]/g,'').trim().replace(/ +/g,'_')}_${data_str}.json`;
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=nomeArq; a.click();
+  URL.revokeObjectURL(url);
+  // Mostra feedback
+  const btn=document.querySelector('[onclick="fazerBackup()"]');
+  if(btn){const orig=btn.textContent;btn.textContent='✓ Salvo!';setTimeout(()=>btn.textContent=orig,2000);}
+}
+
+function restaurarBackup(){
+  document.getElementById('backup-file-input').value='';
+  document.getElementById('backup-file-input').click();
+}
+
+/* ── AVISO DE BACKUP NO NOVO FOLHETO ── */
+const _origOpenModalLimpar=window.openModal;
+// Patch openModal para checar conteúdo quando abre modal-limpar
+document.addEventListener('DOMContentLoaded',()=>{});
+function abrirModalLimpar(){
+  const temDados=temConteudo();
+  document.getElementById('limpar-warn-backup').style.display=temDados?'':'none';
+  document.getElementById('limpar-btn-backup').style.display=temDados?'':'none';
+  document.getElementById('limpar-warn-irreversivel').style.display=temDados?'none':'';
+  openModal('modal-limpar');
+}
+
+/* ── MAXIMIZAR CARD ── */
+let _cardMaximizado=null;
+let _cardOriginalParent=null;
+let _cardOriginalNext=null;
+
+function toggleMaximizar(entryId){
+  if(_cardMaximizado===entryId){
+    minimizarCard();
+  } else {
+    if(_cardMaximizado) minimizarCard();
+    maximizarCard(entryId);
+  }
+}
+
+/* ── AUTOSAVE ── */
+.autosave-banner-overlay{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center}
+.autosave-banner{background:var(--surface);border:1.5px solid var(--gold);border-radius:14px;box-shadow:0 12px 48px rgba(0,0,0,.3);padding:28px 32px;max-width:440px;width:92%;display:flex;flex-direction:column;gap:14px;font-family:'Inter',sans-serif;font-size:14px;color:var(--text)}
+.autosave-banner-icon{font-size:32px;text-align:center;line-height:1}
+.autosave-banner-title{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--gold);text-align:center}
+.autosave-banner-info{font-size:13px;color:var(--text2);text-align:center;line-height:1.5}
+.autosave-banner strong{color:var(--gold);font-family:'Inter',sans-serif;font-weight:700;font-size:12px}
+.autosave-banner-btns{display:flex;gap:10px;justify-content:center;margin-top:4px}
+.autosave-indicator{position:fixed;bottom:8px;right:14px;font-size:11px;color:var(--text3);font-family:'Inter',sans-serif;opacity:0;transition:opacity .4s;pointer-events:none;z-index:100}
+.autosave-indicator.show{opacity:1}
+
+/* ── COLLAPSIBLE SECTIONS ── */
+.collapsible-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;padding:10px 24px;background:var(--surface);border-bottom:1px solid var(--border);transition:background .15s}
+.collapsible-header:hover{background:var(--hover)}
+.collapsible-header-left{display:flex;align-items:center;gap:8px}
+.collapsible-title{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:#1e5ea8;letter-spacing:.1em;text-transform:uppercase}
+.collapsible-subtitle{font-size:11px;color:var(--text3);font-family:'Inter',sans-serif;font-style:italic;margin-left:6px;display:none}
+.collapsible-section.collapsed .collapsible-subtitle{display:inline}
+.collapsible-chevron{font-size:12px;color:#1e5ea8;transition:transform .22s cubic-bezier(.4,0,.2,1);margin-left:4px;line-height:1}
+.collapsible-section.collapsed .collapsible-chevron{transform:rotate(-90deg)}
+.collapsible-body{overflow:hidden;transition:max-height .28s cubic-bezier(.4,0,.2,1),opacity .22s;max-height:600px;opacity:1}
+.collapsible-section.collapsed .collapsible-body{max-height:0;opacity:0;pointer-events:none}
+.collapsible-pin{font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;white-space:nowrap}
+.collapsible-pin:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+.collapsible-pin.pinned{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+.collapsible-section{border-bottom:1px solid var(--border)}
+/* When header-form is collapsed, remove inner border-bottom since section has one */
+.collapsible-section .header-form,.collapsible-section .tempo-wrap,.collapsible-section .img-panel{border-bottom:none}
+
+/* ── 2026 professional redesign ── */
+[data-theme="light"]{
+  --bg:#F5F7FA;--surface:#ffffff;--surface2:#f8fafc;--surface3:#e9eef4;
+  --border:#D9E2EC;--border2:#bcccdc;--text:#102A43;--text2:#486581;--text3:#829ab1;
+  --gold:#F0A202;--gold-l:#ffb523;--gold-bg:#fff8e7;--hover:#f1f5f9;
+  --topnav:#ffffff;--topnav-t:#627d98;--bp-head:#102A43;
+  --shadow:0 1px 2px rgba(16,42,67,.06),0 8px 24px rgba(16,42,67,.05);
+  --shadow-lg:0 16px 48px rgba(16,42,67,.16);--drag-hl:#e7f0f8;
+}
+*{letter-spacing:0}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);font-size:14px}
+.topnav{height:64px;margin-left:288px;padding:0 32px;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:none;position:relative;z-index:240}
+.logo{display:none}
+.nav-tabs{gap:4px}
+.nav-tab{height:40px;margin:12px 0;padding:0 18px;border:1px solid transparent;border-radius:6px;color:var(--text3);font-size:11px;font-weight:700}
+.nav-tab:hover{color:var(--text);background:var(--surface2)}
+.nav-tab.active{color:var(--text);background:var(--surface);border-color:var(--border);box-shadow:0 1px 3px rgba(16,42,67,.08)}
+.nav-actions{gap:8px}
+.nav-btn,.nav-btn.secondary,.nav-btn.outline{height:34px;border-color:var(--border2);color:var(--text2);background:var(--surface);border-radius:6px;padding:6px 12px}
+.nav-btn:hover,.nav-btn.secondary:hover,.nav-btn.outline:hover{color:var(--text);border-color:var(--text3);background:var(--surface2)}
+.nav-btn.solid{color:white;background:var(--gold);border-color:var(--gold);border-radius:6px;padding:6px 16px}
+.theme-btn{border-color:var(--border);background:var(--surface2);color:var(--text2);border-radius:6px}
+body>div[style*="height:calc"]{height:calc(100vh - 64px)!important}
+#panels-top{margin-left:288px;background:var(--surface);box-shadow:0 2px 10px rgba(16,42,67,.05);z-index:20}
+.collapsible-section{border-color:var(--border)}
+.collapsible-header{min-height:58px;padding:0 32px;background:var(--surface);border-bottom:0;position:relative}
+.collapsible-header:hover{background:var(--surface2)}
+.collapsible-header-left{gap:14px;min-width:0}
+.collapsible-title{font-family:'Libre Baskerville',Georgia,serif;font-size:14px;text-transform:none;color:var(--text);font-weight:700}
+.collapsible-title::first-letter{color:var(--gold)}
+.collapsible-subtitle{display:inline!important;font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-style:normal;color:var(--text3);background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:3px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
+.collapsible-section:not(.collapsed) .collapsible-subtitle{display:none!important}
+.collapsible-chevron{width:26px;height:26px;display:grid;place-items:center;border:1px solid var(--border);border-radius:5px;color:var(--gold);font-size:0}
+.collapsible-chevron::after{content:'⌄';font-size:16px;line-height:1;transform:translateY(-2px)}
+.collapsible-section.collapsed .collapsible-chevron{transform:none}
+.collapsible-section.collapsed .collapsible-chevron::after{transform:rotate(-90deg)}
+.collapsible-pin{border:0;background:transparent;color:var(--text3);font-size:0;width:30px;height:30px;border-radius:5px}
+.collapsible-pin::after{content:'◇';font-size:15px}
+.collapsible-pin:hover,.collapsible-pin.pinned{background:var(--gold-bg);color:var(--gold)}
+.collapsible-pin.pinned::after{content:'◆'}
+.collapsible-body{max-height:700px;transition:max-height .34s cubic-bezier(.16,1,.3,1),opacity .22s}
+.header-form,.img-panel,.tempo-wrap{padding:8px 32px 26px;background:var(--surface);gap:18px}
+.fg{gap:7px}.fg label,.img-panel-title,.tempo-label{color:var(--text3);font-size:9px}
+.fg input,.fg select{height:38px;background:var(--surface2);border:1px solid var(--border);border-radius:5px}
+.fg input:focus,.fg select:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in oklab,var(--gold) 16%,transparent)}
+#editor-wrapper{margin-left:0}
+#pane-editor .pi{padding-left:288px}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:288px;padding:92px 16px 24px;background:#102A43;border:0;z-index:300;color:white}
+.sidebar::before{content:'L  LiturgiaMaster';position:absolute;left:24px;top:22px;font-family:'Libre Baskerville',Georgia,serif;font-size:18px;font-weight:700;color:white;white-space:pre;padding-left:2px}
+.sidebar::after{content:'';position:absolute;left:21px;top:15px;width:34px;height:34px;border-radius:4px;background:var(--gold);z-index:-1}
+.sb-title{color:rgba(255,255,255,.42);padding:2px 8px 12px;font-size:9px}
+.sb-add-btn{height:42px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:white;border-radius:6px;padding:0 14px}
+.sb-add-btn:hover{background:rgba(255,255,255,.1);color:var(--gold);border-color:rgba(240,162,2,.5)}
+.sb-sep{background:rgba(255,255,255,.08);margin:12px 0}
+.sbi{height:44px;margin-bottom:4px;padding:8px 12px;color:rgba(255,255,255,.7);border-radius:6px}
+.sbi:hover{background:rgba(255,255,255,.06);color:white}
+.sbi.active{background:rgba(30,78,121,.75);border-color:rgba(255,255,255,.08);color:white;box-shadow:none;border-left:3px solid var(--gold)}
+.sbi-icon{border-radius:4px!important;background:rgba(255,255,255,.1)!important;color:rgba(255,255,255,.75)!important}
+.sbi-name,.sbi.active .sbi-name{color:inherit!important}
+.editor-area{padding:28px 32px 80px;background:var(--bg)}
+.block-panel{max-width:1040px;margin:0 auto 20px;border-color:var(--border);border-radius:7px;box-shadow:var(--shadow)}
+.bp-head{padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border)}
+.bp-title{font-family:'Libre Baskerville',Georgia,serif;color:var(--text)!important;text-transform:none;font-size:15px}
+.bp-note{color:var(--text3)}
+.bp-handle{color:var(--text3)}
+.bp-icon{border-radius:4px!important;background:var(--gold-bg)!important;color:var(--gold)!important}
+.bp-badge{background:var(--gold-bg);color:#a66f00;border-color:color-mix(in oklab,var(--gold) 35%,transparent)}
+.bp-body{padding:22px}
+.sub-entry{border-color:var(--border);border-radius:6px}
+.se-head{background:var(--surface2);padding:9px 12px}
+.se-label{color:var(--text)!important;font-size:10px}
+textarea{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);min-height:126px;padding:18px;font-size:14px}
+.add-canto-btn{color:#b87900;margin-top:4px}
+.tempo-cards{gap:10px}.tc{border-radius:6px;background:var(--surface2);padding:12px}.tc.active{background:var(--gold-bg)}
+.img-drop{border-radius:6px;background:var(--surface2)}
+.modal-box,.autosave-banner{border-radius:8px}.modal-title,.autosave-banner-title,#focused-modal-title{font-family:'Libre Baskerville',Georgia,serif}
+#pane-preview{padding-left:288px}
+@media(max-width:1050px){
+  .topnav{padding:0 16px}.nav-btn.secondary{display:none}.nav-actions{gap:4px}
+  .collapsible-header{padding:0 20px}.header-form,.img-panel,.tempo-wrap{padding-left:20px;padding-right:20px}
+}
+@media(max-width:780px){
+  .sidebar{position:relative;top:auto;width:100%;height:auto;padding:16px;max-height:220px}.sidebar::before,.sidebar::after{display:none}
+  .topnav,#panels-top{margin-left:0}.topnav{height:auto;min-height:64px;flex-wrap:wrap}.nav-actions{overflow-x:auto;width:100%;padding-bottom:8px}
+  body>div[style*="height:calc"]{height:auto!important;min-height:calc(100vh - 64px)}
+  #pane-editor .pi{padding-left:0;flex-direction:column}.pane{overflow:visible!important}.editor-area{overflow:visible;padding:18px 14px}.sidebar{overflow:auto}
+  #pane-preview{padding-left:0}.collapsible-subtitle{max-width:140px}.img-panel{flex-wrap:wrap!important}.img-panel>div{border-right:0!important}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="logo">
+    <div class="logo-icon">🏛</div>
+    <div class="logo-text"><span class="lt-litur">LITURGIA</span><span class="lt-master">MASTER</span></div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-editor" onclick="setTab('editor')">EDITOR</button>
+    <button class="nav-tab" id="tab-preview" onclick="setTab('preview')">VISUALIZAR</button>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Tema claro / escuro">☀</button>
+    <button class="nav-btn secondary" title="Recolher todos os painéis" onclick="collapseAllSections()" style="font-size:11px;padding:5px 10px">⬆ Recolher</button>
+    <button class="nav-btn secondary" title="Expandir todos os painéis" onclick="expandAllSections()" style="font-size:11px;padding:5px 10px">⬇ Expandir</button>
+    <button class="nav-btn secondary" onclick="fazerBackup()" title="Salvar backup do folheto">💾 Backup</button>
+    <button class="nav-btn secondary" onclick="restaurarBackup()" title="Restaurar backup salvo">↩ Restaurar</button>
+    <button class="nav-btn solid" onclick="abrirModalLimpar()">↺ Novo</button>
+    <button class="nav-btn outline" onclick="exportarDoc()">⬇ Word</button>
+    <button class="nav-btn outline" onclick="exportarPDF()">⬇ PDF</button>
+  </div>
+</nav>
+<input type="file" id="backup-file-input" accept=".json" style="display:none">
+
+
+<div style="display:flex;flex-direction:column;height:calc(100vh - 58px);overflow:hidden">
+
+<!-- PAINÉIS SUPERIORES FIXOS -->
+<div id="panels-top">
+
+<div class="collapsible-section" id="section-dados">
+<div class="collapsible-header" onclick="toggleSection('dados')" title="Clique para recolher/expandir">
+  <div class="collapsible-header-left">
+    <span class="collapsible-chevron">▾</span>
+    <span class="collapsible-title">📋 Dados da Missa</span>
+    <span class="collapsible-subtitle" id="subtitle-dados">recolhido</span>
+  </div>
+  <button class="collapsible-pin" id="pin-dados" onclick="event.stopPropagation();togglePin('dados')" title="Manter sempre aberto">📌 Fixar</button>
+</div>
+<div class="collapsible-body" id="body-dados">
+<div class="header-form">
+  <div class="fg"><label>Paróquia / Comunidade</label><input id="paroquia" placeholder="Nome da paróquia" style="width:200px"></div>
+  <div class="fg"><label>Domingo / Solenidade</label><input id="domingo" placeholder="Ex: 4º Domingo da Páscoa" style="width:230px"></div>
+  <div class="fg"><label>Título Principal (ex: O DOMINGO)</label><input id="titulo_principal" placeholder="Ex: O DOMINGO" value="O DOMINGO" style="width:230px" oninput="buildPreviewIfActive()"></div>
+  <div class="fg"><label>Data</label><input id="data_missa" type="date" style="width:145px"></div>
+  <div class="fg"><label>Ano Litúrgico</label>
+    <select id="ano_lit" style="width:150px">
+      <option value="A">Ano A — Mateus</option>
+      <option value="B">Ano B — Marcos</option>
+      <option value="C">Ano C — Lucas</option>
+    </select>
+  </div>
+  <div class="fg"><label>Fonte</label>
+    <select id="fonte_sel" style="width:130px">
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Arial">Arial</option>
+    </select>
+  </div>
+  <div class="fg"><label>Margem Lateral</label>
+    <select id="margin_sel" style="width:145px" onchange="buildPreviewIfActive()">
+      <option value="0">Sem margem (janela toda)</option>
+      <option value="8" selected>Estreita (8mm)</option>
+      <option value="15">Normal (15mm)</option>
+      <option value="25">Larga (25mm)</option>
+    </select>
+  </div>
+  <div class="fg"><label>Fonte dos Títulos</label>
+    <div class="fsize-ctrl">
+      <button onclick="changeTitleFontSize(-1)" title="Diminuir">−</button>
+      <span class="fsize-val" id="tfsize-val">13pt</span>
+      <button onclick="changeTitleFontSize(1)" title="Aumentar">+</button>
+    </div>
+  </div>
+  <div class="fg"><label>Fonte dos Hinos</label>
+    <div class="fsize-ctrl">
+      <button onclick="changeFontSize(-1)" title="Diminuir">−</button>
+      <span class="fsize-val" id="fsize-val">11pt</span>
+      <button onclick="changeFontSize(1)" title="Aumentar">+</button>
+    </div>
+  </div>
+  <div class="fg"><label>Espaço Entre Estrofes</label>
+    <select id="strophe_gap" style="width:145px" onchange="buildPreviewIfActive()">
+      <option value="0.3">Compacto (0.3em)</option>
+      <option value="1" selected>Uma linha (1em)</option>
+      <option value="1.5">Largo (1.5em)</option>
+    </select>
+  </div>
+  <div class="fg" style="min-width:110px">
+    <label>Cor dos Títulos</label>
+    <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;padding-top:4px">
+      <span class="color-swatch active" data-color="#D32F2F" style="background:#D32F2F" title="Vermelho Litúrgico" onclick="setTitleColor(this,'#D32F2F')"></span>
+      <span class="color-swatch" data-color="#7c5cbf" style="background:#7c5cbf" title="Roxo Advento/Quaresma" onclick="setTitleColor(this,'#7c5cbf')"></span>
+      <span class="color-swatch" data-color="#1e5ea8" style="background:#1e5ea8" title="Azul Pascal" onclick="setTitleColor(this,'#1e5ea8')"></span>
+      <span class="color-swatch" data-color="#2d6e22" style="background:#2d6e22" title="Verde Comum" onclick="setTitleColor(this,'#2d6e22')"></span>
+      <span class="color-swatch" data-color="#b8860b" style="background:#b8860b" title="Dourado Natal" onclick="setTitleColor(this,'#b8860b')"></span>
+      <input type="color" id="custom-color" value="#D32F2F" title="Cor personalizada" onchange="setTitleColor(null,this.value)" style="width:24px;height:24px;border:none;border-radius:4px;cursor:pointer;padding:0;background:none">
+    </div>
+  </div>
+  <div class="fg"><label>Frase do cabeçalho (lado direito)</label><input id="frase_header" placeholder="Ex: Que São Francisco nos ensine..." style="width:230px" oninput="buildPreviewIfActive()"></div>
+  <div class="fg"><label>Frase do rodapé</label><input id="frase_rodape" placeholder="Ex: São Francisco, rogai por nós!" style="width:200px" oninput="buildPreviewIfActive()"></div>
+</div>
+</div><!-- /body-dados -->
+</div><!-- /section-dados -->
+
+<!-- PAINEL DE LOGOS + IMAGEM SACRA (mesma linha) -->
+<div class="collapsible-section collapsed" id="section-logos">
+<div class="collapsible-header" onclick="toggleSection('logos')" title="Clique para recolher/expandir">
+  <div class="collapsible-header-left">
+    <span class="collapsible-chevron">▾</span>
+    <span class="collapsible-title">🖼 Imagens do Cabeçalho &amp; Sacra</span>
+    <span class="collapsible-subtitle" id="subtitle-logos">recolhido</span>
+  </div>
+  <button class="collapsible-pin" id="pin-logos" onclick="event.stopPropagation();togglePin('logos')" title="Manter sempre aberto">📌 Fixar</button>
+</div>
+<div class="collapsible-body" id="body-logos">
+<div class="img-panel" style="flex-wrap:nowrap;align-items:flex-start;gap:0">
+
+  <!-- GRUPO: Cabeçalho -->
+  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;padding-right:18px;border-right:1.5px solid var(--border);margin-right:18px">
+    <div style="width:100%"><span class="img-panel-title" style="margin-bottom:0">🖼 Cabeçalho (opcional)</span></div>
+    <div class="img-slot">
+      <label class="slot-lbl">Brasão / Diocese</label>
+      <div class="img-drop" id="drop-diocese" title="Clique para escolher imagem">
+        <span class="img-icon">🏛</span>
+        <span class="img-hint">Clique para carregar</span>
+        <input type="file" accept="image/*" onchange="loadImg('diocese',this)">
+        <img id="prev-diocese" style="display:none">
+      </div>
+      <button class="img-rm" id="rm-diocese" style="display:none" onclick="removeImg('diocese')">✕ Remover</button>
+    </div>
+    <div class="img-slot">
+      <label class="slot-lbl">Logo da Paróquia</label>
+      <div class="img-drop" id="drop-paroquia" title="Clique para escolher imagem">
+        <span class="img-icon">⛪</span>
+        <span class="img-hint">Clique para carregar</span>
+        <input type="file" accept="image/*" onchange="loadImg('paroquia',this)">
+        <img id="prev-paroquia" style="display:none">
+      </div>
+      <button class="img-rm" id="rm-paroquia" style="display:none" onclick="removeImg('paroquia')">✕ Remover</button>
+    </div>
+    <div class="img-controls">
+      <div class="img-ctrl-row">
+        <span class="img-ctrl-lbl">Orientação da folha (A4)</span>
+        <select id="orient-sel" onchange="buildPreviewIfActive()">
+          <option value="portrait" selected>Vertical</option>
+          <option value="landscape">Horizontal</option>
+        </select>
+      </div>
+      <div class="img-ctrl-row">
+        <span class="img-ctrl-lbl">Alinhamento</span>
+        <select id="img-align" onchange="buildPreviewIfActive()">
+          <option value="center">Centro</option>
+          <option value="left">Esquerda</option>
+          <option value="right">Direita</option>
+        </select>
+      </div>
+      <div class="img-ctrl-row">
+        <span class="img-ctrl-lbl">Alt. imagem</span>
+        <input type="range" id="img-height" min="30" max="100" value="55" step="5" oninput="document.getElementById('img-h-val').textContent=this.value+'px';buildPreviewIfActive()">
+        <span class="img-ctrl-val" id="img-h-val">55px</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO: Imagem Sacra -->
+  <div id="sacra-panel" style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+    <div style="width:100%"><span class="img-panel-title" style="margin-bottom:0">🕊 Imagem Sacra (opcional — 1ª coluna)</span></div>
+    <div class="img-slot">
+      <label class="slot-lbl">Imagem do Evangelho</label>
+      <div class="img-drop" id="drop-sacra" title="Clique para escolher imagem sacra" style="width:100px;height:80px">
+        <span class="img-icon">✝</span>
+        <span class="img-hint">Clique para carregar</span>
+        <input type="file" accept="image/*" onchange="loadImg('sacra',this)">
+        <img id="prev-sacra" style="display:none">
+      </div>
+      <button class="img-rm" id="rm-sacra" style="display:none" onclick="removeImg('sacra')">✕ Remover</button>
+    </div>
+    <div class="img-controls">
+      <div class="img-ctrl-row">
+        <span class="img-ctrl-lbl">Alt. imagem</span>
+        <input type="range" id="sacra-height" min="40" max="160" value="90" step="5" oninput="document.getElementById('sacra-h-val').textContent=this.value+'px';buildPreviewIfActive()">
+        <span class="img-ctrl-val" id="sacra-h-val">90px</span>
+      </div>
+      <div class="img-ctrl-row" style="margin-top:4px">
+        <span class="img-ctrl-lbl">Posição</span>
+        <select id="sacra-align" style="font-family:'EB Garamond',serif;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 6px;height:26px;outline:none;width:120px" onchange="buildPreviewIfActive()">
+          <option value="center">Centro</option>
+          <option value="left">Esquerda</option>
+          <option value="right">Direita</option>
+        </select>
+      </div>
+      <div class="img-ctrl-row" style="margin-top:4px">
+        <span class="img-ctrl-lbl">Legenda</span>
+        <input type="text" id="sacra-caption" placeholder="Ex: Bom Pastor (Jo 10,11)" style="font-family:'EB Garamond',serif;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 6px;height:26px;outline:none;width:200px" oninput="buildPreviewIfActive()">
+      </div>
+    </div>
+  </div>
+
+</div>
+</div><!-- /body-logos -->
+</div><!-- /section-logos -->
+
+<div class="collapsible-section collapsed" id="section-tempo">
+<div class="collapsible-header" onclick="toggleSection('tempo')" title="Clique para recolher/expandir">
+  <div class="collapsible-header-left">
+    <span class="collapsible-chevron">▾</span>
+    <span class="collapsible-title">🕯 Tempo Litúrgico</span>
+    <span class="collapsible-subtitle" id="subtitle-tempo">recolhido</span>
+  </div>
+  <button class="collapsible-pin" id="pin-tempo" onclick="event.stopPropagation();togglePin('tempo')" title="Manter sempre aberto">📌 Fixar</button>
+</div>
+<div class="collapsible-body" id="body-tempo">
+<div class="tempo-wrap">
+  <div class="tempo-label">Tempo Litúrgico</div>
+  <div class="tempo-cards" id="tempo-cards"></div>
+  <div class="tempo-info" id="tempo-info"></div>
+</div>
+</div><!-- /body-tempo -->
+</div><!-- /section-tempo -->
+
+</div><!-- /panels-top -->
+
+<!-- EDITOR: ocupa todo o espaço restante, sidebar e editor-area rolam internamente -->
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column" id="editor-wrapper">
+<div class="pane active" id="pane-editor">
+  <div class="pi">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="editor-area" id="editor-area"></div>
+  </div>
+</div>
+
+<div class="pane" id="pane-preview">
+  <div class="preview-wrap"><div class="preview-page" id="preview-page"></div></div>
+  <div class="action-bar">
+    <span class="ab-info" id="ab-info-txt">Duas colunas · fonte 11pt · margens estreitas · estrofes numeradas</span>
+    <label class="fmt-check-row" style="margin-right:6px" title="Formato A5 dobrável (livreto)">
+      <input type="checkbox" id="booklet-mode" onchange="buildPreviewIfActive()"> Livreto A5
+    </label>
+    <button class="action-btn back" onclick="setTab('editor')">← Editor</button>
+    <button class="action-btn word" onclick="exportarDoc()">⬇ Salvar Word</button>
+    <button class="action-btn pdf" onclick="exportarPDF()">⬇ Salvar PDF</button>
+  </div>
+</div>
+</div><!-- /editor-wrapper -->
+
+</div><!-- /flex column wrapper -->
+
+<!-- MODAL: LIMPAR -->
+<div class="modal-bg" id="modal-limpar">
+  <div class="modal-box">
+    <div class="modal-title">Iniciar Novo Folheto</div>
+    <p class="modal-body">Isso irá <strong>apagar todos os cantos</strong> e limpar os campos de cabeçalho.</p>
+    <p class="modal-warn" id="limpar-warn-backup" style="display:none">⚠️ Você tem conteúdo não salvo. Deseja fazer um backup antes?</p>
+    <p class="modal-warn" id="limpar-warn-irreversivel">Esta ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button class="mbtn cancel" onclick="closeModal('modal-limpar')">Cancelar</button>
+      <button class="mbtn ok" id="limpar-btn-backup" style="display:none" onclick="fazerBackup()">💾 Fazer Backup</button>
+      <button class="mbtn confirm" onclick="limparTudo()">Sim, limpar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTOSAVE RESTORE BANNER -->
+<div class="autosave-banner-overlay" id="restore-banner" style="display:none">
+  <div class="autosave-banner">
+    <div class="autosave-banner-icon">💾</div>
+    <div class="autosave-banner-title">Rascunho Encontrado</div>
+    <div class="autosave-banner-info">
+      Há um folheto salvo automaticamente de uma sessão anterior.<br>
+      <span id="restore-info" style="font-size:13px;color:var(--text3)">Há dados salvos de uma sessão anterior.</span>
+    </div>
+    <div class="autosave-banner-btns">
+      <button class="mbtn cancel" onclick="descartarRascunho()">Descartar</button>
+      <button class="mbtn ok" onclick="restaurarRascunho()">✓ Restaurar</button>
+    </div>
+  </div>
+</div>
+<div class="autosave-indicator" id="autosave-indicator">✓ Salvo</div>
+
+<!-- MODAL: ADICIONAR BLOCO -->
+<div class="modal-bg" id="modal-add-block">
+  <div class="modal-box">
+    <div class="modal-title">Adicionar Novo Bloco</div>
+    <p class="modal-body">Defina o nome. Após criado, arraste pelo ícone <strong>⠿</strong> para a posição desejada.</p>
+    <div class="modal-row">
+      <label>Nome do bloco</label>
+      <input id="new-block-name" placeholder="Ex: Sequência, Responsório, Ladainha..." maxlength="60">
+    </div>
+    <div class="modal-actions">
+      <button class="mbtn cancel" onclick="closeModal('modal-add-block')">Cancelar</button>
+      <button class="mbtn ok" onclick="confirmarAddBloco()">Adicionar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+
+/* ── COLLAPSIBLE SECTIONS ── */
+const _sectionPinned={dados:false,logos:false,tempo:false};
+
+function toggleSection(id){
+  const sec=document.getElementById('section-'+id);
+  if(!sec)return;
+  if(_sectionPinned[id])return; // pinned = always open
+  sec.classList.toggle('collapsed');
+  // Update subtitle text when collapsed
+  updateSubtitle(id);
+  saveSectionState();
+}
+
+function togglePin(id){
+  _sectionPinned[id]=!_sectionPinned[id];
+  const btn=document.getElementById('pin-'+id);
+  if(btn)btn.classList.toggle('pinned',_sectionPinned[id]);
+  // If pinning, make sure it's open
+  if(_sectionPinned[id]){
+    const sec=document.getElementById('section-'+id);
+    if(sec)sec.classList.remove('collapsed');
+    updateSubtitle(id);
+  }
+  saveSectionState();
+}
+
+function updateSubtitle(id){
+  const sec=document.getElementById('section-'+id);
+  const sub=document.getElementById('subtitle-'+id);
+  if(!sub)return;
+  if(!sec||!sec.classList.contains('collapsed')){sub.textContent='';return;}
+  // Build a short summary depending on section
+  if(id==='dados'){
+    const p=document.getElementById('paroquia');
+    const d=document.getElementById('domingo');
+    const pv=p?p.value.trim():'';
+    const dv=d?d.value.trim():'';
+    sub.textContent=pv||dv?(pv+(dv?' · '+dv:'')):'recolhido';
+  } else if(id==='logos'){
+    const hasD=!!(document.getElementById('prev-diocese')?.getAttribute('src'));
+    const hasP=!!(document.getElementById('prev-paroquia')?.getAttribute('src'));
+    const hasS=!!(document.getElementById('prev-sacra')?.getAttribute('src'));
+    const parts=[];
+    if(hasD||hasP) parts.push('cabeçalho');
+    if(hasS) parts.push('sacra');
+    sub.textContent=parts.length?parts.join(' + '):'sem imagens';
+  } else if(id==='tempo'){
+    // Find active tempo name
+    const activeCard=document.querySelector('.tc.active .tc-name');
+    sub.textContent=activeCard?activeCard.textContent:'recolhido';
+  } else {
+    sub.textContent='recolhido';
+  }
+}
+
+function saveSectionState(){
+  try{
+    const st={};
+    ['dados','logos','tempo'].forEach(id=>{
+      const sec=document.getElementById('section-'+id);
+      st[id]={collapsed:sec?sec.classList.contains('collapsed'):false,pinned:!!_sectionPinned[id]};
+    });
+    localStorage.setItem('_folheto_sections',JSON.stringify(st));
+  }catch(e){}
+}
+
+function loadSectionState(){
+  try{
+    const raw=localStorage.getItem('_folheto_sections');
+    if(!raw)return;
+    const st=JSON.parse(raw);
+    ['dados','logos','tempo'].forEach(id=>{
+      if(!st[id])return;
+      const sec=document.getElementById('section-'+id);
+      if(sec&&st[id].collapsed&&!st[id].pinned)sec.classList.add('collapsed');
+      if(st[id].pinned){
+        _sectionPinned[id]=true;
+        const btn=document.getElementById('pin-'+id);
+        if(btn)btn.classList.add('pinned');
+      }
+      updateSubtitle(id);
+    });
+  }catch(e){}
+}
+
+// Collapse all sections at once
+function collapseAllSections(){
+  ['dados','logos','tempo'].forEach(id=>{
+    if(_sectionPinned[id])return;
+    const sec=document.getElementById('section-'+id);
+    if(sec)sec.classList.add('collapsed');
+    updateSubtitle(id);
+  });
+  saveSectionState();
+}
+
+// Expand all sections at once
+function expandAllSections(){
+  ['dados','logos','tempo'].forEach(id=>{
+    const sec=document.getElementById('section-'+id);
+    if(sec)sec.classList.remove('collapsed');
+    updateSubtitle(id);
+  });
+  saveSectionState();
+}
+
+const TEMPOS=[
+  {id:'advento',nome:'Advento',cor:'#7c5cbf',dot:'#7c5cbf',corNome:'Roxo',desc:'4 domingos antes do Natal',periodo:'1º Dom. Advento até 24/12',obs:'Glória suprimido. Aleluia substituído por versículo.',base:['entrada','perdao','aclamacao','ofertorio','santo','comunhao','final']},
+  {id:'natal',nome:'Natal',cor:'#b8860b',dot:'#c9a84c',corNome:'Branco/Dourado',desc:'Do Natal ao Batismo do Senhor',periodo:'25/12 até o Batismo do Senhor',obs:'Glória cantado. Tempo de alegria.',base:['entrada','perdao','gloria','aclamacao','ofertorio','santo','comunhao','final']},
+  {id:'quaresma',nome:'Quaresma',cor:'#7c5cbf',dot:'#7c5cbf',corNome:'Roxo',desc:'40 dias de conversão',periodo:'Quarta de Cinzas até a Ceia do Senhor',obs:'Glória e Aleluia suprimidos.',base:['entrada','perdao','aclamacao','ofertorio','santo','comunhao','final']},
+  {id:'pascal',nome:'Páscoa',cor:'#1e5ea8',dot:'#2e6db8',corNome:'Branco',desc:'50 dias — ressurreição',periodo:'Vigília Pascal até Pentecostes',obs:'Tempo mais festivo. Aleluia em destaque.',base:['entrada','perdao','gloria','aclamacao','ofertorio','santo','comunhao','final']},
+  {id:'comum',nome:'Tempo Comum',cor:'#2d6e22',dot:'#4a8c42',corNome:'Verde',desc:'Vida pública de Jesus',periodo:'Entre Natal/Quaresma + Pentecostes/Advento',obs:'Mais longo do ano. Glória cantado.',base:['entrada','perdao','gloria','aclamacao','ofertorio','santo','comunhao','final']}
+];
+
+const BASE={
+  entrada:{label:'Canto de Entrada',icon:'E',note:'Canto processional de abertura'},
+  perdao:{label:'Ato Penitencial',icon:'P',note:'Kyrie / canto de perdão'},
+  gloria:{label:'Hino do Glória',icon:'G',note:'Gloria in excelsis Deo'},
+  aclamacao:{label:'Aclamação ao Evangelho',icon:'A',note:'Aleluia ou versículo antes do Evangelho'},
+  ofertorio:{label:'Canto das Oferendas',icon:'O',note:'Ofertório / apresentação dos dons'},
+  santo:{label:'Santo',icon:'S',note:'Sanctus'},
+  comunhao:{label:'Canto de Comunhão',icon:'Cm',note:'Durante a distribuição da comunhão'},
+  final:{label:'Canto Final',icon:'F',note:'Canto de envio e missão'}
+};
+
+let bdefs={...BASE};
+let blockOrder=['entrada','perdao','gloria','aclamacao','ofertorio','santo','comunhao','final'];
+let state={};
+let tempo='pascal';
+let dark=false;
+let customN=0;
+let dragBlock=null;
+let dragEntry=null;
+let imgData={diocese:null,paroquia:null,sacra:null}; // base64 data URLs
+let fontSize=11; // pt — fonte dos hinos
+let titleFontSize=13; // pt — fonte dos títulos das seções
+let titleColor='#D32F2F'; // Vermelho Litúrgico padrão
+
+function setTitleColor(el,color){
+  titleColor=color;
+  document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));
+  if(el)el.classList.add('active');
+  buildPreviewIfActive();
+}
+
+function getT(){return TEMPOS.find(t=>t.id===tempo);}
+function h(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ── IMAGENS ── */
+function loadImg(slot,input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    imgData[slot]=e.target.result;normalizarImg(e.target.result).then(d=>{imgData[slot]=d;buildPreviewIfActive();});
+    const prev=document.getElementById('prev-'+slot);
+    prev.src=e.target.result;prev.style.display='block';
+    document.querySelectorAll('#drop-'+slot+' .img-icon, #drop-'+slot+' .img-hint').forEach(el=>el.style.display='none');
+    document.getElementById('rm-'+slot).style.display='';
+    buildPreviewIfActive();
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ── Compatibilidade PDF (Adobe Reader): converte imagens p/ JPEG simples ── */
+function normalizarImg(src,maxPx){
+  return new Promise(res=>{
+    if(!src||/^data:image\/jpeg;norm/.test(src)){res(src);return;}
+    const im=new Image();
+    im.onload=()=>{
+      try{
+        const r=Math.min(1,(maxPx||1400)/Math.max(im.naturalWidth,im.naturalHeight));
+        const w=Math.max(1,Math.round(im.naturalWidth*r)),hh=Math.max(1,Math.round(im.naturalHeight*r));
+        const c=document.createElement('canvas');c.width=w;c.height=hh;
+        const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,hh);x.drawImage(im,0,0,w,hh);
+        res(c.toDataURL('image/jpeg',0.92).replace('data:image/jpeg;','data:image/jpeg;norm;'));
+      }catch(e){res(src);}
+    };
+    im.onerror=()=>res(src);
+    im.src=src;
+  });
+}
+async function normalizarTodasImgs(){
+  for(const k of ['diocese','paroquia','sacra']) if(imgData[k]) imgData[k]=await normalizarImg(imgData[k]);
+}
+const _exportarPDF_orig=exportarPDF;
+exportarPDF=async function(){await normalizarTodasImgs();_exportarPDF_orig();};
+const _exportarDoc_orig=exportarDoc;
+exportarDoc=async function(){await normalizarTodasImgs();_exportarDoc_orig();};
+
+function removeImg(slot){
+  imgData[slot]=null;
+  const prev=document.getElementById('prev-'+slot);
+  prev.src='';prev.style.display='none';
+  const slotId=slot==='sacra'?'drop-sacra':'drop-'+slot;
+  document.querySelectorAll('#'+slotId+' .img-icon, #'+slotId+' .img-hint').forEach(el=>el.style.display='');
+  document.getElementById('rm-'+slot).style.display='none';
+  const inp=document.querySelector('#'+slotId+' input[type=file]');if(inp)inp.value='';
+  buildPreviewIfActive();
+}
+function buildPreviewIfActive(){
+  if(document.getElementById('pane-preview').classList.contains('active'))buildPreview();
+}
+
+/* ── FONT SIZE ── */
+function changeFontSize(delta){
+  fontSize=Math.min(18,Math.max(7,fontSize+delta));
+  document.getElementById('fsize-val').textContent=fontSize+'pt';
+  buildPreviewIfActive();
+}
+function changeTitleFontSize(delta){
+  titleFontSize=Math.min(22,Math.max(8,titleFontSize+delta));
+  document.getElementById('tfsize-val').textContent=titleFontSize+'pt';
+  buildPreviewIfActive();
+}
+
+function getStropheGap(){
+  const el=document.getElementById('strophe_gap');
+  return el?parseFloat(el.value):1;
+}
+
+/* ── THEME ── */
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  document.getElementById('theme-btn').textContent=dark?'☽':'☀';
+}
+
+/* ── TEMPO ── */
+function renderTempoCards(){
+  const c=document.getElementById('tempo-cards');c.innerHTML='';
+  TEMPOS.forEach(t=>{
+    const d=document.createElement('div');
+    d.className='tc'+(tempo===t.id?' active':'');
+    d.style.setProperty('--tc-color',t.cor);
+    d.innerHTML=`<div class="tc-dot" style="background:${t.dot}"></div>
+      <div class="tc-name" style="color:${tempo===t.id?t.cor:'var(--text)'}">${t.nome}</div>
+      <div class="tc-sub">${t.corNome}</div>
+      <div class="tc-desc">${t.desc}</div>`;
+    d.onclick=()=>{tempo=t.id;applyTempo();};
+    c.appendChild(d);
+  });
+  const t=getT();
+  document.getElementById('tempo-info').innerHTML=`<div class="ti-dot" style="background:${t.dot}"></div>
+    <div><strong>${t.nome}</strong> · ${t.periodo} · <em>${t.obs}</em></div>`;
+}
+
+function applyTempo(){
+  blockOrder.forEach(k=>{if(!state[k])state[k]=[];});
+  renderTempoCards();renderSidebar();renderEditor();
+}
+
+/* ── SIDEBAR ── */
+function renderSidebar(){
+  const t=getT();
+  const sb=document.getElementById('sidebar');
+  sb.innerHTML=`<div class="sb-title">Blocos de Cantos</div>`;
+  const btn=document.createElement('button');
+  btn.className='sb-add-btn';
+  btn.innerHTML='＋ Adicionar novo bloco';
+  btn.onclick=openAddBlockModal;
+  sb.appendChild(btn);
+  const sep=document.createElement('div');sep.className='sb-sep';sb.appendChild(sep);
+  blockOrder.forEach(k=>{
+    const def=bdefs[k];
+    const isOn=t.base.includes(k)||!!def._custom;
+    const n=(state[k]||[]).filter(v=>v.trim()).length;
+    const d=document.createElement('div');
+    d.className='sbi'+(isOn?' active':'');
+    d.innerHTML=`<div class="sbi-icon" style="background:${isOn?t.cor+'22':'var(--surface3)'};color:${isOn?t.cor:'var(--text3)'}">${def.icon}</div>
+      <div class="sbi-name" style="color:${isOn?'var(--text)':'var(--text3)'}">${def.label}</div>
+      ${n>0?`<span class="sbi-badge">${n}</span>`:isOn?'':'<span class="sbi-off">inativo</span>'}`;
+    d.onclick=()=>document.getElementById('bp-'+k)?.scrollIntoView({behavior:'smooth',block:'start'});
+    sb.appendChild(d);
+  });
+}
+
+/* ── EDITOR ── */
+function renderEditor(){
+  const t=getT();
+  const ea=document.getElementById('editor-area');ea.innerHTML='';
+  blockOrder.forEach(k=>buildBlockEl(k,ea,t));
+}
+
+function buildBlockEl(k,container,t){
+  if(!t)t=getT();
+  const def=bdefs[k];
+  const isOn=t.base.includes(k)||!!def._custom;
+
+  const div=document.createElement('div');
+  div.className='block-panel';div.id='bp-'+k;
+  div.draggable=true;
+  div.addEventListener('dragstart',e=>{dragBlock=k;div.style.opacity='.45';e.dataTransfer.effectAllowed='move';});
+  div.addEventListener('dragend',()=>{div.style.opacity='1';document.querySelectorAll('.block-panel').forEach(p=>p.classList.remove('drag-over-block'));});
+  div.addEventListener('dragover',e=>{e.preventDefault();div.classList.add('drag-over-block');});
+  div.addEventListener('dragleave',()=>div.classList.remove('drag-over-block'));
+  div.addEventListener('drop',e=>{
+    e.preventDefault();div.classList.remove('drag-over-block');
+    if(dragBlock&&dragBlock!==k){
+      const oi=blockOrder.indexOf(dragBlock),ti=blockOrder.indexOf(k);
+      blockOrder.splice(oi,1);blockOrder.splice(ti,0,dragBlock);
+      renderSidebar();renderEditor();
+    }
+  });
+
+  div.innerHTML=`<div class="bp-head">
+      <span class="bp-handle" title="Arrastar bloco">⠿</span>
+      <div class="bp-icon" style="background:${isOn?t.cor+'22':'var(--surface3)'};color:${isOn?t.cor:'var(--text3)'}">${def.icon}</div>
+      <div class="bp-meta">
+        <div class="bp-title" style="color:${isOn?'#ffffff':'rgba(255,255,255,.4)'}">${def.label}</div>
+        <div class="bp-note">${def.note||''}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
+        ${isOn?`<span class="bp-badge" id="badge-${k}">ativo</span>`:`<span class="bp-off">Inativo neste tempo</span>`}
+        ${def._custom?`<button class="bp-del" onclick="removerBloco('${k}')">✕ Remover</button>`:''}
+      </div>
+    </div>
+    <div class="bp-body" id="bpbody-${k}"></div>`;
+  container.appendChild(div);
+  renderSubEntries(k);
+  if(isOn&&!(state[k]||[]).length) addEntry(k,false);
+}
+
+/* ── SUB-ENTRIES ── */
+function renderSubEntries(k){
+  const t=getT();
+  const c=document.getElementById('bpbody-'+k);if(!c)return;
+  c.innerHTML='';
+  (state[k]||[]).forEach((val,i)=>{
+    const d=document.createElement('div');
+    d.className='sub-entry';d.draggable=true;d.dataset.i=i;
+    d.addEventListener('dragstart',e=>{dragEntry={k,i};d.classList.add('dragging');e.stopPropagation();});
+    d.addEventListener('dragend',()=>{d.classList.remove('dragging');document.querySelectorAll('.sub-entry').forEach(s=>s.classList.remove('drag-over-se'));});
+    d.addEventListener('dragover',e=>{e.preventDefault();e.stopPropagation();d.classList.add('drag-over-se');});
+    d.addEventListener('dragleave',()=>d.classList.remove('drag-over-se'));
+    d.addEventListener('drop',e=>{
+      e.preventDefault();e.stopPropagation();d.classList.remove('drag-over-se');
+      if(dragEntry&&dragEntry.k===k&&dragEntry.i!==i){
+        const arr=state[k];const[m]=arr.splice(dragEntry.i,1);arr.splice(i,0,m);
+        renderSubEntries(k);
+      }
+    });
+    const rm=state[k].length>1?`<button class="se-rm" onclick="removeEntry('${k}',${i})">✕</button>`:'';
+    const entryId=`se-entry-${k}-${i}`;
+    d.id=entryId;
+    d.innerHTML=`<div class="se-head">
+        <span class="se-handle">⠿</span>
+        <span class="se-label" style="color:${t.cor}">${bdefs[k].label}${state[k].length>1?' — nº '+(i+1):''}</span>
+        <button class="se-max" onclick="toggleMaximizar('${entryId}')" title="Maximizar para edição">⛶</button>
+        ${rm}
+      </div>
+      <textarea placeholder="Cole ou digite o texto do canto aqui..."></textarea>`;
+    // Usar .value diretamente (não innerHTML) para preservar linhas em branco múltiplas
+    const ta=d.querySelector('textarea');
+    ta.value=val;
+    ta.addEventListener('input',function(){updateEntry(k,i,this.value);});
+    // Ao colar: forçar text/plain para preservar quebras de linha exatas
+    ta.addEventListener('paste',function(e){
+      e.preventDefault();
+      const txt=e.clipboardData.getData('text/plain');
+      const start=this.selectionStart,end=this.selectionEnd;
+      const cur=this.value;
+      this.value=cur.slice(0,start)+txt+cur.slice(end);
+      this.selectionStart=this.selectionEnd=start+txt.length;
+      updateEntry(k,i,this.value);
+      autoSave();
+    });
+    c.appendChild(d);
+  });
+  // ONE add button
+  const btn=document.createElement('button');
+  btn.className='add-canto-btn';
+  btn.textContent='＋ Acrescentar outro '+bdefs[k].label;
+  btn.onclick=()=>addEntry(k,true);
+  c.appendChild(btn);
+  updateBadge(k);
+}
+
+function addEntry(k,render=true){
+  if(!state[k])state[k]=[];
+  state[k].push('');
+  if(render){renderSubEntries(k);renderSidebar();}
+}
+function removeEntry(k,i){state[k].splice(i,1);renderSubEntries(k);renderSidebar();}
+function updateEntry(k,i,v){state[k][i]=v;updateBadge(k);renderSidebar();}
+function updateBadge(k){
+  const b=document.getElementById('badge-'+k);if(!b)return;
+  const n=(state[k]||[]).filter(v=>v.trim()).length;
+  b.textContent=n>0?(n+' canto(s)'):'ativo';
+}
+
+/* ── CUSTOM BLOCKS ── */
+function openAddBlockModal(){
+  document.getElementById('new-block-name').value='';
+  openModal('modal-add-block');
+  setTimeout(()=>document.getElementById('new-block-name').focus(),80);
+}
+function confirmarAddBloco(){
+  const nome=document.getElementById('new-block-name').value.trim();
+  if(!nome){alert('Digite um nome para o bloco.');return;}
+  customN++;
+  const id='cx_'+customN;
+  bdefs[id]={label:nome,icon:nome[0].toUpperCase(),note:'Bloco personalizado',_custom:true};
+  blockOrder.push(id);state[id]=[];
+  closeModal('modal-add-block');
+  renderSidebar();renderEditor();
+  setTimeout(()=>document.getElementById('bp-'+id)?.scrollIntoView({behavior:'smooth',block:'start'}),80);
+}
+function removerBloco(k){
+  if(!confirm('Remover o bloco "'+bdefs[k].label+'"?'))return;
+  blockOrder.splice(blockOrder.indexOf(k),1);delete state[k];delete bdefs[k];
+  renderSidebar();renderEditor();
+}
+
+/* ── TABS ── */
+function setTab(t){
+  ['editor','preview'].forEach(id=>{
+    document.getElementById('pane-'+id).classList.toggle('active',id===t);
+    const tb=document.getElementById('tab-'+id);
+    if(tb)tb.classList.toggle('active',id===t);
+  });
+  if(t==='preview')buildPreview();
+}
+
+/* ── UTILS ── */
+// Converte cor hex + alpha (0-1) para cor sólida RGB sobre fundo branco
+// Necessário para Word/PDF que não suportam cores hex com alpha (#rrggbbAA)
+function hexToRgbBg(hex, alpha, bgR, bgG, bgB){
+  bgR=bgR===undefined?255:bgR;
+  bgG=bgG===undefined?255:bgG;
+  bgB=bgB===undefined?255:bgB;
+  hex=hex.replace('#','');
+  if(hex.length===3)hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+  const r=parseInt(hex.substring(0,2),16);
+  const g=parseInt(hex.substring(2,4),16);
+  const b=parseInt(hex.substring(4,6),16);
+  const a=alpha||0.1;
+  const ro=Math.round(r*a+bgR*(1-a));
+  const go=Math.round(g*a+bgG*(1-a));
+  const bo=Math.round(b*a+bgB*(1-a));
+  return`rgb(${ro},${go},${bo})`;
+}
+
+/* ── DOC INFO ── */
+function getDocInfo(){
+  const parq=document.getElementById('paroquia').value||'Paróquia';
+  const dom=document.getElementById('domingo').value||'';
+  const ano=document.getElementById('ano_lit').value;
+  const data=document.getElementById('data_missa').value;
+  let dataStr='';
+  if(data){const d=new Date(data+'T12:00');dataStr=d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
+  return{parq,dom,ano,dataStr};
+}
+
+/* ── FORMAT STROPHES ── */
+// Detecta se o primeiro bloco sem marcador deve ser tratado como refrão em negrito
+// Regra: se não começa com número, REFRÃO/ESTRIBILHO explícito, PR: ou AS:, mas
+// o restante dos blocos tem numeração (começa com dígito) → é refrão implícito
+// Detecta se um bloco é refrão:
+// - Começa com marcador explícito (REFRÃO, ESTRIBILHO...)
+// - OU termina com (Bis), (2x) etc.
+// - OU é o primeiro bloco sem número enquanto os demais têm numeração
+// Regex que detecta prefixos de refrão no início da estrofe:
+// ref / ref. / ref.: / ref: / refrão / refrão: / REFRÃO / ESTRIBILHO etc.
+const REFRAIN_PREFIX_RE=/^(?:refr[aã]o|estribilho|ref(?![a-zà-ÿ]))\s*[.:]*\s*/i;
+
+// Regex para prefixo de itálico: italico / ITALICO / italico: / ITALICO: / itl / ITL / ilt / ILT (com ou sem : e espaço)
+const ITALIC_PREFIX_RE=/^(it[aá]lico\s*:?|itl\s*:?|ilt\s*:?)\s*/i;
+
+// Verifica se o bloco (texto cru) começa com prefixo de itálico
+function isItalicBlock(bl){
+  return ITALIC_PREFIX_RE.test(bl);
+}
+
+// Remove o prefixo de itálico do bloco cru, retornando o texto limpo
+function stripItalicPrefix(bl){
+  return bl.replace(ITALIC_PREFIX_RE,'').trim();
+}
+
+// Envolve todo o conteúdo HTML em <em>
+function wrapItalic(htmlContent){
+  return `<em>${htmlContent}</em>`;
+}
+
+function isRefrain(bl, idx, blocks){
+  if(!bl)return false;
+  if(REFRAIN_PREFIX_RE.test(bl))return true;
+  if(/^(REFRÃO|ESTRIBILHO|\*|\[)/i.test(bl))return true;
+  if(/\(\s*(bis|2x|2X|Bis)\s*\)\s*$/i.test(bl))return true;
+  if(idx===0){
+    const startsWithNum=/^\d/.test(bl);
+    if(!startsWithNum){
+      const hasNumbered=blocks.slice(1).some(b=>/^\d/.test(b));
+      if(hasNumbered)return true;
+    }
+  }
+  return false;
+}
+
+// Remove o prefixo de refrão (ref:, refrão:, etc.) do texto para exibição limpa
+function stripRefrainPrefix(bl){
+  return bl.replace(REFRAIN_PREFIX_RE,'').trim();
+}
+
+// Detecta se os blocos não-refrão já vêm pré-numerados pelo usuário (ex: "1. texto")
+function isPreNumbered(blocks){
+  const nonRef=blocks.filter((b,i)=>!isRefrain(b,i,blocks));
+  if(nonRef.length===0)return false;
+  // Considera pré-numerado se pelo menos metade dos blocos não-refrão começa com dígito
+  const numCount=nonRef.filter(b=>/^\d+[\.\)]\s/.test(b)).length;
+  return numCount>=Math.ceil(nonRef.length/2);
+}
+
+// Renderiza um bloco de estrofe — se pré-numerado, mostra como está; senão adiciona número
+
+/* ── TÍTULO / BANNER / REFRÃO COLORIDO / AJUSTAR TEXTO ── */
+function _semAcento(x){return String(x).normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function isTituloLine(l){return /^titulo\b\s*:?/i.test(_semAcento(l.trim()));}
+const _ALIGN_SRC='(centralizado|cent|alinhado\\s+a\\s+esquerda|alq|alinhado\\s+a\\s+direita|ald)';
+function _alignDe(x){x=_semAcento(x).toLowerCase().replace(/\s+/g,' ');return /^(cent)/.test(x)?'center':(/^(alq|alinhado a esq)/.test(x)?'left':'right');}
+function isAlignLine(l){return new RegExp('^'+_ALIGN_SRC+'\\s*[.:]?$','i').test(_semAcento(l.trim()));}
+function splitTitulo(text){
+  let lines=String(text||'').split('\n'),align='';
+  // linha só com o código de alinhamento (CENT / ALQ / ALD ...)
+  const ia=lines.findIndex(isAlignLine);
+  if(ia>=0){align=_alignDe(lines[ia]);lines.splice(ia,1);}
+  const i=lines.findIndex(isTituloLine);
+  if(i<0)return{titulo:'',rest:lines.join('\n').replace(/\n{3,}/g,'\n\n').trim(),align};
+  let linha=lines[i];
+  // forma curta: "TÍTULO CENT: texto"
+  const mi=_semAcento(linha).match(new RegExp('^\\s*titulo\\s+'+_ALIGN_SRC+'\\s*:\\s*','i'));
+  let titulo;
+  if(mi){align=_alignDe(mi[1]);titulo=linha.slice(mi[0].length).trim();}
+  else titulo=linha.replace(/^\s*t[ií]tulo\s*:?\s*/i,'').trim();
+  lines.splice(i,1);
+  return{titulo,rest:lines.join('\n').replace(/\n{3,}/g,'\n\n').trim(),align};
+}
+function bannerHtml(num,label,tc,tfs,fstack){
+  const dk=darken(tc,.7);
+  return `<table style="border-collapse:collapse;width:100%;margin:2pt 0 5pt;background:${tc};background:linear-gradient(90deg,${dk},${tc});border-radius:26px;break-after:avoid;page-break-after:avoid"><tr>
+  <td style="width:1%;white-space:nowrap;padding:3pt 0 3pt 4pt;vertical-align:middle"><span style="display:inline-block;width:24pt;height:24pt;line-height:24pt;border-radius:50%;background:${dk};border:1.5pt solid #fff;color:#fff;text-align:center;font-size:14pt;font-family:Arial,sans-serif">&#9835;</span>
+  <span style="display:inline-block;min-width:22pt;height:22pt;line-height:22pt;border-radius:50%;background:${dk};border:2pt solid ${GOLD_DECO};color:#fff;text-align:center;font-size:11pt;font-weight:bold;font-family:Arial,sans-serif;padding:0 1pt">${num}</span></td>
+  <td style="padding:3pt 6pt 3pt 6pt;color:#fff;font-weight:bold;text-transform:uppercase;letter-spacing:.06em;font-size:${tfs};font-family:${fstack};line-height:1.2">${label}</td>
+  <td style="width:1%;padding:0 10pt 0 0;opacity:.45">${leafSvg('#fff',26)}</td></tr></table>`;
+}
+function subtituloHtml(t,tc,fstack,fsz,align){
+  return `<table style="border-collapse:collapse;width:100%;margin:0 0 5pt;background:${hexToRgbBg(tc,0.12)};border-radius:18px;break-after:avoid;page-break-after:avoid"><tr><td style="padding:3pt 12pt;text-align:${align||'left'};font-weight:bold;color:${darken(tc,.8)};font-family:${fstack};font-size:${fsz};line-height:1.3">${h(t)}</td></tr></table>`;
+}
+function refHtml(clean,doc,fs,fstack){
+  const tc=titleColor||'#D32F2F',f=fs||'inherit',ff=fstack||'inherit';
+  return `<table style="border-collapse:collapse;width:100%;margin:0;break-inside:avoid;page-break-inside:avoid"><tr><td style="width:26pt;vertical-align:top;padding:0;font-weight:bold;font-style:italic;color:${tc};font-size:${f};font-family:${ff};line-height:1.4">Ref.:</td><td style="vertical-align:top;padding:0;font-weight:bold;font-style:italic;color:${tc};font-size:${f};font-family:${ff};line-height:1.4;text-align:left">${clean}</td></tr></table>`;
+}
+function toggleCodigos(){document.getElementById('codes-pop').classList.toggle('show');}
+function ajustarTextoFocado(){
+  const ta=document.getElementById('focused-modal-textarea');if(!ta)return;
+  const out=ta.value.replace(/\r/g,'').split('\n\n').map(bloco=>{
+    const ls=bloco.split('\n'),r=[];
+    for(let i=0;i<ls.length;i++){
+      const a=ls[i].trim(),b=(ls[i+1]||'').trim();
+      const fixa=l=>!l||l.includes('/')||isTituloLine(l)||isAlignLine(l)||/^(PR|AS)\s*:/i.test(l);
+      if(!fixa(a)&&b&&!fixa(b)){r.push(a+'/ '+b);i++;}else r.push(ls[i]);
+    }
+    return r.join('\n');
+  }).join('\n\n');
+  ta.focus();ta.select();
+  if(!document.execCommand||!document.execCommand('insertText',false,out))ta.value=out;
+}
+
+
+/* ── VISUAL NOVO (modelo paisagem) ── */
+const GOLD_DECO='#E8C32A';
+function darken(hex,f){
+  let c=String(hex).replace('#','');if(c.length===3)c=c.split('').map(x=>x+x).join('');
+  const n=parseInt(c,16);if(isNaN(n))return hex;
+  return '#'+[n>>16&255,n>>8&255,n&255].map(v=>Math.round(v*f).toString(16).padStart(2,'0')).join('');
+}
+function isLand(){return !document.getElementById('booklet-mode').checked&&document.getElementById('orient-sel').value==='landscape';}
+function leafSvg(c,w){
+  return `<svg width="${w}" height="${Math.round(w*.7)}" viewBox="0 0 40 28" style="vertical-align:middle"><path d="M20 26C20 14 12 6 2 4c0 10 6 18 18 22z" fill="${c}"/><path d="M20 26C20 14 28 6 38 4c0 10-6 18-18 22z" fill="${c}"/><path d="M20 26C19 16 19 8 20 1c2 8 2 16 0 25z" fill="${c}"/></svg>`;
+}
+function decoHtml(tc,pos){
+  const dk=darken(tc,.72),frase=(document.getElementById('frase_rodape')||{}).value||'';
+  const pe='pointer-events:none',ot='0',ob='0',wb='15mm';
+  return `<div style="position:${pos};top:${ot};left:0;width:42mm;height:21mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 300 150" preserveAspectRatio="none"><path d="M0 0H235C140 30 50 75 0 150Z" fill="${GOLD_DECO}"/><path d="M0 0H205C120 25 40 62 0 128Z" fill="${dk}"/></svg></div>
+  <div style="position:${pos};bottom:${ob};left:0;width:100%;height:17mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 1000 80" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V80H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V80H0Z" fill="${dk}"/></svg>
+    <div style="position:absolute;left:0;right:0;bottom:3mm;text-align:center;color:#fff;font-style:italic;font-size:13pt;font-family:'Times New Roman',serif">${h(frase)}</div></div>
+  <div style="position:${pos};bottom:${wb};right:6mm;width:38mm;z-index:0;opacity:.22;${pe}"><svg width="100%" viewBox="0 0 160 110"><rect x="55" y="45" width="50" height="60" fill="${tc}"/><polygon points="80,20 52,46 108,46" fill="${tc}"/><rect x="78" y="6" width="4" height="16" fill="${tc}"/><rect x="73" y="10" width="14" height="3" fill="${tc}"/><circle cx="25" cy="80" r="20" fill="${tc}"/><rect x="23" y="95" width="4" height="12" fill="${tc}"/><circle cx="136" cy="72" r="24" fill="${tc}"/><rect x="134" y="92" width="4" height="15" fill="${tc}"/></svg></div>`;
+}
+
+function renderStrophe(bl, n, preNum, forExport, fs, fstack){
+  const tc=titleColor||'#D32F2F';
+  const italic=isItalicBlock(bl);
+  let txt=italic?stripItalicPrefix(bl):bl, num=n+'.';
+  const m=txt.match(/^\s*(\d+)\s*[.)\-–]\s*/);
+  if(preNum&&m){num=m[1]+'.';txt=txt.slice(m[0].length);}
+  let lines=h(txt).replace(/\n/g,'<br>');
+  if(italic) lines=wrapItalic(lines);
+  const f=fs||'inherit',ff=fstack||'inherit';
+  return `<table style="border-collapse:collapse;width:100%;margin:0;break-inside:avoid;page-break-inside:avoid"><tr><td style="width:22pt;vertical-align:top;padding:0;font-weight:bold;color:${tc};font-size:${f};font-family:${ff};line-height:1.4">${num}</td><td style="vertical-align:top;padding:0;font-size:${f};line-height:1.4;font-family:${ff};text-align:left">${lines}</td></tr></table>`;
+}
+
+// Returns HTML with numbered strophes and bold refrains (preview)
+function fmtHtml(text){
+  if(!text)return'';
+  const blocks=text.split(/\n\s*\n/).map(b=>b.trim()).filter(Boolean);
+  const spacer=`<div style="height:1em;line-height:1em;font-size:1em">&nbsp;</div>`;
+  const preNum=isPreNumbered(blocks);
+  let parts=[],n=0;
+  blocks.forEach((bl,idx)=>{
+    if(isRefrain(bl,idx,blocks)){
+      const rawClean=stripRefrainPrefix(bl);
+      const italic=isItalicBlock(rawClean);
+      let clean=h(italic?stripItalicPrefix(rawClean):rawClean).replace(/\n/g,'<br>');
+      if(italic) clean=wrapItalic(clean);
+      parts.push(`<div class="strophe-block" style="margin:0;font-weight:bold">${clean}</div>`);
+    } else {
+      if(!preNum)n++;
+      parts.push(renderStrophe(bl,n,preNum,false,'',''));
+    }
+  });
+  return parts.join(spacer);
+}
+
+// Returns HTML with PR:/AS: dialog formatting, numbered strophes, bold refrains (preview)
+function fmtHtmlPR(text){
+  if(!text)return'';
+  const blocks=text.split(/\n\s*\n/).map(b=>b.trim()).filter(Boolean);
+  const spacer=`<div style="height:1em;line-height:1em;font-size:1em">&nbsp;</div>`;
+  const preNum=isPreNumbered(blocks);
+  let parts=[],n=0;
+  blocks.forEach((bl,idx)=>{
+    const isPR=/^PR\s*:/i.test(bl);
+    const isAS=/^AS\s*:/i.test(bl);
+    if(isPR||isAS){
+      const who=isPR?'PR:':'AS:';
+      const rawRest=bl.replace(/^(PR|AS)\s*:/i,'').trim();
+      const italic=isItalicBlock(rawRest);
+      let rest=h(italic?stripItalicPrefix(rawRest):rawRest).replace(/\n/g,'<br>');
+      if(italic) rest=wrapItalic(rest);
+      parts.push(`<div class="strophe-block" style="margin:0"><span style="color:#D32F2F;font-weight:bold">${who}</span> ${rest}</div>`);
+    } else if(isRefrain(bl,idx,blocks)){
+      const rawClean=stripRefrainPrefix(bl);
+      const italic=isItalicBlock(rawClean);
+      let clean=h(italic?stripItalicPrefix(rawClean):rawClean).replace(/\n/g,'<br>');
+      if(italic) clean=wrapItalic(clean);
+      parts.push(refHtml(clean,false));
+    } else {
+      if(!preNum)n++;
+      parts.push(renderStrophe(bl,n,preNum,false,'',''));
+    }
+  });
+  return parts.join(spacer);
+}
+
+// Returns HTML for doc/pdf export (inline styles) — alinhamento esquerda
+function fmtDoc(text,fstack,fsize){
+  if(!text)return'';
+  const fs=(fsize||fontSize)+'pt';
+  const spacer=`<p style="margin:0;font-size:${fs};line-height:1;font-family:${fstack}">&nbsp;</p>`;
+  const blocks=text.split(/\n\s*\n/).map(b=>b.trim()).filter(Boolean);
+  const preNum=isPreNumbered(blocks);
+  let parts=[],n=0;
+  blocks.forEach((bl,idx)=>{
+    if(isRefrain(bl,idx,blocks)){
+      const rawClean=stripRefrainPrefix(bl);
+      const italic=isItalicBlock(rawClean);
+      let clean=h(italic?stripItalicPrefix(rawClean):rawClean).replace(/\n/g,'<br>');
+      if(italic) clean=wrapItalic(clean);
+      parts.push(`<p style="margin:0;font-weight:bold;font-size:${fs};line-height:1.35;font-family:${fstack};text-align:left">${clean}</p>`);
+    } else {
+      if(!preNum)n++;
+      parts.push(renderStrophe(bl,n,preNum,true,fs,fstack));
+    }
+  });
+  return parts.join(spacer);
+}
+
+// Returns HTML for doc/pdf export with PR:/AS: detection — alinhamento esquerda
+function fmtDocPR(text,fstack,fsize,tc){
+  if(!text)return'';
+  const fs=(fsize||fontSize)+'pt';
+  const color=tc||'#D32F2F';
+  const spacer=`<p style="margin:0;font-size:4pt;line-height:4pt;font-family:${fstack}">&nbsp;</p>`;
+  const blocks=text.split(/\n\s*\n/).map(b=>b.trim()).filter(Boolean);
+  const preNum=isPreNumbered(blocks);
+  let parts=[],n=0;
+  blocks.forEach((bl,idx)=>{
+    const isPR=/^PR\s*:/i.test(bl);
+    const isAS=/^AS\s*:/i.test(bl);
+    if(isPR||isAS){
+      const who=isPR?'PR:':'AS:';
+      const rawRest=bl.replace(/^(PR|AS)\s*:/i,'').trim();
+      const italic=isItalicBlock(rawRest);
+      let rest=h(italic?stripItalicPrefix(rawRest):rawRest).replace(/\n/g,'<br>');
+      if(italic) rest=wrapItalic(rest);
+      parts.push(`<p style="margin:0;font-size:${fs};line-height:1.4;font-family:${fstack};text-align:left"><b style="color:${color}">${who}</b> ${rest}</p>`);
+    } else if(isRefrain(bl,idx,blocks)){
+      const rawClean=stripRefrainPrefix(bl);
+      const italic=isItalicBlock(rawClean);
+      let clean=h(italic?stripItalicPrefix(rawClean):rawClean).replace(/\n/g,'<br>');
+      if(italic) clean=wrapItalic(clean);
+      parts.push(refHtml(clean,true,fs,fstack));
+    } else {
+      if(!preNum)n++;
+      parts.push(renderStrophe(bl,n,preNum,true,fs,fstack));
+    }
+  });
+  return parts.join(spacer);
+}
+
+/* ── PREVIEW ── */
+function buildPreview(){
+  const{parq,dom,ano,dataStr}=getDocInfo();
+  const t=getT();
+  const fonte=document.getElementById('fonte_sel').value;
+  const fstack=fonte==='Arial'?'Arial,sans-serif':"'Times New Roman',Times,serif";
+  const align=document.getElementById('img-align').value;
+  const imgH=document.getElementById('img-height').value;
+  const booklet=document.getElementById('booklet-mode').checked;
+  const pg=document.getElementById('preview-page');
+  pg.style.fontFamily=fstack;
+  if(booklet){pg.classList.add('booklet');pg.style.maxWidth='560px';}
+  else{pg.classList.remove('booklet');pg.style.maxWidth='';}
+
+  const tc=titleColor||'#D32F2F';
+  _makeContentMode=null;
+  pg.style.padding='0';pg.style.position='relative';pg.style.overflow='hidden';
+  pg.style.maxWidth=booklet?'560px':(isLand()?'1123px':'794px');
+  pg.innerHTML=decoHtml(tc,'absolute')+`<div style="position:relative;z-index:1;padding:8mm 8mm 20mm">${makeHeader(parq,dom,ano,dataStr,t,fstack,fontSize,align,imgH)}${makeContent(fstack,t,fontSize)}</div>`;
+  return;
+  // ── church icon SVG (bible + tower) ──
+  const churchSVG=`<svg xmlns="http://www.w3.org/2000/svg" width="38" height="46" viewBox="0 0 38 46">
+    <rect x="11" y="20" width="16" height="24" rx="1" fill="none" stroke="${tc}" stroke-width="1.5"/>
+    <rect x="14" y="26" width="4" height="4" rx=".5" fill="none" stroke="${tc}" stroke-width="1.2"/>
+    <rect x="20" y="26" width="4" height="4" rx=".5" fill="none" stroke="${tc}" stroke-width="1.2"/>
+    <rect x="16" y="33" width="6" height="11" rx=".5" fill="${tc}22"/>
+    <polygon points="19,6 10,20 28,20" fill="none" stroke="${tc}" stroke-width="1.5"/>
+    <line x1="19" y1="2" x2="19" y2="6" stroke="${tc}" stroke-width="1.5"/>
+    <line x1="16" y1="3.5" x2="22" y2="3.5" stroke="${tc}" stroke-width="1.5"/>
+    <rect x="5" y="38" width="7" height="6" rx=".5" fill="none" stroke="${tc}" stroke-width="1"/>
+    <rect x="26" y="38" width="7" height="6" rx=".5" fill="none" stroke="${tc}" stroke-width="1"/>
+    <rect x="7" y="30" width="3" height="8" fill="none" stroke="${tc}" stroke-width="1"/>
+    <rect x="28" y="30" width="3" height="8" fill="none" stroke="${tc}" stroke-width="1"/>
+    <rect x="13" y="12" width="12" height="8" rx=".5" fill="${tc}11" stroke="${tc}" stroke-width=".8"/>
+    <line x1="13" y1="15" x2="25" y2="15" stroke="${tc}" stroke-width=".5"/>
+    <line x1="13" y1="17" x2="25" y2="17" stroke="${tc}" stroke-width=".5"/>
+  </svg>`;
+
+  // logos row (diocese + parish logos)
+  let logosHtml='';
+  if(imgData.diocese||imgData.paroquia){
+    const imgs=(imgData.diocese?`<img src="${imgData.diocese}" style="height:${imgH}px;max-width:80px;object-fit:contain">`:'')+
+              (imgData.diocese&&imgData.paroquia?'<span style="width:14px;display:inline-block"></span>':'')+
+              (imgData.paroquia?`<img src="${imgData.paroquia}" style="height:${imgH}px;max-width:80px;object-fit:contain">`:'');
+    logosHtml=`<div style="text-align:${align};margin-bottom:6px">${imgs}</div>`;
+  }
+
+  // ── header layout: church icon left, TÍTULO EDITÁVEL center, info right ──
+  const tituloPrincipal=document.getElementById('titulo_principal').value||'O DOMINGO';
+  const headerHtml=`<div style="display:flex;align-items:flex-start;gap:10px;border-bottom:2px solid ${tc};padding-bottom:8px;margin-bottom:10px">
+    <div style="flex-shrink:0;padding-top:2px">${churchSVG}</div>
+    <div style="flex:1;text-align:center">
+      <div class="pg-odoming" style="color:${tc}">${h(tituloPrincipal)}</div>
+      <div class="pg-paroquia" style="font-family:'Cinzel',serif;font-size:15px;font-weight:bold;color:${tc}">${h(parq)}</div>
+      <div style="font-size:11px;margin-top:2px;color:#666">${t.nome} — Ano ${ano} · ${t.corNome}</div>
+      ${dom?`<div style="font-size:12px;font-weight:bold;margin-top:2px">${h(dom)}</div>`:''}
+      ${dataStr?`<div style="font-size:10px;color:#888;margin-top:1px">${h(dataStr)}</div>`:''}
+    </div>
+    <div style="flex-shrink:0;width:38px"></div>
+  </div>`;
+
+  // ── sacra image ──
+  const fs=fontSize+'px';
+  const tfs=titleFontSize+'px';
+  const titleBg=hexToRgbBg(tc,0.1); // RGB sólido, funciona em todos os contextos
+  let guideN=0;
+  let col1='', col2='', allSecs=[];
+  // build sacra for col1
+  const sacraH=document.getElementById('sacra-height').value;
+  const sacraCaption=document.getElementById('sacra-caption').value;
+  const sacraAlignEl=document.getElementById('sacra-align');
+  const sacraAlign=sacraAlignEl?sacraAlignEl.value:'center';
+  let sacraInCol='';
+  if(imgData.sacra){
+    sacraInCol=`<div style="text-align:${sacraAlign};margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:6px"><img src="${imgData.sacra}" style="max-height:${sacraH}px;max-width:100%;object-fit:contain;border:1px solid #ddd;border-radius:3px"><br>${sacraCaption?`<span style="font-size:9px;color:#888;font-style:italic">${h(sacraCaption)}</span>`:''}</div>`;
+  }
+  blockOrder.forEach(k=>{
+    const entries=(state[k]||[]).filter(v=>v.trim());
+    if(!entries.length)return;
+    guideN++;
+    entries.forEach((v,i)=>{
+      const sp=splitTitulo(v);
+      allSecs.push(`<div class="preview-sec">${bannerHtml(guideN+(i>0?'.'+i:''),bdefs[k].label+(entries.length>1?' '+(i+1):''),tc,tfs,"'Cinzel',serif")}${sp.titulo?subtituloHtml(sp.titulo,tc,fstack,fs):''}<div class="preview-sec-body" style="font-family:${fstack};font-size:${fs};text-align:left">${fmtHtmlPR(sp.rest)}</div></div>`);
+  });
+  });
+  // apply page margin + strophe gap CSS var
+  const marginVal=document.getElementById('margin_sel').value;
+  const pgPad=marginVal==='0'?'14mm 8mm':`14mm ${marginVal}mm`;
+  pg.style.padding=pgPad;
+  const gap=getStropheGap();
+  pg.style.setProperty('--strophe-gap', gap+'em');
+
+  pg.innerHTML=`${logosHtml}${headerHtml}<div style="column-count:2;column-gap:14px;column-rule:.5px solid #ccc">
+    ${sacraInCol}${allSecs.join('')}
+  </div>`;
+}
+
+/* ── EXPORT ── */
+function makeHeader(parq,dom,ano,dataStr,t,fstack,fsize,align,imgH){
+  const fs=fsize||fontSize,tc=titleColor||'#D32F2F',k=isLand()?1:.6,dk=darken(tc,.8);
+  const iH=parseInt(imgH||55)||55;
+  const frase=(document.getElementById('frase_header')||{}).value||'';
+  const tituloPrincipal=document.getElementById('titulo_principal').value||'O DOMINGO';
+  const igreja=`<svg width="${Math.round(64*k+10)}" viewBox="0 0 38 46"><rect x="11" y="20" width="16" height="24" rx="1" fill="none" stroke="${tc}" stroke-width="1.6"/><rect x="14" y="26" width="4" height="4" rx=".5" fill="none" stroke="${tc}" stroke-width="1.2"/><rect x="20" y="26" width="4" height="4" rx=".5" fill="none" stroke="${tc}" stroke-width="1.2"/><rect x="16" y="33" width="6" height="11" fill="${tc}" opacity=".25"/><polygon points="19,6 10,20 28,20" fill="none" stroke="${tc}" stroke-width="1.6"/><line x1="19" y1="1" x2="19" y2="6" stroke="${tc}" stroke-width="1.6"/><line x1="16" y1="3" x2="22" y2="3" stroke="${tc}" stroke-width="1.6"/><rect x="5" y="38" width="7" height="6" fill="none" stroke="${tc}" stroke-width="1.1"/><rect x="26" y="38" width="7" height="6" fill="none" stroke="${tc}" stroke-width="1.1"/></svg>`;
+  const logo=(src)=>src?`<img src="${src}" height="${iH}" style="height:${iH}px;width:auto;max-width:90px;object-fit:contain;vertical-align:middle;margin:0 6px">`:'';
+  const logos=(imgData.diocese||imgData.paroquia)?`<div style="text-align:center;margin-bottom:3pt">${logo(imgData.diocese)}${logo(imgData.paroquia)}</div>`:'';
+  const linha=`<td style="border-bottom:1pt solid ${dk};width:18%">&nbsp;</td>`;
+  return `<table style="width:100%;border-collapse:collapse;margin-top:2mm"><tr>
+    <td style="width:16%;vertical-align:middle;text-align:center">${igreja}</td>
+    <td style="vertical-align:top;text-align:center">${logos}
+      <p style="margin:0;font-size:${Math.round((fs+26)*k)}pt;font-weight:900;letter-spacing:.03em;color:${tc};font-family:Arial,sans-serif;text-transform:uppercase;line-height:1.05">${h(tituloPrincipal)}</p>
+      <p style="margin:0;font-size:${Math.round((fs+11)*k)}pt;font-weight:bold;color:${tc};font-family:${fstack};line-height:1.2">${h(parq)}</p>
+      <table style="width:100%;border-collapse:collapse;margin:2pt 0"><tr>${linha}<td style="text-align:center;font-size:${Math.round((fs+4)*k+2)}pt;font-family:${fstack};color:#222;white-space:nowrap;padding:0 8pt">${t.nome} — Ano ${ano} · ${t.corNome}</td>${linha}</tr></table>
+      ${dom?`<p style="margin:0;font-size:${Math.round((fs+6)*k+1)}pt;font-weight:bold;font-family:${fstack};color:#111;line-height:1.25">${h(dom)}</p>`:''}
+      ${dataStr?`<p style="margin:0;font-size:${Math.round((fs+2)*k+1)}pt;color:${dk};font-family:${fstack};line-height:1.3">${h(dataStr)}</p>`:''}
+    </td>
+    <td style="width:20%;vertical-align:top;text-align:center;padding-top:4pt">${frase?`<p style="margin:0;font-size:${Math.round((fs+4)*k+2)}pt;font-style:italic;color:${tc};font-family:${fstack};line-height:1.3">&ldquo;${h(frase)}&rdquo;</p><div style="margin-top:4pt">${leafSvg(tc,26)}</div>`:''}</td>
+  </tr></table>
+  <table style="width:100%;border-collapse:collapse;margin:3pt 0 6pt"><tr><td style="border-bottom:2.5pt solid ${tc};width:48%">&nbsp;</td><td style="text-align:center;padding:0 6pt;width:1%">${leafSvg(tc,26)}</td><td style="border-bottom:2.5pt solid ${tc};width:48%">&nbsp;</td></tr></table>`;
+}
+
+function makeContent(fstack,t,fsize){
+  const fs=fsize||fontSize;
+  const tfs=(titleFontSize||13)+'pt';
+  const tc=titleColor||'#D32F2F';
+  const marginVal=document.getElementById('margin_sel').value;
+  const sidePad=marginVal==='0'?'0':''+marginVal+'pt';
+
+  // Solid background for title (Word/PDF don't support hex+alpha)
+  const titleBg=hexToRgbBg(tc,0.1);
+
+  // sacra image for first column
+  const sacraH=document.getElementById('sacra-height').value;
+  const sacraCaption=document.getElementById('sacra-caption').value;
+  const sacraAlignEl=document.getElementById('sacra-align');
+  const sacraAlign=sacraAlignEl?sacraAlignEl.value:'center';
+  let sacraInCol='';
+  if(imgData.sacra){
+    const imgHeightAttr=sacraH?`height="${sacraH}"`:'';
+    const imgStyle=sacraH?`height:${sacraH}px;width:auto;max-width:100%`:'max-width:100%';
+    sacraInCol=`<div style="text-align:${sacraAlign};margin-bottom:6pt;border-bottom:1pt solid #eee;padding-bottom:4pt">
+      <img src="${imgData.sacra}" ${imgHeightAttr} style="${imgStyle};object-fit:contain;border:1pt solid #ddd">
+      ${sacraCaption?`<p style="font-size:${fs}pt;color:${darken(tc,.8)};font-weight:600;font-style:italic;font-family:${fstack};margin:3pt 0 0;text-align:${sacraAlign}">${h(sacraCaption)}</p>`:''}
+    </div>`;
+  }
+
+  // Badge: use inline table so Word renders the blue square + colored title correctly
+  function makeSectionTitle(num,label){return bannerHtml(num,label,tc,tfs,fstack);}
+
+  let allSecs=[];
+  let guideN=0;
+  blockOrder.forEach(k=>{
+    const entries=(state[k]||[]).filter(v=>v.trim());
+    if(!entries.length)return;
+    guideN++;
+    entries.forEach((v,i)=>{
+      const secLabel=bdefs[k].label;
+      const secNum=(i+1)+'\u00ba';
+      allSecs.push(
+        makeSectionTitle(secNum,secLabel)+(splitTitulo(v).titulo?subtituloHtml(splitTitulo(v).titulo,tc,fstack,fs+'pt',splitTitulo(v).align):'')+fmtDocPR(splitTitulo(v).rest,fstack,fs,tc)+
+        `<p style="margin:0;font-size:4pt;line-height:4pt">&nbsp;</p>`
+      );
+    });
+  });
+
+  // Wrap each section in a break-inside:avoid div so columns flow naturally
+  const secDivs=allSecs.join('');
+
+  // Para PDF/impressão: CSS column-count (fluxo automático de colunas, igual ao preview)
+  // Para Word: usa tabela com divisão por estimativa de linhas
+  const forWord=typeof _makeContentMode!=='undefined'&&_makeContentMode==='word';
+  if(!forWord){
+    // PDF: column-count CSS — o browser pagina e flui automaticamente
+    return`<div style="column-count:2;column-gap:18pt;column-rule:1pt solid ${darken(tc,.8)};padding:0 ${sidePad};font-family:${fstack};font-size:${fs}pt">
+      ${sacraInCol}
+      ${secDivs}
+    </div>`;
+} else {
+    // Word: tabela duas colunas por página
+    // Estima quantas linhas cabem por coluna com base no tamanho da fonte e altura A4
+    // A4 útil ≈ 247mm; linha ≈ fs * 1.4 * 0.352778mm por pt
+    // Largura útil de cada coluna em mm (A4 210mm - 25mm margens - 14mm gap / 2)
+    const colWidthMm=85;
+    // Caracteres que cabem por linha: ~2.1 chars/mm para fontes serifadas nesse tamanho
+    const charsPerLine=Math.floor(colWidthMm*(2.1-(fs-9)*0.05));
+
+    function estimateLines(html){
+      const text=html.replace(/<br>/gi,'\n').replace(/<[^>]+>/g,'');
+      const rawLines=text.split('\n').filter(l=>l.trim());
+      // Conta quebras de linha automáticas por word-wrap
+      const wrapped=rawLines.reduce((sum,ln)=>sum+Math.max(1,Math.ceil(ln.length/charsPerLine)),0);
+      return wrapped+2; // +2 = altura do título da seção
+    }
+    const lineHeightMm=fs*1.4*0.352778;
+    const pageHeightMm=247;   // A4 útil após margens (~297mm - 50mm margens)
+    const headerHeightMm=65;  // cabeçalho ocupa ~65mm na página 1
+    const linesPerCol     =Math.floor(pageHeightMm/lineHeightMm);
+    const linesPerColPg1  =Math.floor((pageHeightMm-headerHeightMm)/lineHeightMm);
+
+    // Ajuste: usar capacidade um poco menor para evitar overflow nas páginas intermediárias
+    // A segunda página tem menos espaço disponível devido a quebras de linha do Word
+    const linesPerColPg2  =Math.floor(linesPerCol * 0.92);
+
+    // Distribui blocos em slots: col1-pg1 → col2-pg1 → col1-pg2 → col2-pg2 → …
+    // Cada slot tem capacidade própria; quando enche passa pro próximo sem forçar entrada.
+    const sacraSec=sacraInCol;
+
+    // Monta lista de slots com capacidade e se tem imagem sacra
+    // Slot = { col: 0|1, page: N, cap: linhas }
+    // col1-pg1 tem sacra + menos espaço; col2-pg1 tem mesma cap; pgs seguintes: linesPerColPg2
+    const sacraLines=sacraSec?10:0; // linhas reservadas para imagem sacra na col1-pg1
+
+    // Preenche slots linearmente
+    const slots=[]; // cada slot: array de blocos HTML
+    let sIdx=0;     // índice do slot atual
+    let sAcc=0;     // linhas acumuladas no slot atual
+    let sPage=0;    // página atual (0-based)
+    let sCol=0;     // coluna atual (0=esquerda, 1=direita)
+
+    function slotCap(page, col){
+      if(page===0) return col===0 ? linesPerColPg1-sacraLines : linesPerColPg1;
+      return linesPerColPg2;
+    }
+
+    slots.push([]);
+    sAcc=sacraLines; // reserva espaço para sacra no primeiro slot
+
+    for(let i=0;i<allSecs.length;i++){
+      const l=estimateLines(allSecs[i]);
+      const cap=slotCap(sPage,sCol);
+      // Se não cabe no slot atual (e slot não está vazio), avança pro próximo
+      if(sAcc+l>cap && slots[sIdx].length>0){
+        sIdx++;
+        slots.push([]);
+        sCol++;
+        if(sCol>1){sCol=0;sPage++;}
+        sAcc=0;
+      }
+      slots[sIdx].push(allSecs[i]);
+      sAcc+=l;
+    }
+
+    // Monta páginas a partir dos slots (cada página = 2 slots)
+    // Garante que pelo menos uma página existe (caso só tenha sacra e nenhum bloco)
+    const totalSlots=Math.max(slots.length, sacraSec?1:0);
+    const pages=[];
+    for(let p=0;p<Math.ceil(totalSlots/2);p++){
+      const s0=slots[p*2]||[];
+      const s1=slots[p*2+1]||[];
+      let col1=s0.join('');
+      if(p===0) col1=sacraSec+col1;
+      const col2=s1.join('');
+      if(!col1&&!col2) break; // safety
+      pages.push({col1,col2});
+    }
+
+    // Quebra de página entre tabelas via parágrafo MSO (único método confiável no Word)
+    const pageBreak=`<p style="margin:0;font-size:1pt"><br style="mso-special-character:line-break;page-break-before:always"></p>`;
+    return pages.map(({col1,col2},pi)=>`
+    <table style="width:100%;border-collapse:collapse;border-spacing:0;padding:0 ${sidePad}">
+      <tr>
+        <td style="width:50%;vertical-align:top;padding-right:7pt;border-right:1pt solid #cccccc;font-family:${fstack};font-size:${fs}pt">
+          ${col1}
+        </td>
+        <td style="width:50%;vertical-align:top;padding-left:7pt;font-family:${fstack};font-size:${fs}pt">
+          ${col2}
+        </td>
+      </tr>
+</table>${pi<pages.length-1?pageBreak:''}`).join('\n');
+  }
+}
+
+function exportarDoc(){
+  const{parq,dom,ano,dataStr}=getDocInfo();
+  const t=getT();
+  const fonte=document.getElementById('fonte_sel').value;
+  const fstack=fonte==='Arial'?'Arial,sans-serif':`'Times New Roman',serif`;
+  const align=document.getElementById('img-align').value;
+  const imgH=document.getElementById('img-height').value;
+  const fs=fontSize;
+  const booklet=document.getElementById('booklet-mode').checked;
+  const pageSize=booklet?'A5 portrait':'A4 portrait';
+  const marginVal=document.getElementById('margin_sel').value;
+  const sideMargin=marginVal==='0'?'0.5cm':(marginVal+'mm');
+  const margin=booklet?`1cm ${sideMargin}`:`1.1cm ${sideMargin}`;
+  const parqName=document.getElementById('paroquia').value||'';
+  const footerHtml=`<div style="font-family:${fstack};font-size:8pt;color:#888;text-align:center;padding-top:4pt">${h(parqName)}</div>`;
+  const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8">
+<!--[if gte mso 9]><xml>
+<w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>100</w:Zoom>
+  <w:Compatibility>
+    <w:BreakWrappedTables/>
+    <w:SnapToGridInCell/>
+    <w:WrapTextWithPunct/>
+    <w:UseAsianBreakRules/>
+  </w:Compatibility>
+</w:WordDocument>
+</xml><![endif]-->
+<style>
+  @page{margin:${margin};size:${pageSize};mso-page-orientation:portrait}
+  body{font-family:${fstack};font-size:${fs}pt;margin:0;mso-default-header-margin:0;mso-default-footer-margin:1cm}
+  p{margin:0;mso-line-height-rule:exactly}
+  table{border-collapse:collapse;border-spacing:0}
+  td{mso-cell-special:normal;vertical-align:top}
+  div.footer{mso-element:footer;text-align:center;font-size:8pt;color:#888;font-family:${fstack}}
+</style>
+</head><body>
+${makeHeader(parq,dom,ano,dataStr,t,fstack,fs,align,imgH)}
+${(_makeContentMode="word",makeContent(fstack,t,fs))}
+<div class="footer">${footerHtml}</div>
+</body></html>`;
+  const blob=new Blob(['\ufeff'+html],{type:'application/msword;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='folheto_liturgico.doc';a.click();
+}
+
+function exportarPDF(){
+  const{parq,dom,ano,dataStr}=getDocInfo();
+  const t=getT();
+  const fonte=document.getElementById('fonte_sel').value;
+  const fstack=fonte==='Arial'?'Arial,sans-serif':`'Times New Roman',serif`;
+  const align=document.getElementById('img-align').value;
+  const imgH=document.getElementById('img-height').value;
+  const fs=fontSize;
+  const booklet=document.getElementById('booklet-mode').checked;
+  const pageSize=booklet?'A5':(isLand()?'A4 landscape':'A4 portrait');
+  const marginVal2=document.getElementById('margin_sel').value;
+  const sideMarginPdf=marginVal2==='0'?'0.5cm':(marginVal2+'mm');
+  const margin2=booklet?`1cm ${sideMarginPdf}`:`1.1cm ${sideMarginPdf}`;
+  const parqName2=document.getElementById('paroquia').value||'';
+  const footerContent=parqName2?`'${parqName2.replace(/'/g,"\\'")} — ' counter(page)`:`counter(page)`;
+
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Folheto Litúrgico</title>
+<style>
+  @page{margin:0;size:${pageSize}}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+  body{font-family:${fstack};font-size:${fs}pt;margin:0}
+</style></head><body>
+${decoHtml(titleColor||'#D32F2F','fixed')}<div style="position:relative;z-index:1;padding:6mm 9mm 20mm;-webkit-box-decoration-break:clone;box-decoration-break:clone">${makeHeader(parq,dom,ano,dataStr,t,fstack,fs,align,imgH)}${(_makeContentMode=null,makeContent(fstack,t,fs))}</div>
+</body></html>`;
+  const w=window.open('','_blank');
+  if(!w){alert('Permita pop-ups para gerar o PDF.');return;}
+  w.document.write(html);w.document.close();
+  setTimeout(()=>{w.focus();w.print();},600);
+}
+
+/* ── MODALS ── */
+function openModal(id){document.getElementById(id).style.display='flex';}
+function closeModal(id){document.getElementById(id).style.display='none';}
+['modal-limpar','modal-add-block'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',function(e){if(e.target===this)closeModal(id);});
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('modal-limpar');closeModal('modal-add-block');}});
+document.getElementById('new-block-name').addEventListener('keydown',e=>{if(e.key==='Enter')confirmarAddBloco();});
+
+function limparTudo(){
+  document.getElementById('paroquia').value='';
+  document.getElementById('domingo').value='';
+  document.getElementById('titulo_principal').value='O DOMINGO';
+  document.getElementById('ano_lit').value='A';
+  document.getElementById('data_missa').value=new Date().toISOString().slice(0,10);
+  blockOrder=[...Object.keys(BASE)];
+  bdefs={...BASE};customN=0;
+  blockOrder.forEach(k=>{state[k]=[''];});
+  // reset imagens
+  ['diocese','paroquia','sacra'].forEach(slot=>{
+    imgData[slot]=null;
+    const prev=document.getElementById('prev-'+slot);
+    if(prev){prev.src='';prev.style.display='none';}
+    document.querySelectorAll('#drop-'+slot+' .img-icon, #drop-'+slot+' .img-hint').forEach(el=>el.style.display='');
+    const rmBtn=document.getElementById('rm-'+slot);if(rmBtn)rmBtn.style.display='none';
+    const inp=document.querySelector('#drop-'+slot+' input[type=file]');if(inp)inp.value='';
+  });
+  // reset sacra caption
+  const sc=document.getElementById('sacra-caption');if(sc)sc.value='';
+  const sa=document.getElementById('sacra-align');if(sa)sa.value='center';
+  // reset title color
+  titleColor='#D32F2F';
+  document.querySelectorAll('.color-swatch').forEach((s,i)=>{s.classList.toggle('active',i===0);});
+  // reset font sizes
+  fontSize=11;
+  titleFontSize=13;
+  document.getElementById('fsize-val').textContent='11pt';
+  document.getElementById('tfsize-val').textContent='13pt';
+  document.getElementById('ab-info-txt').textContent='Duas colunas · fonte dos hinos 11pt · estrofes numeradas';
+  // reset strophe gap
+  const sgEl=document.getElementById('strophe_gap');if(sgEl)sgEl.value='1';
+  closeModal('modal-limpar');
+  localStorage.removeItem(SAVE_KEY);
+  setTab('editor');renderSidebar();renderEditor();
+}
+
+/* ── BACKUP & RESTORE ── */
+function temConteudo(){
+  const campos=['paroquia','domingo','titulo_principal'];
+  if(campos.some(id=>document.getElementById(id).value.trim())) return true;
+  return Object.values(state).some(arr=>arr.some(v=>v&&v.trim()));
+}
+
+function fazerBackup(){
+  const data=collectSaveData();
+  const nome=data.paroquia||'folheto';
+  const data_str=new Date().toISOString().slice(0,10);
+  const nomeArq=`backup_${nome.replace(/[^a-zA-Z0-9À-ú ]/g,'').trim().replace(/ +/g,'_')}_${data_str}.json`;
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=nomeArq; a.click();
+  URL.revokeObjectURL(url);
+  // Mostra feedback
+  const btn=document.querySelector('[onclick="fazerBackup()"]');
+  if(btn){const orig=btn.textContent;btn.textContent='✓ Salvo!';setTimeout(()=>btn.textContent=orig,2000);}
+}
+
+function restaurarBackup(){
+  const inp=document.createElement('input');
+  inp.type='file'; inp.accept='.json';
+  inp.onchange=function(){
+    const file=this.files[0]; if(!file)return;
+    const reader=new FileReader();
+    reader.onload=function(e){
+      try{
+        const d=JSON.parse(e.target.result);
+        // Reutiliza a função de restauração do autosave
+        const origGet=localStorage.getItem.bind(localStorage);
+        localStorage.setItem('__restore_tmp__',JSON.stringify(d));
+        const rawBak=localStorage.getItem('__restore_tmp__');
+        // Simula restaurarRascunho com os dados do backup
+        const saved=localStorage.getItem(SAVE_KEY);
+        localStorage.setItem(SAVE_KEY,rawBak);
+        restaurarRascunho();
+        // Restaura o autosave anterior
+        if(saved)localStorage.setItem(SAVE_KEY,saved);
+        else localStorage.removeItem(SAVE_KEY);
+        localStorage.removeItem('__restore_tmp__');
+        alert('✓ Backup restaurado com sucesso!');
+      }catch(err){
+        alert('Erro ao ler o arquivo de backup. Verifique se é um arquivo .json válido.');
+      }
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
+/* ── AVISO DE BACKUP NO NOVO FOLHETO ── */
+const _origOpenModalLimpar=window.openModal;
+// Patch openModal para checar conteúdo quando abre modal-limpar
+document.addEventListener('DOMContentLoaded',()=>{});
+function abrirModalLimpar(){
+  const temDados=temConteudo();
+  document.getElementById('limpar-warn-backup').style.display=temDados?'':'none';
+  document.getElementById('limpar-btn-backup').style.display=temDados?'':'none';
+  document.getElementById('limpar-warn-irreversivel').style.display=temDados?'none':'';
+  openModal('modal-limpar');
+}
+
+/* ── IMPORTAR PDF DE HINOS ── */
+let _importedHinos=[];
+
+function abrirUploadPDF(){
+  _importedHinos=[];
+  document.getElementById('import-progress').textContent='';
+  document.getElementById('import-results').innerHTML='';
+  document.getElementById('import-confirm-btn').style.display='none';
+  document.getElementById('import-target-row').style.display='none';
+  document.getElementById('import-file-input').value='';
+  // Popula o select com os blocos disponíveis
+  const sel=document.getElementById('import-block-target');
+  sel.innerHTML='<option value="auto">Detectar automaticamente</option>';
+  blockOrder.forEach(k=>{
+    const opt=document.createElement('option');
+    opt.value=k; opt.textContent=bdefs[k].label;
+    sel.appendChild(opt);
+  });
+  openModal('modal-import-pdf');
+}
+
+function handleImportDrop(e){
+  e.preventDefault();
+  document.getElementById('import-drop').classList.remove('dragover');
+  const file=e.dataTransfer.files[0];
+  if(file&&file.type==='application/pdf') handleImportFile(file);
+  else alert('Por favor, envie um arquivo PDF.');
+}
+
+async function handleImportFile(file){
+  if(!file)return;
+  const prog=document.getElementById('import-progress');
+  const results=document.getElementById('import-results');
+  prog.textContent='📖 Lendo o PDF...';
+  results.innerHTML='';
+  document.getElementById('import-confirm-btn').style.display='none';
+  document.getElementById('import-target-row').style.display='none';
+
+  try{
+    // Converte PDF para base64
+    const base64=await new Promise((res,rej)=>{
+      const r=new FileReader();
+      r.onload=()=>res(r.result.split(',')[1]);
+      r.onerror=()=>rej(new Error('Erro ao ler arquivo'));
+      r.readAsDataURL(file);
+    });
+
+    prog.textContent='🤖 Analisando hinos com IA...';
+
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:4000,
+        messages:[{
+          role:'user',
+          content:[
+            {type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}},
+            {type:'text',text:`Analise este PDF de hinos litúrgicos e extraia cada hino separadamente.
+Para cada hino retorne um objeto JSON com:
+- "titulo": nome/título do hino (string)
+- "texto": texto completo do hino com estrofes separadas por linha em branco. Mantenha refrões como estão.
+
+Retorne SOMENTE um array JSON válido, sem markdown, sem explicações, sem texto fora do JSON.
+Exemplo: [{"titulo":"Canto de Entrada","texto":"Refrão\nLinha 1\nLinha 2\n\n1. Estrofe um\nLinha da estrofe"}]`}
+          ]
+        }]
+      })
+    });
+
+    const apiData=await resp.json();
+    if(apiData.error) throw new Error(apiData.error.message);
+
+    const text=apiData.content.filter(b=>b.type==='text').map(b=>b.text).join('');
+    const clean=text.replace(/^```[\w]*\n?/,'').replace(/```$/,'').trim();
+    const hinos=JSON.parse(clean);
+
+    if(!Array.isArray(hinos)||hinos.length===0) throw new Error('Nenhum hino encontrado no PDF.');
+
+    _importedHinos=hinos;
+    prog.textContent=`✓ ${hinos.length} hino(s) encontrado(s). Selecione os que deseja importar:`;
+
+    results.innerHTML=hinos.map((h,i)=>`
+      <div class="import-hino-item">
+        <input type="checkbox" id="ih_${i}" checked>
+        <div>
+          <div class="import-hino-title">${h.titulo||'Hino '+(i+1)}</div>
+          <div class="import-hino-preview">${(h.texto||'').slice(0,80).replace(/\n/g,' ')}…</div>
+        </div>
+      </div>`).join('');
+
+    document.getElementById('import-confirm-btn').style.display='';
+    document.getElementById('import-target-row').style.display='flex';
+
+  }catch(err){
+    prog.textContent='';
+    results.innerHTML=`<div style="color:#c0392b;font-size:13px;padding:8px">❌ Erro: ${err.message}</div>`;
+  }
+}
+
+function confirmarImportacao(){
+  const targetKey=document.getElementById('import-block-target').value;
+  const selecionados=_importedHinos.filter((_,i)=>{
+    const cb=document.getElementById('ih_'+i);
+    return cb&&cb.checked;
+  });
+  if(selecionados.length===0){alert('Selecione pelo menos um hino.');return;}
+
+  selecionados.forEach((hino,i)=>{
+    // Decide qual bloco usar
+    let key=targetKey;
+    if(key==='auto'){
+      // Usa o primeiro bloco de canto disponível, alternando
+      const cantoKeys=blockOrder.filter(k=>bdefs[k]&&bdefs[k].label&&
+        /canto|hino|entrada|ofertório|comunhão|final|glória|santo|aclamação|penitencial/i.test(bdefs[k].label));
+      key=cantoKeys[i%cantoKeys.length]||blockOrder[0];
+    }
+    // Adiciona como nova entrada no bloco
+    if(i===0&&(!state[key]||state[key].every(v=>!v.trim()))){
+      state[key]=[hino.texto||''];
+    } else {
+      if(!state[key]) state[key]=[''];
+      state[key].push(hino.texto||'');
+    }
+  });
+
+  closeModal('modal-import-pdf');
+  renderSidebar();renderEditor();autoSave();
+  alert(`✓ ${selecionados.length} hino(s) importado(s) com sucesso!`);
+}
+
+/* ── MAXIMIZAR CARD ── */
+let _cardMaximizado=null;
+let _cardOriginalParent=null;
+let _cardOriginalNext=null;
+
+function toggleMaximizar(entryId){
+  if(_cardMaximizado===entryId){
+    minimizarCard();
+  } else {
+    if(_cardMaximizado) minimizarCard();
+    maximizarCard(entryId);
+  }
+}
+
+function maximizarCard(entryId){
+  const card=document.getElementById(entryId);
+  if(!card)return;
+  _cardMaximizado=entryId;
+  // Build modal title from block title + entry label
+  const blockPanel=card.closest('.block-panel');
+  const bpTitleEl=blockPanel?blockPanel.querySelector('.bp-title'):null;
+  const seLabelEl=card.querySelector('.se-label');
+  let blockTitle='Modo Focado';
+  if(bpTitleEl&&seLabelEl) blockTitle=bpTitleEl.textContent.trim()+' \u2014 '+seLabelEl.textContent.trim()+' \u2014 Modo Focado';
+  else if(bpTitleEl) blockTitle=bpTitleEl.textContent.trim()+' \u2014 Modo Focado';
+  // Copy textarea value into focused modal textarea
+  const ta=card.querySelector('textarea');
+  const focusedTa=document.getElementById('focused-modal-textarea');
+  if(focusedTa) focusedTa.value=ta?ta.value:'';
+  // Show modal
+  document.getElementById('focused-modal-title').textContent=blockTitle;
+  document.getElementById('focused-modal').classList.add('show');
+  document.getElementById('se-max-backdrop').classList.add('show');
+  // Update trigger button icon
+  const btn=card.querySelector('.se-max');
+  if(btn){btn.textContent='✕';btn.title='Fechar modo focado';}
+  document.body.style.overflow='hidden';
+  // Focus and move cursor to end
+  if(focusedTa){setTimeout(()=>{focusedTa.focus();const l=focusedTa.value.length;focusedTa.setSelectionRange(l,l);},50);}
+}
+
+function salvarFocused(){
+  if(!_cardMaximizado)return;
+  const card=document.getElementById(_cardMaximizado);
+  if(card){
+    const ta=card.querySelector('textarea');
+    const focusedTa=document.getElementById('focused-modal-textarea');
+    if(ta&&focusedTa){
+      ta.value=focusedTa.value;
+      ta.dispatchEvent(new Event('input',{bubbles:true}));
+    }
+  }
+  minimizarCard();
+}
+
+function minimizarCard(){
+  if(!_cardMaximizado)return;
+  document.getElementById('codes-pop').classList.remove('show');
+  const card=document.getElementById(_cardMaximizado);
+  if(card){
+    const btn=card.querySelector('.se-max');
+    if(btn){btn.textContent='⛶';btn.title='Maximizar para edição';}
+  }
+  document.getElementById('focused-modal').classList.remove('show');
+  document.getElementById('se-max-backdrop').classList.remove('show');
+  document.body.style.overflow='';
+  _cardMaximizado=null;
+  _cardOriginalParent=null;
+  _cardOriginalNext=null;
+}
+
+// ESC fecha a maximização
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&_cardMaximizado) minimizarCard();
+});
+
+/* ── AUTOSAVE ── */
+const SAVE_KEY='folheto_liturgico_draft';
+let _saveTimer=null;
+let _savingIndicatorTimer=null;
+
+function collectSaveData(){
+  return {
+    ts: Date.now(),
+    paroquia: document.getElementById('paroquia').value,
+    domingo: document.getElementById('domingo').value,
+    titulo_principal: document.getElementById('titulo_principal').value,
+    ano_lit: document.getElementById('ano_lit').value,
+    data_missa: document.getElementById('data_missa').value,
+    fonte_sel: document.getElementById('fonte_sel').value,
+    margin_sel: document.getElementById('margin_sel').value,
+    img_align: document.getElementById('img-align').value,
+    img_height: document.getElementById('img-height').value,
+    sacra_height: document.getElementById('sacra-height').value,
+    sacra_caption: document.getElementById('sacra-caption').value,
+    sacra_align: document.getElementById('sacra-align').value,
+    booklet: document.getElementById('booklet-mode').checked,
+    strophe_gap: (document.getElementById('strophe_gap')||{}).value||'1',
+    tempo, dark, fontSize, titleFontSize, titleColor,
+    blockOrder:[...blockOrder],
+    bdefs: JSON.parse(JSON.stringify(bdefs)),
+    state: JSON.parse(JSON.stringify(state)),
+    imgData: {
+      diocese: imgData.diocese,
+      paroquia: imgData.paroquia,
+      sacra: imgData.sacra
+    },
+    customN
+  };
+}
+
+function autoSave(){
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(()=>{
+    try{
+      const data=collectSaveData();
+      localStorage.setItem(SAVE_KEY,JSON.stringify(data));
+      showSaveIndicator();
+    }catch(e){/* quota exceeded - silently ignore */}
+  },800);
+}
+
+function showSaveIndicator(){
+  const el=document.getElementById('autosave-indicator');
+  if(!el)return;
+  el.classList.add('show');
+  clearTimeout(_savingIndicatorTimer);
+  _savingIndicatorTimer=setTimeout(()=>el.classList.remove('show'),2000);
+}
+
+function checkForDraft(){
+  try{
+    const raw=localStorage.getItem(SAVE_KEY);
+    if(!raw)return;
+    const data=JSON.parse(raw);
+    // Check if draft has any meaningful content
+    const hasContent=data.paroquia||data.domingo||
+      Object.values(data.state||{}).some(arr=>arr.some(v=>v&&v.trim()));
+    if(!hasContent)return;
+    const ts=new Date(data.ts);
+    const fmt=ts.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    document.getElementById('restore-info').textContent=`Salvo em ${fmt}${data.paroquia?' · '+data.paroquia:''}`;
+    document.getElementById('restore-banner').style.display='flex';
+  }catch(e){}
+}
+
+function restaurarRascunho(){
+  try{
+    const raw=localStorage.getItem(SAVE_KEY);
+    if(!raw)return;
+    const d=JSON.parse(raw);
+
+    // restore header fields
+    if(d.paroquia!=null) document.getElementById('paroquia').value=d.paroquia;
+    if(d.domingo!=null) document.getElementById('domingo').value=d.domingo;
+    if(d.titulo_principal!=null) document.getElementById('titulo_principal').value=d.titulo_principal;
+    if(d.ano_lit!=null) document.getElementById('ano_lit').value=d.ano_lit;
+    if(d.data_missa!=null) document.getElementById('data_missa').value=d.data_missa;
+    if(d.fonte_sel!=null) document.getElementById('fonte_sel').value=d.fonte_sel;
+    if(d.margin_sel!=null) document.getElementById('margin_sel').value=d.margin_sel;
+    if(d.img_align!=null) document.getElementById('img-align').value=d.img_align;
+    if(d.img_height!=null){
+      document.getElementById('img-height').value=d.img_height;
+      document.getElementById('img-h-val').textContent=d.img_height+'px';
+    }
+    if(d.sacra_height!=null){
+      document.getElementById('sacra-height').value=d.sacra_height;
+      document.getElementById('sacra-h-val').textContent=d.sacra_height+'px';
+    }
+    if(d.sacra_caption!=null) document.getElementById('sacra-caption').value=d.sacra_caption;
+    if(d.sacra_align!=null) document.getElementById('sacra-align').value=d.sacra_align;
+    if(d.booklet!=null) document.getElementById('booklet-mode').checked=d.booklet;
+    const sgEl=document.getElementById('strophe_gap');
+    if(sgEl&&d.strophe_gap!=null)sgEl.value=d.strophe_gap;
+
+    // restore state vars
+    if(d.tempo!=null) tempo=d.tempo;
+    if(d.dark!=null){dark=d.dark;document.documentElement.setAttribute('data-theme',dark?'dark':'light');document.getElementById('theme-btn').textContent=dark?'☽':'☀';}
+    if(d.fontSize!=null){fontSize=d.fontSize;document.getElementById('fsize-val').textContent=fontSize+'pt';}
+    if(d.titleFontSize!=null){titleFontSize=d.titleFontSize;document.getElementById('tfsize-val').textContent=titleFontSize+'pt';}
+    if(d.titleColor!=null){
+      titleColor=d.titleColor;
+      document.querySelectorAll('.color-swatch').forEach(s=>{s.classList.toggle('active',s.dataset.color===titleColor);});
+    }
+    if(d.blockOrder!=null) blockOrder=d.blockOrder;
+    if(d.bdefs!=null) bdefs=d.bdefs;
+    if(d.customN!=null) customN=d.customN;
+    if(d.state!=null) Object.assign(state,d.state);
+
+    // restore images
+    if(d.imgData){
+      ['diocese','paroquia','sacra'].forEach(slot=>{
+        const src=d.imgData[slot];
+        if(src){
+          imgData[slot]=src;
+          const prev=document.getElementById('prev-'+slot);
+          if(prev){prev.src=src;prev.style.display='block';}
+          document.querySelectorAll('#drop-'+slot+' .img-icon, #drop-'+slot+' .img-hint').forEach(el=>el.style.display='none');
+          const rmBtn=document.getElementById('rm-'+slot);if(rmBtn)rmBtn.style.display='';
+        }
+      });
+    }
+
+    document.getElementById('restore-banner').style.display='none';
+    renderTempoCards();renderSidebar();renderEditor();
+  }catch(e){
+    alert('Erro ao restaurar rascunho. O arquivo pode estar corrompido.');
+    descartarRascunho();
+  }
+}
+
+function descartarRascunho(){
+  localStorage.removeItem(SAVE_KEY);
+  document.getElementById('restore-banner').style.display='none';
+}
+
+// Hook autosave into all interactions
+function hookAutosave(){
+  // Input fields
+  ['paroquia','domingo','titulo_principal','ano_lit','data_missa','fonte_sel',
+   'margin_sel','img-align','img-height','sacra-height','sacra-caption','sacra-align',
+   'booklet-mode','strophe_gap'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('change',autoSave);
+    if(el&&el.tagName==='INPUT'&&el.type!=='checkbox'&&el.type!=='range') el.addEventListener('input',autoSave);
+  });
+  // Observe editor-area for textarea changes (covers dynamic blocks)
+  const ea=document.getElementById('editor-area');
+  if(ea) ea.addEventListener('input',autoSave);
+  // Also save on tempo change and block reorder (those call renderSidebar/renderEditor)
+  const origApplyTempo=window.applyTempo;
+  // Patch renderSidebar/renderEditor to trigger save after renders
+  const _origRenderEditor=renderEditor;
+  window.renderEditor=function(){_origRenderEditor();autoSave();};
+}
+
+/* ── INIT ── */
+document.getElementById('data_missa').value=new Date().toISOString().slice(0,10);
+document.getElementById('ano_lit').value='A';
+const mm=new Date().getMonth();
+if(mm>=11||mm<1)tempo='advento';
+else if(mm<=1)tempo='natal';
+else if(mm<3)tempo='quaresma';
+else if(mm<5)tempo='pascal';
+else tempo='comum';
+blockOrder.forEach(k=>{state[k]=[''];});
+renderTempoCards();renderSidebar();renderEditor();
+hookAutosave();
+checkForDraft();
+loadSectionState();
+
+/* -- BACKUP RESTORE -- */
+function aplicarDadosBackup(d){
+  if(d.paroquia!=null) document.getElementById('paroquia').value=d.paroquia;
+  if(d.domingo!=null) document.getElementById('domingo').value=d.domingo;
+  if(d.titulo_principal!=null) document.getElementById('titulo_principal').value=d.titulo_principal;
+  if(d.ano_lit!=null) document.getElementById('ano_lit').value=d.ano_lit;
+  if(d.data_missa!=null) document.getElementById('data_missa').value=d.data_missa;
+  if(d.fonte_sel!=null) document.getElementById('fonte_sel').value=d.fonte_sel;
+  if(d.margin_sel!=null) document.getElementById('margin_sel').value=d.margin_sel;
+  if(d.img_align!=null) document.getElementById('img-align').value=d.img_align;
+  if(d.img_height!=null){document.getElementById('img-height').value=d.img_height;document.getElementById('img-h-val').textContent=d.img_height+'px';}
+  if(d.sacra_height!=null){document.getElementById('sacra-height').value=d.sacra_height;document.getElementById('sacra-h-val').textContent=d.sacra_height+'px';}
+  if(d.sacra_caption!=null) document.getElementById('sacra-caption').value=d.sacra_caption;
+  if(d.sacra_align!=null) document.getElementById('sacra-align').value=d.sacra_align;
+  if(d.booklet!=null) document.getElementById('booklet-mode').checked=d.booklet;
+  var sgEl=document.getElementById('strophe_gap');
+  if(sgEl&&d.strophe_gap!=null) sgEl.value=d.strophe_gap;
+  if(d.tempo!=null) tempo=d.tempo;
+  if(d.dark!=null){dark=d.dark;document.documentElement.setAttribute('data-theme',dark?'dark':'light');document.getElementById('theme-btn').textContent=dark?'\u263d':'\u2600';}
+  if(d.fontSize!=null){fontSize=d.fontSize;document.getElementById('fsize-val').textContent=fontSize+'pt';}
+  if(d.titleFontSize!=null){titleFontSize=d.titleFontSize;document.getElementById('tfsize-val').textContent=titleFontSize+'pt';}
+  if(d.titleColor!=null){titleColor=d.titleColor;document.querySelectorAll('.color-swatch').forEach(function(s){s.classList.toggle('active',s.dataset.color===titleColor);});}
+  if(d.customN!=null) customN=d.customN;
+  if(d.bdefs!=null) bdefs=JSON.parse(JSON.stringify(d.bdefs));
+  if(d.blockOrder!=null){
+    blockOrder=d.blockOrder;
+    blockOrder.forEach(function(k){if(!bdefs[k]) bdefs[k]={label:k,icon:k[0].toUpperCase(),note:'Bloco personalizado',_custom:true};});
+  }
+  if(d.state!=null){
+    Object.keys(state).forEach(function(k){delete state[k];});
+    Object.assign(state,JSON.parse(JSON.stringify(d.state)));
+    blockOrder.forEach(function(k){if(!state[k])state[k]=[];});
+  }
+  if(d.imgData){
+    ['diocese','paroquia','sacra'].forEach(function(slot){
+      var src=d.imgData[slot];
+      if(src){
+        imgData[slot]=src;
+        var prev=document.getElementById('prev-'+slot);
+        if(prev){prev.src=src;prev.style.display='block';}
+        document.querySelectorAll('#drop-'+slot+' .img-icon, #drop-'+slot+' .img-hint').forEach(function(el){el.style.display='none';});
+        var rmBtn=document.getElementById('rm-'+slot);if(rmBtn)rmBtn.style.display='';
+      }
+    });
+  }
+  var banner=document.getElementById('restore-banner');
+  if(banner) banner.style.display='none';
+  renderTempoCards();renderSidebar();renderEditor();
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify(collectSaveData()));}catch(e){}
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var bkpInput=document.getElementById('backup-file-input');
+  if(!bkpInput) return;
+  bkpInput.addEventListener('change',function(){
+    var file=this.files[0];
+    this.value='';
+    if(!file) return;
+    var reader=new FileReader();
+    reader.onload=function(e){
+      try{
+        var raw=e.target.result;
+        // Remove BOM se presente
+        if(raw.charCodeAt(0)===0xFEFF) raw=raw.slice(1);
+        var d=JSON.parse(raw);
+        if(!d||typeof d!=='object') throw new Error('invalido');
+        aplicarDadosBackup(d);
+        alert('\u2713 Backup restaurado com sucesso!');
+      }catch(err){
+        console.error('Backup parse error:', err);
+        alert('Erro ao ler backup: ' + err.message + '\n\nAbra o Console do navegador (F12) para mais detalhes.');
+      }
+    };
+    reader.readAsText(file, 'UTF-8');
+  });
+});
+</script>
+<div id="focused-modal">
+  <div id="focused-modal-header">
+    <span id="focused-modal-title">Modo Focado</span>
+    <button id="focused-modal-close" onclick="minimizarCard()" title="Fechar (ESC)">✕</button>
+  </div>
+  <div id="focused-modal-body">
+    <textarea id="focused-modal-textarea" spellcheck="true"></textarea>
+  </div>
+  <div id="focused-modal-footer">
+    <span id="focused-modal-hint">Pressione ESC para concluir</span>
+    <span style="flex:1"></span><button id="focused-modal-info" onclick="toggleCodigos()" title="Como escrever título, refrão e outros códigos">ℹ Códigos</button>
+    <button id="focused-modal-adjust" onclick="ajustarTextoFocado()" title="Junta a 2ª linha na 1ª com uma barra (/) para o texto ocupar menos espaço">↔ Ajustar texto</button>
+    <button id="focused-modal-save" onclick="salvarFocused()">Salvar Alterações</button>
+  </div>
+</div>
+<div id="codes-pop">
+  <h4>Códigos de edição <button onclick="toggleCodigos()" title="Fechar">×</button></h4>
+  <table>
+    <tr><td>Título (barra abaixo do nome do canto)</td><td><code>TÍTULO: Hino de São Francisco</code><br>Vale <code>titulo</code>, <code>Título</code>, <code>TITULO</code>; com ou sem acento, maiúsculo ou minúsculo, com ou sem <code>:</code>. O texto sai como você digitar.</td></tr>
+    <tr><td>Alinhamento do título</td><td>Escreva em uma linha separada (em qualquer lugar do canto):<br><code>CENT</code> ou <code>CENTRALIZADO</code> &rarr; centralizado<br><code>ALQ</code> ou <code>ALINHADO A ESQUERDA</code> &rarr; à esquerda (padrão)<br><code>ALD</code> ou <code>ALINHADO A DIREITA</code> &rarr; à direita<br>Atalho na própria linha: <code>TÍTULO CENT: Hino de São Francisco</code>. Vale maiúsculo, minúsculo, com ou sem acento.</td></tr>
+    <tr><td>Refrão</td><td><code>REF: Cheio de amor...</code><br>Também vale <code>ref.</code>, <code>ref:</code>, <code>refrão</code>, <code>refrão:</code>, <code>estribilho</code>, em maiúsculo ou minúsculo. Sai em negrito e itálico, na cor escolhida, com "Ref.:".</td></tr>
+    <tr><td>Refrão pelo final</td><td>Estrofe terminada em <code>(bis)</code> ou <code>(2x)</code> é tratada como refrão.</td></tr>
+    <tr><td>Refrão automático</td><td>Se o 1º bloco não começa com número e os demais começam (<code>1.</code>, <code>2.</code>...), ele vira refrão.</td></tr>
+    <tr><td>Itálico</td><td><code>ITÁLICO: texto</code> ou <code>itl:</code> / <code>ilt:</code></td></tr>
+    <tr><td>Diálogo</td><td><code>PR: texto</code> (presidente) e <code>AS: texto</code> (assembleia); o rótulo sai colorido.</td></tr>
+    <tr><td>Estrofes</td><td>Separe cada estrofe com uma linha em branco. A numeração é automática, ou use <code>1.</code> <code>2.</code> você mesmo.</td></tr>
+  </table>
+  <div class="nota">Dica: use "↔ Ajustar texto" para juntar as linhas de cada estrofe com uma barra (/).</div>
+</div>
+<div class="se-max-backdrop" id="se-max-backdrop" onclick="minimizarCard()"></div>
+</body>
+</html>
