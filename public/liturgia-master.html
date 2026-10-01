@@ -465,8 +465,6 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
   </div>
   <div class="nav-actions">
     <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Tema claro / escuro">☀</button>
-    <button class="nav-btn secondary" title="Recolher todos os painéis" onclick="collapseAllSections()" style="font-size:11px;padding:5px 10px">⬆ Recolher</button>
-    <button class="nav-btn secondary" title="Expandir todos os painéis" onclick="expandAllSections()" style="font-size:11px;padding:5px 10px">⬇ Expandir</button>
     <button class="nav-btn secondary" onclick="fazerBackup()" title="Salvar backup do folheto">💾 Backup</button>
     <button class="nav-btn secondary" onclick="restaurarBackup()" title="Restaurar backup salvo">↩ Restaurar</button>
     <button class="nav-btn solid" onclick="abrirModalLimpar()">↺ Novo</button>
@@ -885,26 +883,6 @@ function loadSectionState(){
   }catch(e){}
 }
 
-// Collapse all sections at once
-function collapseAllSections(){
-  ['dados','logos','tempo'].forEach(id=>{
-    if(_sectionPinned[id])return;
-    const sec=document.getElementById('section-'+id);
-    if(sec)sec.classList.add('collapsed');
-    updateSubtitle(id);
-  });
-  saveSectionState();
-}
-
-// Expand all sections at once
-function expandAllSections(){
-  ['dados','logos','tempo'].forEach(id=>{
-    const sec=document.getElementById('section-'+id);
-    if(sec)sec.classList.remove('collapsed');
-    updateSubtitle(id);
-  });
-  saveSectionState();
-}
 
 const TEMPOS=[
   {id:'advento',nome:'Advento',cor:'#7c5cbf',dot:'#7c5cbf',corNome:'Roxo',desc:'4 domingos antes do Natal',periodo:'1º Dom. Advento até 24/12',obs:'Glória suprimido. Aleluia substituído por versículo.',base:['entrada','perdao','aclamacao','ofertorio','santo','comunhao','final']},
