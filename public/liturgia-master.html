@@ -1396,7 +1396,7 @@ function leafSvg(c,w){
 }
 function decoHtml(tc,pos,pageBg){
   const dk=darken(tc,.72),frase=(document.getElementById('frase_rodape')||{}).value||'';
-  const pe='pointer-events:none',ot='0',ob='0',wb='15mm';
+  const pe='pointer-events:none',ot='0',ob='0',wb=pageBg?'0mm':'15mm';
   return `<div style="position:${pos};top:${ot};left:0;width:42mm;height:21mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 300 150" preserveAspectRatio="none"><path d="M0 0H235C140 30 50 75 0 150Z" fill="${GOLD_DECO}"/><path d="M0 0H205C120 25 40 62 0 128Z" fill="${dk}"/></svg></div>
   ${pageBg?``:`<div style="position:${pos};bottom:${ob};left:0;width:100%;height:17mm;z-index:0;${pe}"><svg width="100%" height="100%" viewBox="0 0 1000 80" preserveAspectRatio="none"><path d="M0 34C250 6 600 24 1000 0V80H0Z" fill="${GOLD_DECO}"/><path d="M0 44C250 20 600 34 1000 14V80H0Z" fill="${dk}"/></svg>
      <div style="position:absolute;left:0;right:0;bottom:3mm;text-align:center;color:#fff;font-style:italic;font-size:13pt;font-family:'Times New Roman',serif">${h(frase)}</div></div>
