@@ -461,6 +461,66 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
+
+/* ===== Abas laterais em formato de tabela ===== */
+.dm-wrap{padding:20px 32px 32px;background:var(--surface)}
+.dm-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #D2DFEB;border-radius:8px;overflow:hidden;font-family:'Inter',sans-serif}
+.dm-table th,.dm-table td{padding:9px 12px;border-bottom:1px solid #D2DFEB;vertical-align:middle;text-align:left}
+.dm-table tr:last-child>th,.dm-table tr:last-child>td{border-bottom:none}
+.dm-table th{width:38%;background:#E1EBF5;color:#1E4E79;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-right:1px solid #D2DFEB}
+.dm-table td{background:#fff;color:#1a1d23}
+.dm-table tr.dm-sec>th{width:auto;background:#1E4E79;color:#fff;font-size:10.5px;letter-spacing:.1em;padding:8px 12px;border-right:none;border-bottom:none}
+.dm-table input[type=text],.dm-table input:not([type]),.dm-table input[type=date],.dm-table select{width:100%;height:36px;font-family:'Inter',sans-serif;font-size:13px;color:#1a1d23;background:#fff;border:1px solid #CBD6E2;border-radius:5px;padding:6px 10px;outline:none;transition:border-color .15s,box-shadow .15s}
+.dm-table input:focus,.dm-table select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(232,149,10,.16)}
+.dm-table input::placeholder{color:#9099b0}
+.dm-table .dm-inline{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dm-table .dm-inline input[type=range]{flex:1;min-width:110px;width:auto;height:20px;padding:0;border:none;box-shadow:none;accent-color:var(--gold)}
+.dm-table .dm-inline .img-ctrl-val{min-width:38px;font-size:12px;font-weight:600;color:#1E4E79}
+.dm-table .dm-swatches{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.dm-table .dm-up{display:flex;align-items:center;gap:12px}
+.dm-table .img-drop{background:#F4F8FC;border-color:#9DB6CE}
+.dm-table .img-drop:hover{background:var(--gold-bg);border-color:var(--gold)}
+.dm-table .img-rm{white-space:nowrap}
+[data-theme="dark"] .dm-wrap{background:var(--surface)}
+[data-theme="dark"] .dm-table{border-color:rgba(255,255,255,.1)}
+[data-theme="dark"] .dm-table th,[data-theme="dark"] .dm-table td{border-color:rgba(255,255,255,.08)}
+[data-theme="dark"] .dm-table th{background:rgba(30,78,121,.35);color:#8FB8DC}
+[data-theme="dark"] .dm-table tr.dm-sec>th{background:#1E4E79;color:#fff}
+[data-theme="dark"] .dm-table td{background:var(--surface2);color:var(--text)}
+[data-theme="dark"] .dm-table input,[data-theme="dark"] .dm-table select{background:var(--surface);color:var(--text);border-color:var(--border2)}
+[data-theme="dark"] .dm-table .dm-inline .img-ctrl-val{color:#8FB8DC}
+[data-theme="dark"] .dm-table .img-drop{background:var(--surface);border-color:var(--border2)}
+.collapsible-section:not(.collapsed) .collapsible-body{max-height:none}
+@media(max-width:520px){
+  .dm-wrap{padding:14px}
+  .dm-table,.dm-table tbody,.dm-table tr,.dm-table th,.dm-table td{display:block;width:100%}
+  .dm-table th{border-right:none;border-bottom:none;padding-bottom:4px}
+  .dm-table td{padding-top:4px}
+  .dm-table tr.dm-sec{display:block}
+}
+
+/* ===== Tempo Litúrgico em tabela ===== */
+#tempo-cards{display:block}
+#tempo-info{display:block;margin-top:16px;padding:0;border:none;background:none}
+.dm-table tr.tc{display:table-row;min-width:0;padding:0;border:none;border-radius:0;background:none;box-shadow:none;cursor:pointer;transition:none}
+.dm-table tr.tc th{display:table-cell;text-align:left;transition:background .15s}
+.dm-table tr.tc td{transition:background .15s}
+.dm-table tr.tc:hover td{background:#F4F8FC}
+.dm-table tr.tc:hover th{background:#D6E4F2}
+.dm-table tr.tc.active td{background:var(--gold-bg)}
+.dm-table tr.tc.active th{box-shadow:inset 5px 0 0 var(--tc-color,var(--gold))}
+.dm-table .tc-head{display:flex;align-items:center;gap:9px}
+.dm-table .tc-head .tc-dot{flex:0 0 auto}
+.dm-table .tc-name{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;text-align:left}
+.dm-table .tc-cor{display:block;margin-top:2px;font-size:10px;font-weight:600;letter-spacing:.02em;text-transform:none;color:#5a7a99}
+.dm-table .tc-desc{font-size:13px;color:#1a1d23;text-align:left;line-height:1.35}
+.dm-table .tc-check{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle}
+.dm-table .ti-text{font-size:13px;line-height:1.4}
+[data-theme="dark"] .dm-table tr.tc:hover td{background:var(--surface3)}
+[data-theme="dark"] .dm-table tr.tc:hover th{background:rgba(30,78,121,.5)}
+[data-theme="dark"] .dm-table tr.tc.active td{background:var(--gold-bg)}
+[data-theme="dark"] .dm-table .tc-cor{color:#8FB8DC}
+[data-theme="dark"] .dm-table .tc-desc{color:var(--text)}
 </style>
 </head>
 <body>
@@ -501,69 +561,76 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
   <button class="side-panel-close" onclick="event.stopPropagation();closeSidePanel()" title="Fechar Dados da Missa" aria-label="Fechar Dados da Missa">×</button>
 </div>
 <div class="collapsible-body" id="body-dados">
-<div class="header-form">
-  <div class="fg"><label>Paróquia / Comunidade</label><input id="paroquia" placeholder="Nome da paróquia" style="width:200px"></div>
-  <div class="fg"><label>Domingo / Solenidade</label><input id="domingo" placeholder="Ex: 4º Domingo da Páscoa" style="width:230px"></div>
-  <div class="fg"><label>Título Principal (ex: O DOMINGO)</label><input id="titulo_principal" placeholder="Ex: O DOMINGO" value="O DOMINGO" style="width:230px" oninput="buildPreviewIfActive()"></div>
-  <div class="fg"><label>Data</label><input id="data_missa" type="date" style="width:145px"></div>
-  <div class="fg"><label>Ano Litúrgico</label>
-    <select id="ano_lit" style="width:150px">
+<div class="dm-wrap">
+<table class="dm-table">
+  <tbody>
+  <tr class="dm-sec"><th colspan="2">Identificação da Celebração</th></tr>
+  <tr><th>Paróquia / Comunidade</th><td><input id="paroquia" placeholder="Nome da paróquia"></td></tr>
+  <tr><th>Domingo / Solenidade</th><td><input id="domingo" placeholder="Ex: 4º Domingo da Páscoa"></td></tr>
+  <tr><th>Título Principal (ex: O DOMINGO)</th><td><input id="titulo_principal" placeholder="Ex: O DOMINGO" value="O DOMINGO" oninput="buildPreviewIfActive()"></td></tr>
+  <tr><th>Data</th><td><input id="data_missa" type="date"></td></tr>
+  <tr><th>Ano Litúrgico</th><td>
+    <select id="ano_lit">
       <option value="A">Ano A — Mateus</option>
       <option value="B">Ano B — Marcos</option>
       <option value="C">Ano C — Lucas</option>
-    </select>
-  </div>
-  <div class="fg"><label>Fonte</label>
-    <select id="fonte_sel" style="width:130px">
+    </select></td></tr>
+
+  <tr class="dm-sec"><th colspan="2">Aparência do Folheto</th></tr>
+  <tr><th>Fonte</th><td>
+    <select id="fonte_sel">
       <option value="Times New Roman">Times New Roman</option>
       <option value="Arial">Arial</option>
-    </select>
-  </div>
-  <div class="fg"><label>Margem Lateral</label>
-    <select id="margin_sel" style="width:145px" onchange="buildPreviewIfActive()">
+    </select></td></tr>
+  <tr><th>Margem Lateral</th><td>
+    <select id="margin_sel" onchange="buildPreviewIfActive()">
       <option value="0">Sem margem (janela toda)</option>
       <option value="8" selected>Estreita (8mm)</option>
       <option value="15">Normal (15mm)</option>
       <option value="25">Larga (25mm)</option>
-    </select>
-  </div>
-  <div class="fg"><label>Fonte dos Títulos</label>
+    </select></td></tr>
+  <tr><th>Fonte dos Títulos</th><td>
     <div class="fsize-ctrl">
       <button onclick="changeTitleFontSize(-1)" title="Diminuir">−</button>
       <span class="fsize-val" id="tfsize-val">13pt</span>
       <button onclick="changeTitleFontSize(1)" title="Aumentar">+</button>
-    </div>
-  </div>
-  <div class="fg"><label>Fonte dos Hinos</label>
+    </div></td></tr>
+  <tr><th>Fonte dos Hinos</th><td>
     <div class="fsize-ctrl">
       <button onclick="changeFontSize(-1)" title="Diminuir">−</button>
       <span class="fsize-val" id="fsize-val">11pt</span>
       <button onclick="changeFontSize(1)" title="Aumentar">+</button>
-    </div>
-  </div>
-  <div class="fg"><label>Espaço Entre Estrofes</label>
-    <select id="strophe_gap" style="width:145px" onchange="buildPreviewIfActive()">
+    </div></td></tr>
+  <tr><th>Espaço Entre Estrofes</th><td>
+    <select id="strophe_gap" onchange="buildPreviewIfActive()">
       <option value="0.3">Compacto (0.3em)</option>
       <option value="1" selected>Uma linha (1em)</option>
       <option value="1.5">Largo (1.5em)</option>
-    </select>
-  </div>
-  <div class="fg" style="min-width:110px">
-    <label>Cor dos Títulos</label>
-    <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;padding-top:4px">
+    </select></td></tr>
+  <tr><th>Cor dos Títulos</th><td>
+    <div class="dm-swatches">
       <span class="color-swatch active" data-color="#D32F2F" style="background:#D32F2F" title="Vermelho Litúrgico" onclick="setTitleColor(this,'#D32F2F')"></span>
       <span class="color-swatch" data-color="#7c5cbf" style="background:#7c5cbf" title="Roxo Advento/Quaresma" onclick="setTitleColor(this,'#7c5cbf')"></span>
       <span class="color-swatch" data-color="#1e5ea8" style="background:#1e5ea8" title="Azul Pascal" onclick="setTitleColor(this,'#1e5ea8')"></span>
       <span class="color-swatch" data-color="#2d6e22" style="background:#2d6e22" title="Verde Comum" onclick="setTitleColor(this,'#2d6e22')"></span>
       <span class="color-swatch" data-color="#b8860b" style="background:#b8860b" title="Dourado Natal" onclick="setTitleColor(this,'#b8860b')"></span>
-      <input type="color" id="custom-color" value="#D32F2F" title="Cor personalizada" onchange="setTitleColor(null,this.value)" style="width:24px;height:24px;border:none;border-radius:4px;cursor:pointer;padding:0;background:none">
-    </div>
-  </div>
-  <div class="fg"><label>Frase do cabeçalho (lado direito)</label><input id="frase_header" placeholder="Ex: Que São Francisco nos ensine..." style="width:230px" oninput="buildPreviewIfActive()"></div>
-  <div class="fg"><label>Barra inferior</label><select id="footer-bar" onchange="buildPreviewIfActive()"><option value="1">Com barra inferior</option><option value="0">Sem barra inferior</option></select></div>
-  <div class="fg"><label>Estilo das barras dos cantos</label><select id="song-bar-style" onchange="updateSongBarControls();buildPreviewIfActive()"><option value="1">Barra 01</option><option value="2">Barra 02</option><option value="0">Sem barra</option></select></div>
-  <div class="fg" id="no-bar-color-controls" style="display:none"><label>Cor das letras (sem barra)</label><div style="display:flex;align-items:center;gap:6px"><select id="no-bar-color-mode" onchange="updateSongBarControls();buildPreviewIfActive()"><option value="black">Preto</option><option value="general">Cor geral do folheto</option><option value="custom">Cor personalizada</option></select><input type="color" id="no-bar-custom-color" value="#111111" title="Escolher cor das letras" aria-label="Cor personalizada das letras sem barra" oninput="buildPreviewIfActive()" style="display:none;width:34px;height:34px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px;background:var(--surface)"></div></div>
-  <div class="fg"><label>Frase do rodapé</label><input id="frase_rodape" placeholder="Ex: São Francisco, rogai por nós!" style="width:200px" oninput="buildPreviewIfActive()"></div>
+      <input type="color" id="custom-color" value="#D32F2F" title="Cor personalizada" onchange="setTitleColor(null,this.value)" style="width:24px!important;height:24px!important;border:none!important;border-radius:4px;cursor:pointer;padding:0!important;background:none!important">
+    </div></td></tr>
+
+  <tr class="dm-sec"><th colspan="2">Cabeçalho e Rodapé</th></tr>
+  <tr><th>Frase do cabeçalho (lado direito)</th><td><input id="frase_header" placeholder="Ex: Que São Francisco nos ensine..." oninput="buildPreviewIfActive()"></td></tr>
+  <tr><th>Barra inferior</th><td><select id="footer-bar" onchange="buildPreviewIfActive()"><option value="1">Com barra inferior</option><option value="0">Sem barra inferior</option></select></td></tr>
+  <tr><th>Frase do rodapé</th><td><input id="frase_rodape" placeholder="Ex: São Francisco, rogai por nós!" oninput="buildPreviewIfActive()"></td></tr>
+
+  <tr class="dm-sec"><th colspan="2">Barras dos Cantos</th></tr>
+  <tr><th>Estilo das barras dos cantos</th><td><select id="song-bar-style" onchange="updateSongBarControls();buildPreviewIfActive()"><option value="1">Barra 01</option><option value="2">Barra 02</option><option value="0">Sem barra</option></select></td></tr>
+  <tr id="no-bar-color-controls" style="display:none"><th>Cor das letras (sem barra)</th><td>
+    <div class="dm-inline">
+      <select id="no-bar-color-mode" style="flex:1;min-width:140px;width:auto" onchange="updateSongBarControls();buildPreviewIfActive()"><option value="black">Preto</option><option value="general">Cor geral do folheto</option><option value="custom">Cor personalizada</option></select>
+      <input type="color" id="no-bar-custom-color" value="#111111" title="Escolher cor das letras" aria-label="Cor personalizada das letras sem barra" oninput="buildPreviewIfActive()" style="display:none;width:38px!important;height:34px!important;padding:2px!important;cursor:pointer">
+    </div></td></tr>
+  </tbody>
+</table>
 </div>
 </div><!-- /body-dados -->
 </div><!-- /section-dados -->
@@ -579,13 +646,12 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
   <button class="side-panel-close" onclick="event.stopPropagation();closeSidePanel()" title="Fechar Imagens e Sacra" aria-label="Fechar Imagens e Sacra">×</button>
 </div>
 <div class="collapsible-body" id="body-logos">
-<div class="img-panel" style="flex-wrap:nowrap;align-items:flex-start;gap:0">
-
-  <!-- GRUPO: Cabeçalho -->
-  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;padding-right:18px;border-right:1.5px solid var(--border);margin-right:18px">
-    <div style="width:100%"><span class="img-panel-title" style="margin-bottom:0">🖼 Cabeçalho (opcional)</span></div>
-    <div class="img-slot">
-      <label class="slot-lbl">Brasão / Diocese</label>
+<div class="dm-wrap">
+<table class="dm-table">
+  <tbody>
+  <tr class="dm-sec"><th colspan="2">🖼 Cabeçalho (opcional)</th></tr>
+  <tr><th>Brasão / Diocese</th><td>
+    <div class="dm-up">
       <div class="img-drop" id="drop-diocese" title="Clique para escolher imagem">
         <span class="img-icon">🏛</span>
         <span class="img-hint">Clique para carregar</span>
@@ -593,9 +659,9 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
         <img id="prev-diocese" style="display:none">
       </div>
       <button class="img-rm" id="rm-diocese" style="display:none" onclick="removeImg('diocese')">✕ Remover</button>
-    </div>
-    <div class="img-slot">
-      <label class="slot-lbl">Logo da Paróquia</label>
+    </div></td></tr>
+  <tr><th>Logo da Paróquia</th><td>
+    <div class="dm-up">
       <div class="img-drop" id="drop-paroquia" title="Clique para escolher imagem">
         <span class="img-icon">⛪</span>
         <span class="img-hint">Clique para carregar</span>
@@ -603,36 +669,28 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
         <img id="prev-paroquia" style="display:none">
       </div>
       <button class="img-rm" id="rm-paroquia" style="display:none" onclick="removeImg('paroquia')">✕ Remover</button>
-    </div>
-    <div class="img-controls">
-      <div class="img-ctrl-row">
-        <span class="img-ctrl-lbl">Orientação da folha (A4)</span>
-        <select id="orient-sel" onchange="buildPreviewIfActive()">
-          <option value="portrait" selected>Vertical</option>
-          <option value="landscape">Horizontal</option>
-        </select>
-      </div>
-      <div class="img-ctrl-row">
-        <span class="img-ctrl-lbl">Alinhamento</span>
-        <select id="img-align" onchange="buildPreviewIfActive()">
-          <option value="center">Centro</option>
-          <option value="left">Esquerda</option>
-          <option value="right">Direita</option>
-        </select>
-      </div>
-      <div class="img-ctrl-row">
-        <span class="img-ctrl-lbl">Alt. imagem</span>
-        <input type="range" id="img-height" min="30" max="100" value="55" step="5" oninput="document.getElementById('img-h-val').textContent=this.value+'px';buildPreviewIfActive()">
-        <span class="img-ctrl-val" id="img-h-val">55px</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- GRUPO: Imagem Sacra -->
-  <div id="sacra-panel" style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
-    <div style="width:100%"><span class="img-panel-title" style="margin-bottom:0">🕊 Imagem Sacra (opcional — 1ª coluna)</span></div>
-    <div class="img-slot">
-      <label class="slot-lbl">Imagem do Evangelho</label>
+    </div></td></tr>
+  <tr><th>Orientação da folha (A4)</th><td>
+    <select id="orient-sel" onchange="buildPreviewIfActive()">
+      <option value="portrait" selected>Vertical</option>
+      <option value="landscape">Horizontal</option>
+    </select></td></tr>
+  <tr><th>Alinhamento</th><td>
+    <select id="img-align" onchange="buildPreviewIfActive()">
+      <option value="center">Centro</option>
+      <option value="left">Esquerda</option>
+      <option value="right">Direita</option>
+    </select></td></tr>
+  <tr><th>Altura da imagem</th><td>
+    <div class="dm-inline">
+      <input type="range" id="img-height" min="30" max="100" value="55" step="5" oninput="document.getElementById('img-h-val').textContent=this.value+'px';buildPreviewIfActive()">
+      <span class="img-ctrl-val" id="img-h-val">55px</span>
+    </div></td></tr>
+  </tbody>
+  <tbody id="sacra-panel">
+  <tr class="dm-sec"><th colspan="2">🕊 Imagem Sacra (opcional — 1ª coluna)</th></tr>
+  <tr><th>Imagem do Evangelho</th><td>
+    <div class="dm-up">
       <div class="img-drop" id="drop-sacra" title="Clique para escolher imagem sacra" style="width:100px;height:80px">
         <span class="img-icon">✝</span>
         <span class="img-hint">Clique para carregar</span>
@@ -640,33 +698,26 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
         <img id="prev-sacra" style="display:none">
       </div>
       <button class="img-rm" id="rm-sacra" style="display:none" onclick="removeImg('sacra')">✕ Remover</button>
-    </div>
-    <div class="img-controls">
-      <div class="img-ctrl-row">
-        <span class="img-ctrl-lbl">Alt. imagem</span>
-        <input type="range" id="sacra-height" min="40" max="160" value="90" step="5" oninput="document.getElementById('sacra-h-val').textContent=this.value+'px';buildPreviewIfActive()">
-        <span class="img-ctrl-val" id="sacra-h-val">90px</span>
-      </div>
-      <div class="img-ctrl-row" style="margin-top:4px">
-        <span class="img-ctrl-lbl">Tom da barra</span>
-        <input type="range" id="bar-intensity" min="20" max="100" value="100" step="5" aria-label="Intensidade da cor das barras dos cantos" oninput="document.getElementById('bar-intensity-val').textContent=this.value+'%';buildPreviewIfActive()">
-        <span class="img-ctrl-val" id="bar-intensity-val">100%</span>
-      </div>
-      <div class="img-ctrl-row" style="margin-top:4px">
-        <span class="img-ctrl-lbl">Posição</span>
-        <select id="sacra-align" style="font-family:'EB Garamond',serif;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 6px;height:26px;outline:none;width:120px" onchange="buildPreviewIfActive()">
-          <option value="center">Centro</option>
-          <option value="left">Esquerda</option>
-          <option value="right">Direita</option>
-        </select>
-      </div>
-      <div class="img-ctrl-row" style="margin-top:4px">
-        <span class="img-ctrl-lbl">Legenda</span>
-        <input type="text" id="sacra-caption" placeholder="Ex: Bom Pastor (Jo 10,11)" style="font-family:'EB Garamond',serif;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 6px;height:26px;outline:none;width:200px" oninput="buildPreviewIfActive()">
-      </div>
-    </div>
-  </div>
-
+    </div></td></tr>
+  <tr><th>Altura da imagem</th><td>
+    <div class="dm-inline">
+      <input type="range" id="sacra-height" min="40" max="160" value="90" step="5" oninput="document.getElementById('sacra-h-val').textContent=this.value+'px';buildPreviewIfActive()">
+      <span class="img-ctrl-val" id="sacra-h-val">90px</span>
+    </div></td></tr>
+  <tr><th>Tom da barra</th><td>
+    <div class="dm-inline">
+      <input type="range" id="bar-intensity" min="20" max="100" value="100" step="5" aria-label="Intensidade da cor das barras dos cantos" oninput="document.getElementById('bar-intensity-val').textContent=this.value+'%';buildPreviewIfActive()">
+      <span class="img-ctrl-val" id="bar-intensity-val">100%</span>
+    </div></td></tr>
+  <tr><th>Posição</th><td>
+    <select id="sacra-align" onchange="buildPreviewIfActive()">
+      <option value="center">Centro</option>
+      <option value="left">Esquerda</option>
+      <option value="right">Direita</option>
+    </select></td></tr>
+  <tr><th>Legenda</th><td><input type="text" id="sacra-caption" placeholder="Ex: Bom Pastor (Jo 10,11)" oninput="buildPreviewIfActive()"></td></tr>
+  </tbody>
+</table>
 </div>
 </div><!-- /body-logos -->
 </div><!-- /section-logos -->
@@ -681,10 +732,9 @@ body.preview-mode .preview-page{width:100%;min-width:0;margin:0 auto}
   <button class="side-panel-close" onclick="event.stopPropagation();closeSidePanel()" title="Fechar Tempo Litúrgico" aria-label="Fechar Tempo Litúrgico">×</button>
 </div>
 <div class="collapsible-body" id="body-tempo">
-<div class="tempo-wrap">
-  <div class="tempo-label">Tempo Litúrgico</div>
-  <div class="tempo-cards" id="tempo-cards"></div>
-  <div class="tempo-info" id="tempo-info"></div>
+<div class="dm-wrap">
+  <div id="tempo-cards"></div>
+  <div id="tempo-info"></div>
 </div>
 </div><!-- /body-tempo -->
 </div><!-- /section-tempo -->
@@ -951,7 +1001,7 @@ function updateSongBarControls(){
   const controls=document.getElementById('no-bar-color-controls');
   const picker=document.getElementById('no-bar-custom-color');
   const mode=(document.getElementById('no-bar-color-mode')||{}).value||'black';
-  if(controls)controls.style.display=noBar?'flex':'none';
+  if(controls)controls.style.display=noBar?'':'none';
   if(picker)picker.style.display=noBar&&mode==='custom'?'block':'none';
 }
 
@@ -1047,20 +1097,27 @@ function toggleTheme(){
 /* ── TEMPO ── */
 function renderTempoCards(){
   const c=document.getElementById('tempo-cards');c.innerHTML='';
+  const table=document.createElement('table');table.className='dm-table';
+  const tb=document.createElement('tbody');
+  tb.innerHTML='<tr class="dm-sec"><th colspan="2">Selecione o Tempo Litúrgico</th></tr>';
   TEMPOS.forEach(t=>{
-    const d=document.createElement('div');
-    d.className='tc'+(tempo===t.id?' active':'');
-    d.style.setProperty('--tc-color',t.cor);
-    d.innerHTML=`<div class="tc-dot" style="background:${t.dot}"></div>
-      <div class="tc-name" style="color:${tempo===t.id?t.cor:'var(--text)'}">${t.nome}</div>
-      <div class="tc-sub">${t.corNome}</div>
-      <div class="tc-desc">${t.desc}</div>`;
-    d.onclick=()=>{tempo=t.id;applyTempo();};
-    c.appendChild(d);
+    const on=tempo===t.id;
+    const r=document.createElement('tr');
+    r.className='tc'+(on?' active':'');
+    r.style.setProperty('--tc-color',t.cor);
+    r.innerHTML=`<th><div class="tc-head"><span class="tc-dot" style="background:${t.dot}"></span><div><div class="tc-name" style="color:${on?t.cor:'inherit'}">${t.nome}</div><span class="tc-cor">${t.corNome}</span></div></div></th>
+      <td><span class="tc-desc">${t.desc}</span>${on?'<span class="tc-check">✓ Selecionado</span>':''}</td>`;
+    r.onclick=()=>{tempo=t.id;applyTempo();};
+    tb.appendChild(r);
   });
+  table.appendChild(tb);c.appendChild(table);
   const t=getT();
-  document.getElementById('tempo-info').innerHTML=`<div class="ti-dot" style="background:${t.dot}"></div>
-    <div><strong>${t.nome}</strong> · ${t.periodo} · <em>${t.obs}</em></div>`;
+  document.getElementById('tempo-info').innerHTML=`<table class="dm-table"><tbody>
+    <tr class="dm-sec"><th colspan="2">Tempo selecionado: ${t.nome}</th></tr>
+    <tr><th>Cor litúrgica</th><td><span class="tc-dot" style="display:inline-block;vertical-align:middle;margin-right:8px;background:${t.dot}"></span><span class="ti-text">${t.corNome}</span></td></tr>
+    <tr><th>Período</th><td><span class="ti-text">${t.periodo}</span></td></tr>
+    <tr><th>Observações</th><td><span class="ti-text">${t.obs}</span></td></tr>
+  </tbody></table>`;
 }
 
 function applyTempo(){
