@@ -749,11 +749,53 @@ const _sectionPinned={dados:false,logos:false,tempo:false};
 function toggleSection(id){
   const sec=document.getElementById('section-'+id);
   if(!sec)return;
+  const panels=document.getElementById('panels-top');
+  if(panels&&panels.classList.contains('side-open')&&sec.classList.contains('side-active')){
+    closeSidePanel();
+    return;
+  }
   if(_sectionPinned[id])return; // pinned = always open
   sec.classList.toggle('collapsed');
   // Update subtitle text when collapsed
   updateSubtitle(id);
   saveSectionState();
+}
+
+let _activeSidePanel=null;
+
+function getSectionSummary(id){
+  if(id==='dados'){
+    const p=document.getElementById('paroquia')?.value.trim();
+    const d=document.getElementById('domingo')?.value.trim();
+    return p||d||'Preencher dados';
+  }
+  if(id==='logos'){
+    const count=['diocese','paroquia','sacra'].filter(slot=>imgData[slot]).length;
+    return count?count+' imagem'+(count>1?'ns':''):'Sem imagens';
+  }
+  return getT()?.nome||'Selecionar tempo';
+}
+
+function openSidePanel(id){
+  const panels=document.getElementById('panels-top');
+  const sec=document.getElementById('section-'+id);
+  if(!panels||!sec)return;
+  if(_activeSidePanel===id&&panels.classList.contains('side-open')){
+    closeSidePanel();return;
+  }
+  _activeSidePanel=id;
+  document.querySelectorAll('#panels-top .collapsible-section').forEach(el=>el.classList.remove('side-active'));
+  sec.classList.add('side-active');
+  sec.classList.remove('collapsed');
+  panels.classList.add('side-open');
+  document.querySelectorAll('.sidebar-config-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.panel===id));
+}
+
+function closeSidePanel(){
+  document.getElementById('panels-top')?.classList.remove('side-open');
+  document.querySelectorAll('#panels-top .collapsible-section').forEach(el=>el.classList.remove('side-active'));
+  document.querySelectorAll('.sidebar-config-btn').forEach(btn=>btn.classList.remove('active'));
+  _activeSidePanel=null;
 }
 
 function togglePin(id){
@@ -998,7 +1040,19 @@ function applyTempo(){
 function renderSidebar(){
   const t=getT();
   const sb=document.getElementById('sidebar');
-  sb.innerHTML=`<div class="sb-title">Blocos de Cantos</div>`;
+  const configs=[
+    {id:'dados',icon:'▣',label:'Dados da Missa'},
+    {id:'logos',icon:'▧',label:'Imagens e Sacra'},
+    {id:'tempo',icon:'♰',label:'Tempo Litúrgico'}
+  ];
+  sb.innerHTML=`<div class="sidebar-config">
+    <div class="sb-title">Configurações do Folheto</div>
+    ${configs.map(item=>`<button class="sidebar-config-btn${_activeSidePanel===item.id?' active':''}" data-panel="${item.id}" onclick="openSidePanel('${item.id}')">
+      <span class="sidebar-config-icon">${item.icon}</span>
+      <span class="sidebar-config-copy"><span class="sidebar-config-name">${item.label}</span><span class="sidebar-config-summary">${h(getSectionSummary(item.id))}</span></span>
+      <span class="sidebar-config-arrow">›</span>
+    </button>`).join('')}
+  </div><div class="sb-title">Blocos de Cantos</div>`;
   const btn=document.createElement('button');
   btn.className='sb-add-btn';
   btn.innerHTML='＋ Adicionar novo bloco';
